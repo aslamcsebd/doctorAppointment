@@ -1,0 +1,55 @@
+
+.sidebar {
+    position: fixed;
+    top: 0px;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+    /*background: #343957;*/
+    /* font-size: 14px; */
+    z-index: 100;
+    overflow: auto;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-transition: width 300ms ease-in-out;
+    transition: width 300ms ease-in-out;
+     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.50);
+}
+
+
+/*    Humberger icon
+--------------------------*/
+
+
+.hamburger .line {
+    background-color: #252525;
+    display: block;
+    height: 3px;
+    margin: 4px auto;
+    width: 22px;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+
+.hamburger.is-active .line:nth-child(1), .hamburger.is-active .line:nth-child(3) {
+    width: 10px;
+    height: 3px;
+}
+
+.hamburger.is-active .line:nth-child(2) {
+    -webkit-transform: translateX(-5px);
+    transform: translateX(-5px);
+    width: 20px;
+    height: 3px;
+}
+
+.hamburger.is-active .line:nth-child(1) {
+    -webkit-transform: translateY(3px) rotate(45deg);
+    transform: translateY(3px) rotate(45deg);
+}
+
+.hamburger.is-active .line:nth-child(3) {
+    -webkit-transform: translateY(-3px) rotate(-45deg);
+    transform: translateY(-3px) rotate(-45deg);
+}

@@ -1,0 +1,197 @@
+.pushmenu { position: fixed; left: 255px; }
+.navbar .ml-auto li{ margin: 0 6px;}
+.layout-fixed .main-sidebar {
+   position: fixed;
+   float: none;
+   top: unset;
+   bottom: unset; 
+   left: 0;
+}  
+
+.sidebar-mini .main-sidebar .nav-link{width: unset;}
+
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active,{
+   background-color: rgba(255,255,255,.9);
+   color: #343a40;
+   padding: 3px 10px;
+   margin: 8px 0px;
+}
+
+fieldset {
+   border: 1px dashed #000 !important;
+   border-radius: 0.50rem;
+   padding: 0 1em 1em 1em !important;
+   margin: 0 0 1.5em 0 !important;
+   -webkit-box-shadow:  0px 0px 0px 0px #000;
+   /*box-shadow:  0px 0px 2px 0px #000;*/
+}
+
+legend{ 
+   width:inherit;
+   font-size: 1em !important;
+   font-weight: bold !important;
+   text-align: center;
+   border: 1px solid pink;
+   background-color: whitesmoke;
+   border-radius: 12px;   
+   padding: 0px 10px; 
+   margin-bottom:10px;
+}
+
+/*Datatable*/
+/*header & footer*/
+.dataTables_wrapper .dataTables_length, 
+.dataTables_filter, 
+.dataTables_info, 
+.dataTables_paginate {
+   background-color: paleturquoise;
+
+}
+
+.dataTables_wrapper .dataTables_filter, 
+.dataTables_wrapper .dataTables_paginate{ 
+   float: none;
+}
+
+.dataTables_wrapper .dataTables_length label, 
+.dataTables_wrapper .dataTables_filter label{ 
+   padding: 0.175rem 0.5rem; 
+   margin-bottom: 0rem; 
+}
+
+/*header left + right*/
+.dataTables_wrapper .dataTables_length select,
+.dataTables_wrapper .dataTables_filter input {
+   background-color: #fff; padding: 0px;
+}
+
+/*Table body*/
+
+table.dataTable { margin: 5px 0px; border-collapse: collapse; }
+
+.table-bordered, .table-bordered td, .table-bordered th { /*border: 1px solid #dee2e6; border: 1px dashed;*/ }
+
+table.dataTable thead th, table.dataTable.no-footer{ border-bottom: unset; }
+
+table.dataTable thead th, 
+table.dataTable thead td { padding: 2px 20px; text-transform: capitalize; 
+    /*background-color: turquoise;*/
+   text-align: center;
+}
+
+table.dataTable tbody td { text-align: center; vertical-align: middle; padding: 2px; }
+table.dataTable tbody tr { background-color: whitesmoke; }
+
+
+/*Buttom*/
+.dataTables_wrapper .dataTables_info { padding: 0.5rem; }
+.dataTables_wrapper .dataTables_paginate { padding: 0.25em; }
+
+.dataTables_wrapper .dataTables_paginate .paginate_button { 
+   min-width: 1.5em; padding: 0.2em 0.6em; margin-left: 2px;
+}
+
+/*Model Form*/
+   .modal-content{ background-color: #cff5ea; }
+   .modal-header { padding: 0.5rem; background-color: aquamarine; }
+   .modal-body { padding: 0.3rem 1rem 0rem; }
+   .modal-footer { padding: 0rem; margin-bottom: 5px;}
+   .close span{ 
+      color: red; 
+      border: 1px dashed red;
+      padding: 0px 6px;
+   }
+   .close span:hover{ 
+      background-color: red; 
+      color: #fff;
+   }
+
+/*Font Awesome*/
+.iconList i{
+   font-size: 2.5rem;
+}
+.leftside i{
+   font-size: 1.6rem;
+   float: left;
+   width: 2.5rem;
+}
+
+/*Alert message*/
+   .alert { 
+      margin-top: 0px; 
+      position: absolute; 
+      right: 0px; 
+      z-index: 1; 
+      color: #000;
+   }
+   .alert .close{
+      color: #000 !important; 
+      margin: 0 -8px 0px 10px;
+      line-height: 20px; 
+   }
+   .alert .close:hover{ 
+      color: black;
+   }
+
+   button:focus {
+       outline: unset !important;
+   }
+.capitalize{ text-transform: capitalize; }
+.justify{text-align: justify !important;}
+.left{text-align: left !important;}
+.right{text-align: right !important;}
+.alert:first-letter{text-transform: uppercase !important;}
+.form-group { margin-bottom: 0.5rem; }
+.hide{ display: none; }
+
+.dropdown-menu{ /*min-width: 4rem;*/ background-color: thistle; }    
+
+.multiselect-container>li>a {
+    padding: 0;
+    margin-left: -20px;
+}
+#preview, .card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    padding: 0rem;
+    border: 1px solid #dee2e6;
+   }
+
+.img-thumbnail {
+    padding: 0.25rem;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    max-width: 100%;
+    height: auto;
+ }
+
+ /*View page*/
+.view table.dataTable tbody td:first-child {
+   text-align: right;
+   padding-right: 5px
+   vertical-align: unset;            
+}
+.view table.dataTable tbody td:first-child label{
+   padding-right: 15px;                
+}
+
+.view table.dataTable tbody td:last-child {
+   text-align: unset;
+   padding-left: 15px;                
+}
+
+.userType {
+   display: inline-block;
+   padding: 0.25em 0.4em;
+   font-size: 75%;
+   font-weight: 700;
+   line-height: 1;
+   text-align: center;
+   white-space: nowrap;
+   vertical-align: baseline;
+   border-radius: 0.25rem;
+   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+                                                                                  
