@@ -18,7 +18,7 @@
    <script src="{{ asset('js/dataTables.min.js') }}"></script>
 
    <!-- summernote -->
-   {{-- <script src="{{ asset('/') }}summernote/summernote.min.js" ></script> --}}
+   <script src="{{ asset('/') }}summernote/summernote.min.js" ></script>
 
    <!-- Datepicker -->
    <script src="{{ asset('/') }}js/datepicker.min.js"></script>
@@ -103,7 +103,7 @@
             $.ajax({
                type: "GET",
                dataType: "json",
-               // url: '{{ Route('status') }}',
+               {{-- // url: '{{ Route('status') }}', --}}
                data: {'model': model, 'field': field, 'id': id, 'tab': tab},
                success: function (data) {
                   toastr.options.closeButton = true;

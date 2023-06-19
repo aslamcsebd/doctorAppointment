@@ -6,7 +6,7 @@
         <div class="col-md-6">
             <div class="card mt-5">
                 <div class="text-center pt-2">
-                    <img src="{{ asset('images/general/default.jpg') }}" class="img-thumbnail" alt="No Image found" width="100">
+                    <img src="{{ asset('images/default.jpg') }}" class="img-thumbnail" alt="No Image found" width="100">
                     <br>
                     <h4>{{ $general->company_name ?? 'Add institution name' }}</h4>
                     <p>Sign in to your account</p>

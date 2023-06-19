@@ -17,7 +17,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
    <!-- summernote -->
-   {{-- <link href="{{ asset('/') }}summernote/summernote.css" rel="stylesheet"> --}}
+   <link href="{{ asset('/') }}summernote/summernote.css" rel="stylesheet">
    
    <!-- Datepicker -->
    <link rel="stylesheet" href="{{ asset('/')}}css/datepicker.min.css">
