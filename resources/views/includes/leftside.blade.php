@@ -13,6 +13,12 @@
                     <p>Add doctor</p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('doctor.list') }}" class="nav-link {{ (request()->routeIs('doctor.list*'))  ? 'active' : '' }}">
+                    <i class="fas fa-user-md nav-icon"></i>                  
+                    <p>Doctor list</p>
+                </a>
+            </li>
             
         <!-- 2 = Doctor -->
         @elseif($role==2)

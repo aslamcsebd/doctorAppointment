@@ -77,4 +77,16 @@ class DoctorController extends Controller
 
         return back()->with('success','Doctor registration successfully');
     }
+
+    // Show all doctor
+    public function doctor_list(){
+        $data['doctors'] = Doctor::with('user')->get();
+        return view('doctor.doctors', $data);
+    }
+
+    // View doctor full info
+    public function doctorView($id){
+        $data['doctor'] = Doctor::find($id);        
+        return view('doctor.view', $data);
+    }
 }

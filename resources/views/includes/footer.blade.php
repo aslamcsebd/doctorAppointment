@@ -103,7 +103,7 @@
             $.ajax({
                type: "GET",
                dataType: "json",
-               {{-- // url: '{{ Route('status') }}', --}}
+               url: '{{ route('status') }}',
                data: {'model': model, 'field': field, 'id': id, 'tab': tab},
                success: function (data) {
                   toastr.options.closeButton = true;

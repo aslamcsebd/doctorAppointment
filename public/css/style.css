@@ -151,8 +151,8 @@ table.dataTable tbody tr { background-color: whitesmoke; }
     margin-left: -20px;
 }
 #preview, .card img {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     padding: 0rem;
     border: 1px solid #dee2e6;

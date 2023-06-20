@@ -12,3 +12,5 @@
 
     2. Add doctor
         * Insert doctor all info then save.
+
+### Doctor's list [view, delete] complete
