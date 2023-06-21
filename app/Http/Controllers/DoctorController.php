@@ -88,5 +88,5 @@ class DoctorController extends Controller
     public function doctorView($id){
         $data['doctor'] = Doctor::find($id);        
         return view('doctor.view', $data);
-    }
+    }    
 }

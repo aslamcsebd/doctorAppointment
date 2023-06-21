@@ -3,19 +3,29 @@
 namespace App\Http\Controllers;
 use DB;
 
+use App\Models\Room;
+use App\Models\User;
+use App\Models\Floor;
+use App\Models\Doctor;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+   
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function index(){
+        $data['doctors'] = Doctor::all();
+
+        $data['floors'] = Floor::all();
+        $data['rooms'] = Room::all();         
+  
+        return view('home', $data);
     }
 
     // Status change
@@ -41,8 +51,4 @@ class HomeController extends Controller
         return back()->with('success', $model.' delete successfully')->withInput(['tab' => $tab]);
     }
 
-    public function index()
-    {
-        return view('home');
-    }
 }

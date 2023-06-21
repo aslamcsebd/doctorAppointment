@@ -11,10 +11,9 @@ Route::get('/', function () {
 });
 Auth::routes();
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth'])->group(function(){
+    Route::get('/', [HomeController::class, 'index'])->name('home');
  
     // Doctor registration
         Route::get('doctor/registration', 'DoctorController@registration')->name('doctor.registration');
@@ -23,6 +22,14 @@ Route::middleware(['auth'])->group(function(){
         Route::get('doctor/list', 'DoctorController@doctor_list')->name('doctor.list');
         Route::get('doctorView/{id}','DoctorController@doctorView')->name('doctorView');
 
+    // Room management
+        Route::get('room', 'RoomController@room')->name('room');
+
+        // Add room
+        Route::post('/add-room', 'RoomController@addRoom')->name('addRoom');
+
+        // Add floor        
+        Route::post('/add-floor', 'RoomController@addFloor')->name('addFloor');
 
         // All status change
         Route::get('/status/update', 'HomeController@changeStatus')->name('status');

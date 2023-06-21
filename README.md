@@ -14,3 +14,7 @@
         * Insert doctor all info then save.
 
 ### Doctor's list [view, delete] complete
+
+### Floor & room management
+    1. Create new floor
+    2. Create room under the floor

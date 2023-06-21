@@ -15,11 +15,17 @@
             </li>
             <li class="nav-item">
                 <a href="{{ route('doctor.list') }}" class="nav-link {{ (request()->routeIs('doctor.list*'))  ? 'active' : '' }}">
-                    <i class="fas fa-user-md nav-icon"></i>                  
+                    <i class="fas fa-user-md nav-icon"></i>              
                     <p>Doctor list</p>
                 </a>
             </li>
-            
+            <li class="nav-item">
+                <a href="{{ route('room') }}" class="nav-link {{ (request()->routeIs('room*'))  ? 'active' : '' }}">
+                <!-- <i class="fas fa-bed nav-icon"></i> -->
+                <i class="fas fa-procedures nav-icon"></i>
+                    <p>Room-seat</p>
+                </a>
+            </li>            
         <!-- 2 = Doctor -->
         @elseif($role==2)
             <li>                

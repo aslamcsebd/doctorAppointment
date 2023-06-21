@@ -69,15 +69,15 @@
          $('#tabMenu a[href="#{{ old('tab') }}"]').tab('show')
       });   
 
-      $(document).on('click', '#addExtraDropdown', function (e) {
+      $(document).on('click', '#addRoom', function (e) {
          e.preventDefault()
-         var html = '<div class="row justify-content-center dropdownDelete"> <i class="fa fa-chevron-down pt-3"></i> <div class="col-8 form-group"> <input type="text" name="dropdownValue[]" class="form-control" placeholder="Value name" required/> </div><button type="button" class="btn dropdown-btn"> <i class="fa fa-trash"></i> </button> </div>'
+         var html = '<div class="row justify-content-center roomDelete"> <i class="fa fa-chevron-down pt-3"></i> <div class="col-8 form-group"> <input type="text" name="room[]" class="form-control" placeholder="Ex: 101, 102..." required/> </div><button type="button" class="btn dropdown-btn"> <i class="fa fa-trash"></i> </button> </div>'
 
-         $('#extraDropdown').append(html)
+         $('#roomRow').append(html)
       });
 
       $("body").on("click",".dropdown-btn",function(e){
-          $(this).parents('.dropdownDelete').remove();
+          $(this).parents('.roomDelete').remove();
       });
       
       $(document).ready(function() {
