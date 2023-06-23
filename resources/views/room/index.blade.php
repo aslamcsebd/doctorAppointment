@@ -21,7 +21,7 @@
                      <div class="card-header p-1">
                         <ul class="nav nav-pills" id="tabMenu">
                            <li class="nav-item">
-                              <button class="btn btn-sm btn-success text-light" data-toggle="modal" data-original-title="test" data-target="#addfloorRoom">Add floor or room</button>
+                              <button class="btn btn-sm btn-success text-light" data-toggle="modal" data-original-title="test" data-target="#addfloorRoom">Add floor, room, seat</button>
                            </li>
                         </ul>
                      </div>
@@ -35,12 +35,12 @@
                               @foreach($floors as $floor)
                                  @php $child = $floor->rooms->count()  @endphp
                                  <tr>
-                                    <td rowspan="{{$child+1}}">{{$floor->floor}} ({{$child}})</td>
+                                    <td rowspan="{{$child+1}}">{{$floor->floor}}</td>
                                  </tr>
                                  @if($child > 1)
                                     @foreach($floor->rooms->sortBy('room') as $room)
                                        <tr>
-                                          <td>{{$room->room}}</td>
+                                          <td>{{$room->name}}</td>
                                        </tr>
                                     @endforeach
                                 @endif
@@ -54,14 +54,14 @@
                         <div class="modal-dialog" role="document">
                            <div class="modal-content">
                               <div class="modal-header">
-                                 <h6 class="modal-title text-center" id="exampleModalLabel">Add floor or room</h6>
+                                 <h6 class="modal-title text-center" id="exampleModalLabel">Add floor, room, seat</h6>
                                  <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                               </div>
                               <div class="card-header p-1">
                                  <ul class="nav nav-pills">
                                     <li class="nav-item">
                                         <a class="nav-link active btn-sm py-1 m-1" data-toggle="pill" href="#addRoomTab">Add room</a>
-                                    </li>                                 
+                                    </li>
                                     <li class="nav-item">
                                        <a class="nav-link btn-sm py-1 m-1" data-toggle="pill" href="#addFloor">Add floor</a>
                                     </li>
@@ -73,36 +73,53 @@
                                     <div class="tab-pane fade active show" id="addRoomTab">
                                        <form action="{{ route('addRoom') }}" method="post" enctype="multipart/form-data" class="needs-validation" >
                                           @csrf
-                                          <div class="form-group">
-                                                <label for="floor">Floor no*</label>
-                                                <select class="form-control" name="floor" id="floor" required>
-                                                    <option value="">Select floor</option>
-                                                    @foreach($floors as $floor)
-                                                        <option value="{{$floor->id}}">{{$floor->floor}}</option>
-                                                    @endforeach
-                                                </select>
+                                            <fieldset class="form-group mb-1 pb-1">
+                                                <legend class="mb-0">Select room type</legend>
+                                                <div class="radio-toolbar form-check form-check-inline">
+                                                    <div class="radio">
+                                                        <input type="radio" id="cabin" name="room_type" value="cabin" checked>
+                                                        <label for="cabin">Single cabin/room</label>
+                                                    </div>
+                                                    <div class="radio ml-4 mt-1">
+                                                        <input type="radio" id="ward" name="room_type" value="ward">
+                                                        <label for="ward">Ward (Multiple bed)</label> 
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+
+                                            <div class="form-group">
+                                                <label for="roomName">Room name*</label>
+                                                <input type="text" name="name" class="form-control" id="roomName" placeholder="Ex: Cabin A, Delux Cabin, ICU/CCU, General ward, Ward (4 Bed)" required/>
                                             </div>
-                                          <fieldset>
-                                             <legend>Value options</legend>
-                                                <div id="roomRow">
-                                                   <div class="row justify-content-center">
-                                                      <i class="fa fa-chevron-down pt-3"></i>
-                                                      <div class="col-8 form-group">
-                                                         <input type="text" name="room[]" class="form-control" placeholder="Ex: 101, 102..." required/>
-                                                      </div>
-                                                      <button type="button" class="btn">
-                                                         <i class="fa fa-trash "></i>
-                                                      </button>
-                                                   </div>                  
+
+                                            <div class="row">
+                                                <div class="form-group col-6">
+                                                    <label for="floor">Floor number*</label>
+                                                    <select class="form-control" name="floor_id" id="floor" required>
+                                                        <option value="">Select floor</option>
+                                                        @foreach($floors as $floor)
+                                                            <option value="{{$floor->id}}">{{$floor->floor}}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
-                                                <div class="row justify-content-center"> 
-                                                   <div class="col-8">
-                                                      <button type="button" id="addRoom" class="btn btn-primary">
-                                                         <i class="fa fa-plus">&nbsp; Add more room</i>
-                                                      </button>
-                                                   </div>
+                                                <div class="form-group col-6">
+                                                    <label for="room_no">Room number*</label>
+                                                    <input type="text" name="room_no" class="form-control" id="room_no" placeholder="Ex: 101, 201, 301..." required/>
                                                 </div>
-                                          </fieldset>
+                                            </div>
+                                            
+                                            <div class="row">
+                                                <div class="hide col-6" id="roomStatus">                                                    
+                                                    <div class="form-group" data_id="roomAction">
+                                                        <label for="bedCount">Number of seat/bed*</label>
+                                                        <input type="number" name="bedCount" class="form-control" id="bedCount" placeholder="Ex: 4 or 5"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-6">
+                                                    <label for="price">Price*</label>
+                                                    <input type="number" name="price" class="form-control" id="price" placeholder="Ex: 100, 200" required/>
+                                                </div>
+                                            </div>                                        
 
                                           <div class="modal-footer">
                                              <div class="btn-group">

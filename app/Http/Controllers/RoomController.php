@@ -6,8 +6,9 @@ use Redirect;
 
 use App\Models\Room;
 use App\Models\User;
-use App\Models\Floor;
+use App\Models\Ward;
 
+use App\Models\Floor;
 use App\Models\Doctor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -26,23 +27,36 @@ class RoomController extends Controller
     public function addRoom(Request $request){
                
         $validator = Validator::make($request->all(),[
-            'floor'=>'required',
-            'room'=>'required'
+            'room_type'=>'required',     
+            'name'=>'required',
+            'floor_id'=>'required',
+            'room_no'=>'required',
+            'price'=>'required',
         ]);
     
         if($validator->fails()){
             $messages = $validator->messages();
             return Redirect::back()->withErrors($validator);
-        }  
-
-        $rooms = $request->input('room');
-        foreach ($rooms as $room){
-            Room::create([
-                'floor_id' => $request->floor,
-                'room' => $room
-            ]);
         }
-        $tab = "floorRoom";
+
+        $room_id = Room::insertGetId([
+            'room_type' => $request->room_type,
+            'name' => $request->name,
+            'floor_id' => $request->floor_id,
+            'room_no' => $request->room_no,
+            'price' => $request->price             
+        ]);
+        
+        if($request->room_type=='ward'){
+            for($i=1; $i<=$request->bedCount; $i++){
+                Ward::Create([
+                    'room_id' => $room_id,
+                    'ward_no' => 'W-'.$i           
+                ]);
+            }
+        }
+       
+        $tab = "addRoomTab";
         return back()->with('success', 'Floor\'s rooms added')->withInput(['tab' => $tab]);
     }
 

@@ -114,6 +114,19 @@
             });
          });
       });
-     
+
+        // Room status
+        $("#cabin").click(function () {
+            var chkFormationDept = document.getElementById("cabin").checked;
+            if (chkFormationDept) {
+                $('#roomStatus [data_id="roomAction"]').parent().removeClass('active').css('display', 'none');
+            }
+        })
+        $("#ward").click(function () {
+            var chkFormationDept = document.getElementById("ward").checked;
+            if (chkFormationDept) {
+                $('#roomStatus [data_id="roomAction"]').parent().removeClass('active').css('display', 'block');
+            }
+        })     
    </script>
    
