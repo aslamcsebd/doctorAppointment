@@ -73,13 +73,23 @@ table.dataTable { margin: 5px 0px; border-collapse: collapse; }
 
 table.dataTable thead th, table.dataTable.no-footer{ border-bottom: unset; }
 
-table.dataTable thead th, 
-table.dataTable thead td { padding: 2px 20px; text-transform: capitalize; 
+.table thead th,
+table.dataTable thead th,
+
+.table thead td, 
+table.dataTable thead td { 
+    padding: 2px 20px !important; 
+    text-transform: capitalize; 
     /*background-color: turquoise;*/
-   text-align: center;
+    text-align: center;
 }
 
-table.dataTable tbody td { text-align: center; vertical-align: middle; padding: 2px; }
+.table tbody td, 
+table.dataTable tbody td { 
+    text-align: center; 
+    vertical-align: middle; 
+    padding: 2px; 
+}
 table.dataTable tbody tr { background-color: whitesmoke; }
 
 

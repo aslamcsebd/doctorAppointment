@@ -18,3 +18,4 @@
 ### Floor & room management
     1. Create new floor
     2. Create room under the floor
+    2. Cabin/room list, ward list show

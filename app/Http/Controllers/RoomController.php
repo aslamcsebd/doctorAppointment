@@ -18,7 +18,7 @@ class RoomController extends Controller
     // Room info
     public function room(){
         $data['floors'] = Floor::all();       
-        $data['singlrRooms'] = User::all();
+        $data['roomWards'] = Room::where('room_type', 'ward')->get();
 
         return view('room.index', $data);
     }

@@ -25,25 +25,66 @@
                            </li>
                         </ul>
                      </div>
+
+                     <h6 class="card-header bg-success text-center py-1 mx-1">Cabin/room list</h6>
                      <div class="card-body p-1">
                         <table class="table table-bordered">
                            <thead class="bg-info">
                                 <th>Floor</th>
                                 <th>Room no</th>
+                                <th>Price</th>
                            </thead>
                            <tbody>
                               @foreach($floors as $floor)
-                                 @php $child = $floor->rooms->count()  @endphp
+                                 @php $roomCount = $floor->rooms->where('room_type', 'cabin')->count()  @endphp
+
                                  <tr>
-                                    <td rowspan="{{$child+1}}">{{$floor->floor}}</td>
+                                    <td rowspan="{{($roomCount > 1) ? $roomCount+1 : ''}}">{{$floor->floor}}</td>
+                                    @if($roomCount == 1)
+                                       @foreach($floor->rooms->where('room_type', 'cabin')->sortBy('room') as $room)
+                                             <td>{{$room->room_no}}</td>
+                                             <td>{{$room->price}}</td>
+                                       @endforeach
+                                   @endif
                                  </tr>
-                                 @if($child > 1)
-                                    @foreach($floor->rooms->sortBy('room') as $room)
-                                       <tr>
-                                          <td>{{$room->name}}</td>
-                                       </tr>
-                                    @endforeach
-                                @endif
+                                    @if($roomCount > 1)
+                                       @foreach($floor->rooms->where('room_type', 'cabin')->sortBy('room') as $room)
+                                            <tr>
+                                                <td>{{$room->room_no}}</td>
+                                                <td>{{$room->price}}</td>
+                                            </tr>     
+                                       @endforeach
+                                   @endif
+                              @endforeach
+                           </tbody>
+                        </table>
+                    </div>
+
+                    <br>
+                    
+                    <h6 class="card-header bg-secondary text-center py-1 mx-1">Ward list</h6>
+                    <div class="card-body p-1">
+                        <table class="table table-bordered">
+                           <thead class="bg-info">
+                               <th>Room no</th>
+                                <th>Ward no</th>
+                                <th>Price</th>
+                           </thead>
+                           <tbody>
+                              @foreach($roomWards as $room)
+                                 @php $wardCount = $room->wards->count()  @endphp
+
+                                 <tr>
+                                    <td rowspan="{{($wardCount > 1) ? $wardCount+1 : ''}}">{{$room->room_no}}</td>
+                                 </tr>
+                                    @if($wardCount > 1)
+                                       @foreach($room->wards->sortBy('ward_no') as $ward)
+                                            <tr>
+                                                <td>{{$ward->ward_no}}</td>
+                                                <td>{{$room->price}}</td>
+                                            </tr>     
+                                       @endforeach
+                                   @endif
                               @endforeach
                            </tbody>
                         </table>
@@ -112,7 +153,7 @@
                                                 <div class="hide col-6" id="roomStatus">                                                    
                                                     <div class="form-group" data_id="roomAction">
                                                         <label for="bedCount">Number of seat/bed*</label>
-                                                        <input type="number" name="bedCount" class="form-control" id="bedCount" placeholder="Ex: 4 or 5"/>
+                                                        <input type="number" min="2" name="bedCount" class="form-control" id="bedCount" placeholder="Ex: 4 or 5"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-6">
