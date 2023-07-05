@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Models\Patient;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -63,7 +65,8 @@ class RegisterController extends Controller
      * @return \App\Models\User
      */
     protected function create(array $data)
-    {        
+    {
+        /*
         return User::create([
             'role' => 3,
             'name' => $data['name'],
@@ -71,5 +74,24 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ]);
+        */
+
+        $user_id = User::create([
+            'role' => 3,
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'password' => Hash::make($data['password']),
+            'created_at' => Carbon::now()
+        ]);
+
+        $id = $user_id->id;
+
+        Patient::create([
+            'user_id' => $id,
+            'patient_id' => str_pad($id, 6, '0', STR_PAD_LEFT)
+        ]);
+
+        return $user_id;
     }
 }

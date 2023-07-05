@@ -178,8 +178,13 @@ table.dataTable tbody tr { background-color: whitesmoke; }
  }
 
  /*View page*/
+.view2 td{
+   text-align: right !important;
+   font-weight: bold;   
+}
+
 .view table.dataTable tbody td:first-child {
-   text-align: right;
+   text-align: right !important;
    padding-right: 5px
    vertical-align: unset;            
 }

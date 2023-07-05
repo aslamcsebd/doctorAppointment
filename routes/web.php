@@ -6,14 +6,15 @@ use Artisan;
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Auth::routes();
 
-
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::middleware(['auth'])->group(function(){
-    Route::get('/', [HomeController::class, 'index'])->name('home');
  
     // Doctor registration
         Route::get('doctor/registration', 'DoctorController@registration')->name('doctor.registration');
@@ -30,6 +31,11 @@ Route::middleware(['auth'])->group(function(){
 
         // Add floor        
         Route::post('/add-floor', 'RoomController@addFloor')->name('addFloor');
+
+    // Payment system
+        Route::get('payment', 'PaymentController@payment')->name('payment');
+        Route::get('paymentView/{id}','PaymentController@paymentView')->name('paymentView');
+        Route::post('/payment-add', 'PaymentController@payment_add')->name('payment.add');
 
         // All status change
         Route::get('/status/update', 'HomeController@changeStatus')->name('status');

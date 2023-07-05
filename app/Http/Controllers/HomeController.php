@@ -5,9 +5,10 @@ use DB;
 
 use App\Models\Room;
 use App\Models\User;
+use App\Models\Ward;
 use App\Models\Floor;
-use App\Models\Doctor;
 
+use App\Models\Doctor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 
@@ -23,8 +24,9 @@ class HomeController extends Controller
         $data['doctors'] = Doctor::all();
 
         $data['floors'] = Floor::all();
-        $data['rooms'] = Room::all();         
-  
+        $data['cabins'] = Room::where('room_type', 'cabin')->get();
+        $data['wards'] = Ward::all();
+ 
         return view('home', $data);
     }
 

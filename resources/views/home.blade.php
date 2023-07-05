@@ -45,11 +45,13 @@
                               <tbody>
                                  <tr class="bg-primary">
                                     <td>Floor</td>
-                                    <td>Rooms</td>
+                                    <td>Cabin</td>
+                                    <td>Ward</td>
                                  </tr>
                                  <tr class="bg-primary">
                                     <td>{{$floors->count() ?? '0'}}</td>
-                                    <td>{{$rooms->count() ?? '0'}}</td>
+                                    <td>{{$cabins->count() ?? '0'}}</td>
+                                    <td>{{$wards->count() ?? '0'}}</td>
                                  </tr>
                               </tbody>
                            </table>
