@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
+use App\Models\Report;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Models\FavouriteDoctor;
@@ -37,13 +38,13 @@ class PatientController extends Controller
         return back()->with('success', 'Favourite doctor add successfully');
     }
  
-    // Show all doctor
+    // Show favourite list
     public function favourite_list(){
         $data['doctors'] = FavouriteDoctor::where('patient_id', Auth::id())->with('user')->get();
         return view('patient.favouriteDoctors', $data);
     }
 
-    // Add favourite doctor
+    // Add appointment
     public function appointment_add(Request $request){
         Appointment::Create([
             'patient_id' => Auth::id(),
@@ -53,9 +54,21 @@ class PatientController extends Controller
         return back()->with('success', 'Appointment add successfully');
     }
 
-    // Show all doctor
+    // Show appointment list
     public function appointment_list(){
         $data['appointments'] = Appointment::where('patient_id', Auth::id())->with('user')->get();
         return view('patient.appointments', $data);
     }
+
+    // Show appointment list
+    public function report_list(){
+        $data['reports'] = Report::where('patient_id', Auth::id())->with('user')->orderBy('id', 'DESC')->get();
+        return view('patient.reports', $data);
+    }
+
+    // Report view
+    public function report_view($id){ 
+        $data['report'] = Report::find($id);
+        return view('patient.reportView', $data);
+    }        
 }
