@@ -24,3 +24,8 @@
     1. Payment data list show
     2. Payment single data view
     2. Payment money add
+
+### Patient side
+    1. Show all doctor list
+    2. Add favourite doctor
+    2. Show full doctor info

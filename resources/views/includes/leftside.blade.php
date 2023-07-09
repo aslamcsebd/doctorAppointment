@@ -40,9 +40,21 @@
 
         <!-- 3 = Patient -->
         @elseif($role==3)
-            <li>                
-                <a href="">{{Auth::user()->name}}</a>
+            <li class="nav-item">
+                <a href="{{ route('doctor.search') }}" class="nav-link {{ (request()->routeIs('doctor.search*'))  ? 'active' : '' }}">
+                    <i class="fas fa-search nav-icon"></i>                    
+                    <p>Search doctor</p>
+                </a>
             </li>
+
+            @if($favourite = \App\Models\FavouriteDoctor::where('patient_id', Auth::id())->count())            
+                <li class="nav-item">
+                    <a href="{{ route('favourite.list') }}" class="nav-link {{ (request()->routeIs('favourite.list*'))  ? 'active' : '' }}">
+                        <i class="fas fa-heart nav-icon"></i>
+                        <p>Favourite doctor ({{$favourite}})</p>
+                    </a>
+                </li>
+            @endif
         @endif
         </ul>
     </nav>

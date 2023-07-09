@@ -15,7 +15,8 @@ Auth::routes();
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::middleware(['auth'])->group(function(){
- 
+
+// Admin
     // Doctor registration
         Route::get('doctor/registration', 'DoctorController@registration')->name('doctor.registration');
         Route::post('/doctor-create', 'DoctorController@doctor_create')->name('doctor.create');
@@ -37,6 +38,15 @@ Route::middleware(['auth'])->group(function(){
         Route::get('paymentView/{id}','PaymentController@paymentView')->name('paymentView');
         Route::post('/payment-add', 'PaymentController@payment_add')->name('payment.add');
 
+// Patient
+    // Doctor search
+    Route::get('doctor-search', 'PatientController@doctor_search')->name('doctor.search');
+    Route::get('single-doctor/{id}','PatientController@singleDoctor')->name('singleDoctor');        
+    Route::get('addFavourite/{id}','PatientController@addFavourite')->name('addFavourite');
+    Route::get('favourite-list','PatientController@favourite_list')->name('favourite.list');
+    
+
+// Default option
         // All status change
         Route::get('/status/update', 'HomeController@changeStatus')->name('status');
 

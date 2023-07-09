@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Ward;
 use App\Models\Floor;
 
+use App\Models\Payment;
+
 use App\Models\Doctor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
@@ -26,6 +28,8 @@ class HomeController extends Controller
         $data['floors'] = Floor::all();
         $data['cabins'] = Room::where('room_type', 'cabin')->get();
         $data['wards'] = Ward::all();
+
+        $data['payments'] = Payment::where('status', 0)->get();
  
         return view('home', $data);
     }

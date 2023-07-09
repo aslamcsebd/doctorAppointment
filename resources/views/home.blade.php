@@ -63,9 +63,26 @@
                      </div>
                   </div>
 
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
+                     <div class="small-box bg-danger">
+                        <div class="inner text-center">
+                           <h3>{{$payments->count() ?? '0'}}</h3> 
+                           <span>
+                              <i class="fas fa-money-check-alt mr-2"></i>
+                              Incomplete payment
+                           </span>
+                        </div>                        
+                        <a href="{{ route('payment') }}" class="small-box-footer">
+                           More info
+                           <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                     </div>
+                  </div>
+
                @endif               
             </div>           
          </div>
       </section>
    </div> 
 @endsection
+
