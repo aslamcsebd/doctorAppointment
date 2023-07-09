@@ -50,7 +50,11 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('report-list','PatientController@report_list')->name('report.list');
     Route::get('report-view/{id}','PatientController@report_view')->name('report-view'); 
-    
+
+// Settings
+    Route::get('hospitalInfo', 'AdminController@hospitalInfo')->name('hospitalInfo');
+    Route::post('addHospitalInfo', 'AdminController@addHospitalInfo')->name('addHospitalInfo');
+       
 // Default option
         // All status change
         Route::get('/status/update', 'HomeController@changeStatus')->name('status');

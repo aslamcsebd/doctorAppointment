@@ -5,10 +5,13 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card mt-5">
+                @php 
+                    $hospitalInfo = App\Models\HospitalInfo::first();
+                @endphp    
                 <div class="text-center pt-2">
-                    <img src="{{ asset('images/default.jpg') }}" class="img-thumbnail" alt="No Image found" width="100">
+                    <img src="{{ asset('')}}/{{$hospitalInfo->photo ?? 'images/default.jpg'}}" class="img-thumbnail" alt="No Image found" width="100">
                     <br>
-                    <h4>{{ $general->company_name ?? 'Add institution name' }}</h4>
+                    <h4>{{ $hospitalInfo->name ?? 'Add hospital name' }}</h4>
                     <p>Sign in to your account</p>
                     <hr>
                 </div>        

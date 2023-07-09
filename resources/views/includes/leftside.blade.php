@@ -31,6 +31,12 @@
                         <i class="fas fa-money-check-alt nav-icon"></i>
                         <p>Payment system</p>
                     </a>
+                </li>                
+                <li class="nav-item">
+                    <a href="{{ route('hospitalInfo') }}" class="nav-link {{ (request()->routeIs('hospitalInfo*'))  ? 'active' : '' }}">
+                        <i class="fas fa-user-cog nav-icon"></i>
+                        <p>Settings</p>
+                    </a>
                 </li>   
 
             <!-- 2 = Doctor -->
