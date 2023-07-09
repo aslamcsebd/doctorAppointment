@@ -53,19 +53,45 @@
                         <label class="capitalize">Qalification</label>
                      </td>
                      <td class="mb-0">{!!$doctor->qualification!!}</td>
-                  </tr><tr>
+                  </tr>
+                  <tr>
                      <td width="20%">
                         <label class="capitalize">Services</label>
                      </td>
                      <td>{!!$doctor->service!!}</td>
                   </tr>
+                  @if($route=='appointment.list')
+                    <tr class="bg-warning">
+                        <td width="20%">
+                            <label for="date" class="capitalize">Fixed Appointment</label>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control col-4" name="date" id="date" placeholder="Day-Month-Year" value="{{$appointmentDate->date}}" readonly/>                            
+                        </td>
+                    </tr>
+                  @else
+                    <tr>
+                        <td width="20%">
+                            <label for="date" class="capitalize">Add Appointment</label>
+                        </td>
+                        <td>
+                            <form action="{{ route('appointment.add') }}" method="post" enctype="multipart/form-data" class="row p-0 m-0">
+                                @csrf
+                                <input type="hidden" name="user_id" value="{{$doctor->user_id}}">
+                                <input type="text" class="form-control datepicker col-4" name="date" id="date" placeholder="Day-Month-Year"/>                            
+                                <button type="submit" class="btn btn-success ml-4 col-auto">
+                                    <i class="fas fa-calendar-plus nav-icon"></i> &nbsp; Add date
+                                </button>
+                            </form>
+                        </td>
+                    </trclass=>
+                  @endif
                </table>             
             </div>
-
             <div class="card-footer row justify-content-center">
-               <a href="{{ route('doctor.search') }}" class="btn btn-primary col-2">
+               <a href="{{ route($route) }}" class="btn btn-primary col-auto">
                   <i class="fas fa-arrow-circle-left nav-icon"></i>   &nbsp;
-                  Back
+                  Back previous page
                </a>
             </div>
          </div>

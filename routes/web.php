@@ -41,11 +41,13 @@ Route::middleware(['auth'])->group(function(){
 // Patient
     // Doctor search
     Route::get('doctor-search', 'PatientController@doctor_search')->name('doctor.search');
-    Route::get('single-doctor/{id}','PatientController@singleDoctor')->name('singleDoctor');        
+    Route::get('single-doctor/{id}/{route}','PatientController@singleDoctor')->name('singleDoctor');        
     Route::get('addFavourite/{id}','PatientController@addFavourite')->name('addFavourite');
     Route::get('favourite-list','PatientController@favourite_list')->name('favourite.list');
-    
 
+    Route::post('appointment-add', 'PatientController@appointment_add')->name('appointment.add');   
+    Route::get('appointment-list','PatientController@appointment_list')->name('appointment.list');
+    
 // Default option
         // All status change
         Route::get('/status/update', 'HomeController@changeStatus')->name('status');

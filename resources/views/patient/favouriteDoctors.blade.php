@@ -1,5 +1,5 @@
 @extends('layouts.app')
-   @section('title') Doctor-list @endsection
+   @section('title') Favourite list @endsection
 @section('content')
 @include('includes.alertMessage')
 
@@ -35,7 +35,7 @@
 
                            <td width="auto">
                               <div class="btn-group">
-                                    <a href="{{ url('single-doctor', [$doctor->doctor_id])}}" class="btn btn-sm btn-info py-1">View</a>
+                                    <a href="{{ url('single-doctor', [$doctor->doctor_id, Route::currentRouteName()])}}" class="btn btn-sm btn-info py-1">View</a>
                                     <a href="{{ url('itemDelete', ['favourite_doctors', $doctor->id, 'tabName'])}}" class="btn btn-sm btn-danger ml-1 py-1 px-3" onclick="return confirm('Are you want to delete this?')">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>

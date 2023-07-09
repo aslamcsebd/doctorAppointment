@@ -55,6 +55,15 @@
                     </a>
                 </li>
             @endif
+
+            @if($appointment = \App\Models\Appointment::where('patient_id', Auth::id())->count())            
+                <li class="nav-item">
+                    <a href="{{ route('appointment.list') }}" class="nav-link {{ (request()->routeIs('appointment.list*'))  ? 'active' : '' }}">
+                        <i class="fas fa-calendar-check nav-icon"></i>
+                        <p>Appointment list ({{$appointment}})</p>
+                    </a>
+                </li>
+            @endif
         @endif
         </ul>
     </nav>

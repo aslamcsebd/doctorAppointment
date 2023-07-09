@@ -18,14 +18,15 @@
 ### Floor & room management
     1. Create new floor
     2. Create room under the floor
-    2. Cabin/room list, ward list show
+    3. Cabin/room list, ward list show
 
 ### Payment system
     1. Payment data list show
     2. Payment single data view
-    2. Payment money add
+    3. Payment money add
 
 ### Patient side
     1. Show all doctor list
     2. Add favourite doctor
-    2. Show full doctor info
+    3. Show full doctor info
+    4. Appointment-list show

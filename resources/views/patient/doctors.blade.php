@@ -35,7 +35,7 @@
 
                            <td width="auto">
                               <div class="btn-group">
-                                    <a href="{{ url('single-doctor', [$doctor->user_id])}}" class="btn btn-sm btn-info py-1">View</a>
+                                    <a href="{{ url('single-doctor', [$doctor->user_id, Route::currentRouteName()]) }}" class="btn btn-sm btn-info py-1">View</a>
                                     <a href="{{ url('addFavourite', [$doctor->user_id])}}" class="btn btn-sm btn-danger ml-1 py-1 px-3" title="Add to favorite">
                                         <i class="fas fa-bookmark"></i>
                                     </a>
