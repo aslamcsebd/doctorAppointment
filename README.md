@@ -30,3 +30,8 @@
     2. Add favourite doctor
     3. Show full doctor info
     4. Appointment-list show
+
+### Profile update
+    1. Hospital profile update
+    2. Doctor profile update
+    3. Patient profile update

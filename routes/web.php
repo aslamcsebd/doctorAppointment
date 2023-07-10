@@ -52,9 +52,18 @@ Route::middleware(['auth'])->group(function(){
     Route::get('report-view/{id}','PatientController@report_view')->name('report-view'); 
 
 // Settings
+    // Admin
     Route::get('hospitalInfo', 'AdminController@hospitalInfo')->name('hospitalInfo');
-    Route::post('addHospitalInfo', 'AdminController@addHospitalInfo')->name('addHospitalInfo');
-       
+    Route::post('updateHospitalInfo', 'AdminController@updateHospitalInfo')->name('updateHospitalInfo');
+    
+    // Doctor
+    Route::get('doctorInfo', 'DoctorController@doctorInfo')->name('doctorInfo');
+    Route::post('updateDoctorInfo', 'DoctorController@updateDoctorInfo')->name('updateDoctorInfo');
+
+    // Patient
+    Route::get('patientInfo', 'PatientController@patientInfo')->name('patientInfo');
+    Route::post('updatePatientInfo', 'PatientController@updatePatientInfo')->name('updatePatientInfo');
+    
 // Default option
         // All status change
         Route::get('/status/update', 'HomeController@changeStatus')->name('status');

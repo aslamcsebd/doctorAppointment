@@ -18,8 +18,7 @@ class AdminController extends Controller
     }
 
     // Add hospital info 
-    public function addHospitalInfo(Request $request){
-
+    public function updateHospitalInfo(Request $request){
         if($request->id==null){
             $validator = Validator::make($request->all(),[
                 'name'=>'required',
@@ -32,7 +31,7 @@ class AdminController extends Controller
                 return Redirect::back()->withErrors($validator);
             }
 
-            $path="images/";
+            $path="images/admin/";
             $default="default.jpg";
             if ($request->hasFile('photo')){
                 if($files=$request->file('photo')){
@@ -54,13 +53,12 @@ class AdminController extends Controller
             
         }else{
 
-            $path="images/";
-            if ($request->hasFile('photo')){
-                
+            $path="images/admin/";
+            if ($request->hasFile('photo')){                
                 $validator = Validator::make($request->all(),[
                     'name'=>'required',
                     'address'=>'required',
-                    'photo'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+                    'photo'=>'required|image|mimes:jpeg,png,jpg,gif,svg'
                 ]);
 
                 if($validator->fails()){
@@ -75,7 +73,7 @@ class AdminController extends Controller
                     $photoLink = $path . $fullName;
                 }
             }else{
-                $photoLink =$request->photoName;
+                $photoLink =$request->oldPhoto;
             }
 
             HospitalInfo::where('id', $request->id)->update([

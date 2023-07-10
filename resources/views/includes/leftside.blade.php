@@ -37,13 +37,16 @@
                         <i class="fas fa-user-cog nav-icon"></i>
                         <p>Settings</p>
                     </a>
-                </li>   
+                </li>
 
             <!-- 2 = Doctor -->
             @elseif($role==2)
-                <li>                
-                    <a href="">{{Auth::user()->name}}</a>
-                </li>
+                <li class="nav-item">
+                    <a href="{{ route('doctorInfo') }}" class="nav-link {{ (request()->routeIs('doctorInfo*'))  ? 'active' : '' }}">
+                        <i class="fas fa-user-cog nav-icon"></i>
+                        <p>Doctor profile</p>
+                    </a>
+                </li>  
 
             <!-- 3 = Patient -->
             @elseif($role==3)
@@ -77,7 +80,14 @@
                         <i class="fas fa-list-alt nav-icon"></i>                   
                         <p>My all report</p>
                     </a>
-                </li>                                
+                </li>       
+                
+                <li class="nav-item">
+                    <a href="{{ route('patientInfo') }}" class="nav-link {{ (request()->routeIs('patientInfo*'))  ? 'active' : '' }}">
+                        <i class="fas fa-user-cog nav-icon"></i>
+                        <p>Patient profile</p>
+                    </a>
+                </li>   
             @endif
         </ul>
     </nav>

@@ -10,6 +10,7 @@ use App\Models\Doctor;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -89,4 +90,46 @@ class DoctorController extends Controller
         $data['doctor'] = Doctor::find($id);        
         return view('doctor.view', $data);
     }    
+
+
+    // Patient profile
+    public function doctorInfo(){
+        $data['doctorInfo'] = Doctor::where('user_id', Auth::id())->with('user')->first();
+        return view('doctor.settings', $data);
+    }   
+
+    // Add hospital info 
+    public function updateDoctorInfo(Request $request){
+
+        $path="images/doctor/";
+        if ($request->hasFile('photo')){                
+            $validator = Validator::make($request->all(),[
+                'photo'=>'required|image|mimes:jpeg,png,jpg,gif,svg'
+            ]);
+
+            if($validator->fails()){
+                $messages = $validator->messages();
+                return Redirect::back()->withErrors($validator);
+            }
+
+            if($files=$request->file('photo')){
+                $photo = $request->photo;
+                $fullName=time().".".$photo->getClientOriginalExtension();
+                $files->move(public_path($path), $fullName);
+                $photoLink = $path . $fullName;
+            }
+        }else{
+            $photoLink =$request->oldPhoto;
+        }
+
+        Doctor::where('id', $request->id)->update([
+            'gender' => $request->gender,
+            'blood' => $request->blood,
+            'dob' => date('Y-m-d', strtotime($request->dob)),
+            'photo' => $photoLink,
+            'qualification' => $request->qualification,
+            'service' => $request->service
+        ]);
+        return back()->with('success','Doctor info update successfully');
+    }   
 }
