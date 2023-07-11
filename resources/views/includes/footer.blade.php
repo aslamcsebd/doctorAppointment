@@ -52,6 +52,8 @@
 
       $(".datepicker").datepicker({
          format: "dd-mm-yyyy",
+         startDate: new Date()
+         //  minDate:0,
          // startView: "months", 
          // minViewMode: "months"
       });

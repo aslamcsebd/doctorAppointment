@@ -42,6 +42,12 @@
             <!-- 2 = Doctor -->
             @elseif($role==2)
                 <li class="nav-item">
+                    <a href="{{ route('appointment.request') }}" class="nav-link {{ (request()->routeIs('appointment.request*'))  ? 'active' : '' }}">
+                        <i class="fas fa-calendar-check nav-icon"></i>
+                        <p>Appointment list</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('doctorInfo') }}" class="nav-link {{ (request()->routeIs('doctorInfo*'))  ? 'active' : '' }}">
                         <i class="fas fa-user-cog nav-icon"></i>
                         <p>Doctor profile</p>

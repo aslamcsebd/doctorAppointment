@@ -35,3 +35,7 @@
     1. Hospital profile update
     2. Doctor profile update
     3. Patient profile update
+
+### Appointment section
+    1. Patient request for appointment
+    2. Doctor accept appointment

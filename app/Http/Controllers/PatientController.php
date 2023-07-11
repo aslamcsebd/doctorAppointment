@@ -24,7 +24,7 @@ class PatientController extends Controller
     }
 
     // View doctor full info
-    public function singleDoctor($id, $route){   
+    public function singleDoctor($id, $route){
         if($route=='appointment.list'){
             $data['appointmentDate'] = Appointment::where('patient_id', Auth::id())->where('doctor_id', $id)->first();
         }    
@@ -53,7 +53,8 @@ class PatientController extends Controller
         Appointment::Create([
             'patient_id' => Auth::id(),
             'doctor_id' => $request->user_id,
-            'date' => date('Y-m-d', strtotime($request->date))
+            'date' => date('Y-m-d', strtotime($request->date)),
+            'time' => $request->time
         ]);
         return back()->with('success', 'Appointment add successfully');
     }
@@ -84,6 +85,7 @@ class PatientController extends Controller
 
     // Update patient info 
     public function updatePatientInfo(Request $request){
+        
         $path="images/patient/";
         if ($request->hasFile('photo')){                
             $validator = Validator::make($request->all(),[

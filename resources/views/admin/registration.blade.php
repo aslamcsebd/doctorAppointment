@@ -39,18 +39,15 @@
                         </select>
                      </div>
                      <div class="form-group col-4">
+                        @php
+                            $groups = array('O +ve', 'O -ve', 'A +ve', 'A -ve', 'B +ve', 'B -ve', 'AB +ve', 'AB -ve', 'Unknown');
+                        @endphp
                         <label for="blood">Blood group</label>
                         <select class="form-control" name="blood" id="blood">
                            <option value="">Select group</option>
-                           <option value="O +ve">O +ve</option>
-                           <option value="O -ve">O -ve</option>
-                           <option value="A +ve">A +ve</option>
-                           <option value="A -ve">A -ve</option>
-                           <option value="B +ve">B +ve</option>
-                           <option value="B -ve">B -ve</option>
-                           <option value="AB +ve">AB +ve</option>
-                           <option value="AB -ve">AB -ve</option>
-                           <option value="Unknown">Unknown</option>
+                            @foreach($groups as $group)
+                                <option value="{{$group}}">{{$group}}</option>
+                            @endforeach
                         </select>
                      </div>
                      <div class="form-group col-4">

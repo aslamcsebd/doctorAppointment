@@ -18,30 +18,30 @@ Route::middleware(['auth'])->group(function(){
 
 // Admin
     // Doctor registration
-        Route::get('doctor/registration', 'DoctorController@registration')->name('doctor.registration');
-        Route::post('/doctor-create', 'DoctorController@doctor_create')->name('doctor.create');
-       
-        Route::get('doctor/list', 'DoctorController@doctor_list')->name('doctor.list');
-        Route::get('doctorView/{id}','DoctorController@doctorView')->name('doctorView');
+        Route::get('doctor/registration/', 'AdminController@registration')->name('doctor.registration');
+        Route::post('doctor-create/', 'AdminController@doctor_create')->name('doctor.create');       
+        Route::get('doctor/list/', 'AdminController@doctor_list')->name('doctor.list');
+        Route::get('doctorView/{id}/','AdminController@doctorView')->name('doctorView');
 
     // Room management
         Route::get('room', 'RoomController@room')->name('room');
-
-        // Add room
-        Route::post('/add-room', 'RoomController@addRoom')->name('addRoom');
-
-        // Add floor        
-        Route::post('/add-floor', 'RoomController@addFloor')->name('addFloor');
+        Route::post('add-room/', 'RoomController@addRoom')->name('addRoom');
+        Route::post('add-floor/', 'RoomController@addFloor')->name('addFloor');
 
     // Payment system
         Route::get('payment', 'PaymentController@payment')->name('payment');
         Route::get('paymentView/{id}','PaymentController@paymentView')->name('paymentView');
-        Route::post('/payment-add', 'PaymentController@payment_add')->name('payment.add');
+        Route::post('payment-add/', 'PaymentController@payment_add')->name('payment.add');
+
+// Doctor
+    Route::get('appointment-request','DoctorController@appointment_request')->name('appointment.request');
+    Route::get('single-patient/{id}/{route}','DoctorController@singlePatient')->name('singlePatient');   
+    Route::post('appointment-accept', 'DoctorController@appointment_accept')->name('appointment.accept');   
 
 // Patient
     // Doctor search
     Route::get('doctor-search', 'PatientController@doctor_search')->name('doctor.search');
-    Route::get('single-doctor/{id}/{route}','PatientController@singleDoctor')->name('singleDoctor');        
+    Route::get('single-doctor/{id}/{route}','PatientController@singleDoctor')->name('singleDoctor');      
     Route::get('addFavourite/{id}','PatientController@addFavourite')->name('addFavourite');
     Route::get('favourite-list','PatientController@favourite_list')->name('favourite.list');
 

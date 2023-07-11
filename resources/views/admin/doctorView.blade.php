@@ -17,6 +17,12 @@
                            <span class="singerName">{{$doctor->user->name}}</span>                         
                         </div>
                      </td>
+                  </tr>               
+                  <tr>
+                     <td width="20%">
+                        <label class="capitalize">Doctor Id</label>
+                     </td>
+                     <td>{{$doctor->doctor_id}}</td>
                   </tr>
                   <tr>
                      <td width="20%">
@@ -53,49 +59,19 @@
                         <label class="capitalize">Qalification</label>
                      </td>
                      <td class="mb-0">{!!$doctor->qualification!!}</td>
-                  </tr>
-                  <tr>
+                  </tr><tr>
                      <td width="20%">
                         <label class="capitalize">Services</label>
                      </td>
                      <td>{!!$doctor->service!!}</td>
                   </tr>
-                  @if($route=='appointment.list')
-                    <tr>
-                        <td width="20%" class="bg-warning">
-                            <label for="date" class="capitalize">Fixed Appointment</label>
-                        </td>
-                        <td class="row p-0 m-0">
-                            <input type="text" class="form-control col-4 ml-2" name="date" id="date" placeholder="Day-Month-Year" value="{{$appointmentDate->date}}" readonly/>                            
-                            @include('patient.time')            
-                        </td>
-                    </tr>
-                  @else
-                    <tr>
-                        <td width="20%">
-                            <label for="date" class="capitalize">Add Appointment</label>
-                        </td>
-                        <td>
-                            <form action="{{ route('appointment.add') }}" method="post" enctype="multipart/form-data" class="row p-0 m-0">
-                                @csrf
-                                <input type="hidden" name="user_id" value="{{$doctor->user_id}}">
-                                <input type="text" class="form-control datepicker col-4" name="date" id="date" placeholder="Day-Month-Year"/>                            
-                                
-                                @include('patient.time')
-
-                                <button type="submit" class="btn btn-success ml-2 col-auto">
-                                    <i class="fas fa-calendar-plus nav-icon"></i> &nbsp; Add now
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                  @endif
                </table>             
             </div>
+
             <div class="card-footer row justify-content-center">
-               <a href="{{ route($route) }}" class="btn btn-primary col-auto">
+               <a href="{{ route('doctor.list') }}" class="btn btn-primary col-2">
                   <i class="fas fa-arrow-circle-left nav-icon"></i>   &nbsp;
-                  Back previous page
+                  Back
                </a>
             </div>
          </div>

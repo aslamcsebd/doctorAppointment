@@ -38,21 +38,19 @@
                            <option value="Female" {{$patientInfo->gender == 'Female' ? 'selected' : ''}}>Female</option>
                            <option value="Custom" {{$patientInfo->gender == 'Custom' ? 'selected' : ''}}>Custom</option>
                         </select>
-                     </div>
-                     <div class="form-group col-4">
-                        <label for="blood">Blood group</label>
-                        <select class="form-control" name="blood" id="blood">
-                           <option value="">Select group</option>
-                           <option value="O +ve" {{$patientInfo->blood == 'O +ve' ? 'selected' : ''}}>O +ve</option>
-                           <option value="O -ve" {{$patientInfo->blood == 'O -ve' ? 'selected' : ''}}>O -ve</option>
-                           <option value="A +ve" {{$patientInfo->blood == 'A +ve' ? 'selected' : ''}}>A +ve</option>
-                           <option value="A -ve" {{$patientInfo->blood == 'A -ve' ? 'selected' : ''}}>A -ve</option>
-                           <option value="B +ve" {{$patientInfo->blood == 'B +ve' ? 'selected' : ''}}>B +ve</option>
-                           <option value="B -ve" {{$patientInfo->blood == 'B -ve' ? 'selected' : ''}}>B -ve</option>
-                           <option value="AB +ve" {{$patientInfo->blood == 'AB +ve' ? 'selected' : ''}}>AB +ve</option>
-                           <option value="AB -ve" {{$patientInfo->blood == 'AB -ve' ? 'selected' : ''}}>AB -ve</option>
-                           <option value="Unknown" {{$patientInfo->blood == 'Unknown' ? 'selected' : ''}}>Unknown</option>
-                        </select>
+                     </div>                       
+                        
+                      <div class="form-group col-4">
+                            @php
+                                $groups = array('O +ve', 'O -ve', 'A +ve', 'A -ve', 'B +ve', 'B -ve', 'AB +ve', 'AB -ve', 'Unknown');
+                            @endphp
+                            <label for="blood">Blood group</label>
+                            <select class="form-control" name="blood" id="blood">
+                                <option value="">Select group</option>
+                                @foreach($groups as $group)
+                                    <option value="{{$group}}" {{$patientInfo->blood == $group ? 'selected' : ''}}>{{$group}}</option>
+                                @endforeach
+                            </select>
                      </div>
                      <div class="form-group col-4">
                         <label for="dob">Date of birth</label>
@@ -95,8 +93,7 @@
                      <div class="form-group col-12">
                         <label for="address">Address*</label>
                         <textarea type="text" class="form-control summernote required" name="address" id="address" >{{ $patientInfo->address ?? '' }}</textarea>
-                     </div>
-                    
+                     </div>                    
                   </div>
 
                   <div class="row justify-content-md-center mt-2">

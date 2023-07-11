@@ -84,7 +84,7 @@
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <button type="submit" class="btn btn-success btn-block py-1 mt-1">Submit now</button>
+                                    <button type="submit" class="btn btn-success btn-block py-1 mt-1">Payment now</button>
                                 </td>
                             </tr>
                         </form>           

@@ -11,13 +11,13 @@ class PaymentController extends Controller
     // Payment list
     public function payment(){
         $data['payments'] = Payment::all();
-        return view('admin.payment', $data);
+        return view('payment.payment', $data);
     }
 
     // Patient payment view
     public function paymentView($id){
         $data['payment'] = Payment::find($id);        
-        return view('admin.view', $data);
+        return view('payment.view', $data);
     }
 
     // Create doctor account
