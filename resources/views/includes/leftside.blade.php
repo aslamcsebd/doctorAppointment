@@ -82,12 +82,17 @@
                 @endif
 
                 <li class="nav-item">
+                    <a href="{{ route('booking') }}" class="nav-link {{ (request()->routeIs('booking*'))  ? 'active' : '' }}">
+                        <i class="fas fa-procedures nav-icon"></i>                 
+                        <p>Bed booking</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('report.list') }}" class="nav-link {{ (request()->routeIs('report.list*'))  ? 'active' : '' }}">
                         <i class="fas fa-list-alt nav-icon"></i>                   
                         <p>My all report</p>
                     </a>
-                </li>       
-                
+                </li>
                 <li class="nav-item">
                     <a href="{{ route('patientInfo') }}" class="nav-link {{ (request()->routeIs('patientInfo*'))  ? 'active' : '' }}">
                         <i class="fas fa-user-cog nav-icon"></i>

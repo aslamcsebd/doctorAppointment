@@ -116,5 +116,5 @@ class PatientController extends Controller
             'address' => $request->address
         ]);
         return back()->with('success','Patient info update successfully');
-    }   
+    }
 }

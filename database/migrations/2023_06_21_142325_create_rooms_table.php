@@ -19,7 +19,7 @@ class CreateRoomsTable extends Migration
             $table->string('name');
             $table->integer('floor_id');
             $table->string('room_no');
-            $table->integer('price');
+            $table->integer('rent');
             $table->timestamps();
         });
     }

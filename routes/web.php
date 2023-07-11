@@ -49,7 +49,11 @@ Route::middleware(['auth'])->group(function(){
     Route::get('appointment-list','PatientController@appointment_list')->name('appointment.list');
 
     Route::get('report-list','PatientController@report_list')->name('report.list');
-    Route::get('report-view/{id}','PatientController@report_view')->name('report-view'); 
+    Route::get('report-view/{id}','PatientController@report_view')->name('report-view');
+
+    // Booking
+    Route::get('booking/','PaymentController@booking')->name('booking');
+    Route::post('booking-search', 'PaymentController@booking_search')->name('booking_search');   
 
 // Settings
     // Admin

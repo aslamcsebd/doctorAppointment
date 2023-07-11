@@ -18,7 +18,7 @@ class RoomController extends Controller
     // Room info
     public function room(){
         $data['floors'] = Floor::all();       
-        $data['roomWards'] = Room::where('room_type', 'ward')->get();
+        $data['roomWards'] = Room::where('room_type', 'ward')->orderBy('room_no', 'Asc')->get();
 
         return view('room.index', $data);
     }
@@ -31,7 +31,7 @@ class RoomController extends Controller
             'name'=>'required',
             'floor_id'=>'required',
             'room_no'=>'required',
-            'price'=>'required',
+            'rent'=>'required',
         ]);
     
         if($validator->fails()){
@@ -44,7 +44,7 @@ class RoomController extends Controller
             'name' => $request->name,
             'floor_id' => $request->floor_id,
             'room_no' => $request->room_no,
-            'price' => $request->price             
+            'rent' => $request->rent             
         ]);
         
         if($request->room_type=='ward'){

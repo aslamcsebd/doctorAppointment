@@ -32,7 +32,7 @@
                            <thead class="bg-info">
                                 <th>Floor</th>
                                 <th>Room no</th>
-                                <th>Price</th>
+                                <th>Rent</th>
                            </thead>
                            <tbody>
                               @foreach($floors as $floor)
@@ -43,7 +43,7 @@
                                     @if($roomCount == 1)
                                        @foreach($floor->rooms->where('room_type', 'cabin')->sortBy('room') as $room)
                                              <td>{{$room->room_no}}</td>
-                                             <td>{{$room->price}}</td>
+                                             <td>{{$room->rent}}</td>
                                        @endforeach
                                    @endif
                                  </tr>
@@ -51,7 +51,7 @@
                                        @foreach($floor->rooms->where('room_type', 'cabin')->sortBy('room') as $room)
                                             <tr>
                                                 <td>{{$room->room_no}}</td>
-                                                <td>{{$room->price}}</td>
+                                                <td>{{$room->rent}}</td>
                                             </tr>     
                                        @endforeach
                                    @endif
@@ -68,7 +68,7 @@
                            <thead class="bg-info">
                                <th>Room no</th>
                                 <th>Ward no</th>
-                                <th>Price</th>
+                                <th>Rent</th>
                            </thead>
                            <tbody>
                               @foreach($roomWards as $room)
@@ -81,7 +81,7 @@
                                        @foreach($room->wards->sortBy('ward_no') as $ward)
                                             <tr>
                                                 <td>{{$ward->ward_no}}</td>
-                                                <td>{{$room->price}}</td>
+                                                <td>{{$room->rent}}</td>
                                             </tr>     
                                        @endforeach
                                    @endif
@@ -157,8 +157,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-6">
-                                                    <label for="price">Price*</label>
-                                                    <input type="number" name="price" class="form-control" id="price" placeholder="Ex: 100, 200" required/>
+                                                    <label for="rent">Rent*</label>
+                                                    <input type="number" name="rent" class="form-control" id="rent" placeholder="Ex: 100, 200" required/>
                                                 </div>
                                             </div>                                        
 
