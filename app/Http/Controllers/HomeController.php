@@ -8,10 +8,11 @@ use App\Models\User;
 use App\Models\Ward;
 use App\Models\Floor;
 
-use App\Models\Payment;
-
 use App\Models\Doctor;
+
+use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 
 class HomeController extends Controller
@@ -31,6 +32,9 @@ class HomeController extends Controller
 
         $data['payments'] = Payment::where('status', 0)->get();
  
+        if(Auth::user()->role=='3' && Auth::user()->password == null){
+            return redirect('/set-password')->with('success', 'Patient\'s registration complete'); 
+        }
         return view('home', $data);
     }
 

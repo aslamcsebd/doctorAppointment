@@ -56,49 +56,58 @@
 
             <!-- 3 = Patient -->
             @elseif($role==3)
-                <li class="nav-item">
-                    <a href="{{ route('doctor.search') }}" class="nav-link {{ (request()->routeIs('doctor.search*'))  ? 'active' : '' }}">
-                        <i class="fas fa-search nav-icon"></i>                    
-                        <p>Search doctor</p>
-                    </a>
-                </li>
-
-                @if($favourite = \App\Models\FavouriteDoctor::where('patient_id', Auth::id())->count())            
+                @if(Auth::user()->password != null)
                     <li class="nav-item">
-                        <a href="{{ route('favourite.list') }}" class="nav-link {{ (request()->routeIs('favourite.list*'))  ? 'active' : '' }}">
-                            <i class="fas fa-heart nav-icon"></i>
-                            <p>Favourite doctor ({{$favourite}})</p>
+                        <a href="{{ route('doctor.search') }}" class="nav-link {{ (request()->routeIs('doctor.search*'))  ? 'active' : '' }}">
+                            <i class="fas fa-search nav-icon"></i>                    
+                            <p>Search doctor</p>
+                        </a>
+                    </li>
+
+                    @if($favourite = \App\Models\FavouriteDoctor::where('patient_id', Auth::id())->count())            
+                        <li class="nav-item">
+                            <a href="{{ route('favourite.list') }}" class="nav-link {{ (request()->routeIs('favourite.list*'))  ? 'active' : '' }}">
+                                <i class="fas fa-heart nav-icon"></i>
+                                <p>Favourite doctor ({{$favourite}})</p>
+                            </a>
+                        </li>
+                    @endif
+
+                    @if($appointment = \App\Models\Appointment::where('patient_id', Auth::id())->count())            
+                        <li class="nav-item">
+                            <a href="{{ route('appointment.list') }}" class="nav-link {{ (request()->routeIs('appointment.list*'))  ? 'active' : '' }}">
+                                <i class="fas fa-calendar-check nav-icon"></i>
+                                <p>Appointment list ({{$appointment}})</p>
+                            </a>
+                        </li>
+                    @endif
+
+                    <li class="nav-item">
+                        <a href="{{ route('booking') }}" class="nav-link {{ (request()->routeIs('booking*'))  ? 'active' : '' }}">
+                            <i class="fas fa-procedures nav-icon"></i>                 
+                            <p>Bed booking</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('report.list') }}" class="nav-link {{ (request()->routeIs('report.list*'))  ? 'active' : '' }}">
+                            <i class="fas fa-list-alt nav-icon"></i>                   
+                            <p>My all report</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('patientInfo') }}" class="nav-link {{ (request()->routeIs('patientInfo*'))  ? 'active' : '' }}">
+                            <i class="fas fa-user-cog nav-icon"></i>
+                            <p>Patient profile</p>
+                        </a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a href="{{ route('setPassword') }}" class="nav-link bg-warning {{ (request()->routeIs('setPassword*'))  ? 'active' : '' }}">
+                            <i class="fas fa-unlock nav-icon"></i>                    
+                            <p>Set password</p>
                         </a>
                     </li>
                 @endif
-
-                @if($appointment = \App\Models\Appointment::where('patient_id', Auth::id())->count())            
-                    <li class="nav-item">
-                        <a href="{{ route('appointment.list') }}" class="nav-link {{ (request()->routeIs('appointment.list*'))  ? 'active' : '' }}">
-                            <i class="fas fa-calendar-check nav-icon"></i>
-                            <p>Appointment list ({{$appointment}})</p>
-                        </a>
-                    </li>
-                @endif
-
-                <li class="nav-item">
-                    <a href="{{ route('booking') }}" class="nav-link {{ (request()->routeIs('booking*'))  ? 'active' : '' }}">
-                        <i class="fas fa-procedures nav-icon"></i>                 
-                        <p>Bed booking</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('report.list') }}" class="nav-link {{ (request()->routeIs('report.list*'))  ? 'active' : '' }}">
-                        <i class="fas fa-list-alt nav-icon"></i>                   
-                        <p>My all report</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('patientInfo') }}" class="nav-link {{ (request()->routeIs('patientInfo*'))  ? 'active' : '' }}">
-                        <i class="fas fa-user-cog nav-icon"></i>
-                        <p>Patient profile</p>
-                    </a>
-                </li>   
             @endif
         </ul>
     </nav>

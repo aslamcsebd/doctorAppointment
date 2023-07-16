@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
+use Socialite;
+use App\Models\User;
+
+use App\Models\Patient;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
-use Socialite;
-use App\Models\User;
-use Auth;
 
 class LoginController extends Controller {
    
@@ -35,11 +36,29 @@ class LoginController extends Controller {
         if ($authUser) {
             return $authUser;
         }
-        return User::create([
+        /*
+            return User::create([
+                'name'     => $user->name,
+                'email'    => $user->email,
+                'provider' => $provider,
+                'provider_id' => $user->id
+            ]);
+        */
+        $user_id = User::create([
+            'role' => 3,
             'name'     => $user->name,
             'email'    => $user->email,
             'provider' => $provider,
             'provider_id' => $user->id
         ]);
+
+        $id = $user_id->id;
+        
+        Patient::create([
+            'user_id' => $id,
+            'patient_id' => str_pad($id, 6, '0', STR_PAD_LEFT)
+        ]);
+        return $user_id;
     }
 }
+      

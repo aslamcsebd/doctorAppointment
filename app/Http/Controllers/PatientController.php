@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Redirect;
 
+use App\Models\User;
 use App\Models\Doctor;
 use App\Models\Report;
 use App\Models\Patient;
@@ -10,8 +11,9 @@ use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Models\FavouriteDoctor;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -117,4 +119,33 @@ class PatientController extends Controller
         ]);
         return back()->with('success','Patient info update successfully');
     }
+
+    // Password set page
+    public function setPassword(){
+        $data['patientInfo'] = User::find(Auth::id());
+        return view('patient.setPassword', $data);
+    }   
+
+    // Add hospital info 
+    public function setPasswordNow(Request $request){
+        $validator = Validator::make($request->all(),[
+            'id'=>'required',
+            'password'=>['required', 'string', 'min:6', 'confirmed'],
+            'password_confirmation'=>'required|same:password'
+        ]);
+
+        if($validator->fails()){
+            $messages = $validator->messages();
+            return Redirect::back()->withErrors($validator);
+        }
+
+        User::where('id', $request->id)->update([
+            'password' => Hash::make($request->password)
+        ]);
+
+        return redirect('/home')->with('success','Password set successfully');
+        // return redirect('/dashboard')->with('status', 'Profile updated!');
+
+    }  
+    
 }

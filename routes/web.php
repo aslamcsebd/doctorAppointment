@@ -67,6 +67,9 @@ Route::middleware(['auth'])->group(function(){
     // Patient
     Route::get('patientInfo', 'PatientController@patientInfo')->name('patientInfo');
     Route::post('updatePatientInfo', 'PatientController@updatePatientInfo')->name('updatePatientInfo');
+
+    Route::get('set-password', 'PatientController@setPassword')->name('setPassword');
+    Route::post('set-password-now', 'PatientController@setPasswordNow')->name('setPasswordNow');        
     
 // Default option
         // All status change
@@ -76,8 +79,8 @@ Route::middleware(['auth'])->group(function(){
         Route::get('itemDelete/{model}/{id}/{tab}','HomeController@itemDelete')->name('itemDelete');  
 });
  
-Route::get('login/{provider}', 'App\Http\Controllers\Auth\LoginController@redirectToProvider');
-Route::get('{provider}/callback', 'App\Http\Controllers\Auth\LoginController@handleProviderCallback');
+Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::get('/clear', function() {
     Artisan::call('cache:clear');

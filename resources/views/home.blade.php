@@ -2,6 +2,8 @@
 @section('title') Hospital @endsection
 
 @section('content')   
+@include('includes.alertMessage')
+
    <div class="content-wrapper">
       <div class="content-header">
          <div class="container-fluid">
