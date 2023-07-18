@@ -19,23 +19,23 @@
                         </tr>
                         <tr>
                             <td class="text-right">Name:</td>
-                            <td>{!!$payment->getPatient->name!!}</td>
+                            <td>{{ $payment->getPatient->name ?? '' }}</td>
                         </tr>
                         <tr>
                             <td>Gender:</td>
-                            <td>{!!$payment->patientInfo->gender!!}</td>
+                            <td>{{ $payment->patientInfo->gender ?? '' }}</td>
                         </tr>
                         <tr>
                             <td>Blood group:</td>
-                            <td>{!!$payment->patientInfo->blood!!}</td>
+                            <td>{{ $payment->patientInfo->blood ?? '' }}</td>
                         </tr>
                         <tr>
                             <td>Mobile:</td>
-                            <td>{!!$payment->getPatient->phone!!}</td>
+                            <td>{{ $payment->getPatient->phone ?? '' }}</td>
                         </tr>
                         <tr class="font-weight-bold bg-cyan">
                             <td>Patient ID:</td>
-                            <td>{!!$payment->patientInfo->patient_id!!}</td>
+                            <td>{{ $payment->patientInfo->patient_id ?? '' }}</td>
                         </tr>
                     </table> 
                 </div>

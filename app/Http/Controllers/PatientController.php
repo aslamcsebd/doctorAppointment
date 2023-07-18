@@ -8,10 +8,12 @@ use App\Models\Doctor;
 use App\Models\Report;
 use App\Models\Patient;
 use App\Models\Appointment;
+use App\Models\WardBooking;
+use App\Models\CabinBooking;
 use Illuminate\Http\Request;
+
 use App\Models\FavouriteDoctor;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
@@ -144,8 +146,13 @@ class PatientController extends Controller
         ]);
 
         return redirect('/home')->with('success','Password set successfully');
-        // return redirect('/dashboard')->with('status', 'Profile updated!');
+    }
 
-    }  
-    
+    // Report view
+    public function booked(){ 
+        $data['cabines'] = CabinBooking::where('patient_id', Auth::id())->orderBy('id', 'desc')->get();
+        $data['wards'] = WardBooking::where('patient_id', Auth::id())->orderBy('id', 'desc')->get();
+
+        return view('patient.bookingList', $data);
+    }
 }

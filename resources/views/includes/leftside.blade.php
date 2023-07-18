@@ -89,6 +89,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route('booked') }}" class="nav-link {{ (request()->routeIs('booked*'))  ? 'active' : '' }}">
+                            <i class="fas fa-stream nav-icon"></i>              
+                            <p>Booking list</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('report.list') }}" class="nav-link {{ (request()->routeIs('report.list*'))  ? 'active' : '' }}">
                             <i class="fas fa-list-alt nav-icon"></i>                   
                             <p>My all report</p>

@@ -40,7 +40,7 @@
                         </select>
                      </div>                       
                         
-                      <div class="form-group col-4">
+                        <div class="form-group col-4">
                             @php
                                 $groups = array('O +ve', 'O -ve', 'A +ve', 'A -ve', 'B +ve', 'B -ve', 'AB +ve', 'AB -ve', 'Unknown');
                             @endphp
@@ -51,7 +51,7 @@
                                     <option value="{{$group}}" {{$patientInfo->blood == $group ? 'selected' : ''}}>{{$group}}</option>
                                 @endforeach
                             </select>
-                     </div>
+                        </div>
                      <div class="form-group col-4">
                         <label for="dob">Date of birth</label>
                         <input type="text" class="form-control datepicker" name="dob" value="{{ date('d-m-Y', strtotime($patientInfo->dob)) ?? '' }}" id="dob" placeholder="Day-Month-Year"/>

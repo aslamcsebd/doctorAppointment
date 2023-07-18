@@ -30,6 +30,7 @@
     2. Add favourite doctor
     3. Show full doctor info
     4. Appointment-list show
+    5. Login with social & password set complete
 
 ### Profile update
     1. Hospital profile update
@@ -39,3 +40,8 @@
 ### Appointment section
     1. Patient request for appointment
     2. Doctor accept appointment
+
+### Bed booking
+    1. Date wise cabin/ward bed show
+    2. Booking process ok
+    3. Booking list show

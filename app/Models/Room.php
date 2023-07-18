@@ -13,4 +13,9 @@ class Room extends Model
     public function wards(){
         return $this->hasMany(Ward::class);
     }
+
+    // Floor no
+    public function floorNo(){
+        return $this->belongsTo(Floor::class, 'floor_id', 'id')->withDefault();
+    }
 }

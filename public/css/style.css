@@ -183,9 +183,10 @@ table.dataTable tbody tr { background-color: whitesmoke; }
    font-weight: bold;   
 }
 
+.bookingView table.dataTable tbody td:first-child,
 .view table.dataTable tbody td:first-child {
    text-align: right !important;
-   padding-right: 5px
+   padding-right: 15px;
    vertical-align: unset;            
 }
 .view table.dataTable tbody td:first-child label{

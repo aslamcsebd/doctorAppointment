@@ -52,8 +52,19 @@ Route::middleware(['auth'])->group(function(){
     Route::get('report-view/{id}','PatientController@report_view')->name('report-view');
 
     // Booking
-    Route::get('booking/','PaymentController@booking')->name('booking');
-    Route::post('booking-search', 'PaymentController@booking_search')->name('booking_search');   
+    Route::get('booking/', 'PaymentController@booking')->name('booking');
+    Route::post('booking-search', 'PaymentController@booking_search')->name('booking_search');
+    
+    // Cabin
+    Route::get('cabin_book/{check_in}/{check_out}/{id}', 'PaymentController@cabin_book')->name('cabin_book');
+    Route::post('booking-now', 'PaymentController@bookingNow')->name('bookingNow');
+
+    // Ward
+    Route::get('ward_book/{check_in}/{check_out}/{id}', 'PaymentController@ward_book')->name('ward_book');
+    Route::post('booking-now2', 'PaymentController@bookingNow2')->name('bookingNow2');
+
+
+    Route::get('booking-list', 'PatientController@booked')->name('booked');  
 
 // Settings
     // Admin

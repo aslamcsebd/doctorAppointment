@@ -9,4 +9,9 @@ class CabinBooking extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    // Floor id
+    public function floorId(){
+        return $this->belongsTo(Room::class, 'room_no', 'room_no')->withDefault();
+    }
 }

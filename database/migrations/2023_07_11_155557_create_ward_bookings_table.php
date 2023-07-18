@@ -18,8 +18,7 @@ class CreateWardBookingsTable extends Migration
             $table->integer('patient_id');
             $table->date('check_in')->nullable()->comment('Start day');
             $table->date('check_out')->nullable()->comment('End day');
-            $table->string('room_no')->nullable();
-            $table->string('ward_no')->nullable();
+            $table->integer('ward_id')->nullable();
             $table->integer('rent')->nullable();
             $table->timestamps();
         });

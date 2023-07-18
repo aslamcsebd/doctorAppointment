@@ -40,20 +40,19 @@
                         </select>
                      </div>
                      <div class="form-group col-4">
+                        @php
+                            $groups = array('O +ve', 'O -ve', 'A +ve', 'A -ve', 'B +ve', 'B -ve', 'AB +ve', 'AB -ve', 'Unknown');
+                        @endphp
                         <label for="blood">Blood group</label>
                         <select class="form-control" name="blood" id="blood">
-                           <option value="">Select group</option>
-                           <option value="O +ve" {{$doctorInfo->blood == 'O +ve' ? 'selected' : ''}}>O +ve</option>
-                           <option value="O -ve" {{$doctorInfo->blood == 'O -ve' ? 'selected' : ''}}>O -ve</option>
-                           <option value="A +ve" {{$doctorInfo->blood == 'A +ve' ? 'selected' : ''}}>A +ve</option>
-                           <option value="A -ve" {{$doctorInfo->blood == 'A -ve' ? 'selected' : ''}}>A -ve</option>
-                           <option value="B +ve" {{$doctorInfo->blood == 'B +ve' ? 'selected' : ''}}>B +ve</option>
-                           <option value="B -ve" {{$doctorInfo->blood == 'B -ve' ? 'selected' : ''}}>B -ve</option>
-                           <option value="AB +ve" {{$doctorInfo->blood == 'AB +ve' ? 'selected' : ''}}>AB +ve</option>
-                           <option value="AB -ve" {{$doctorInfo->blood == 'AB -ve' ? 'selected' : ''}}>AB -ve</option>
-                           <option value="Unknown" {{$doctorInfo->blood == 'Unknown' ? 'selected' : ''}}>Unknown</option>
+                            <option value="">Select group</option>
+                            @foreach($groups as $group)
+                                <option value="{{$group}}" {{$doctorInfo->blood == $group ? 'selected' : ''}}>{{$group}}</option>
+                            @endforeach
                         </select>
-                     </div>
+                    </div>
+
+
                      <div class="form-group col-4">
                         <label for="dob">Date of birth</label>
                         <input type="text" class="form-control datepicker" name="dob" value="{{ date('d-m-Y', strtotime($doctorInfo->dob)) ?? '' }}" id="dob" placeholder="Day-Month-Year"/>
