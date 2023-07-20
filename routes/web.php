@@ -57,13 +57,12 @@ Route::middleware(['auth'])->group(function(){
     
     // Cabin
     Route::get('cabin_book/{check_in}/{check_out}/{id}', 'PaymentController@cabin_book')->name('cabin_book');
-    Route::post('booking-now', 'PaymentController@bookingNow')->name('bookingNow');
-
+    
     // Ward
     Route::get('ward_book/{check_in}/{check_out}/{id}', 'PaymentController@ward_book')->name('ward_book');
-    Route::post('booking-now2', 'PaymentController@bookingNow2')->name('bookingNow2');
 
-
+    // Booking [cabin, Ward]
+    Route::post('booking-now', 'SslCommerzPaymentController@index')->name('bookingNow');
     Route::get('booking-list', 'PatientController@booked')->name('booked');  
 
 // Settings
@@ -90,9 +89,25 @@ Route::middleware(['auth'])->group(function(){
         Route::get('itemDelete/{model}/{id}/{tab}','HomeController@itemDelete')->name('itemDelete');  
 });
  
+// Google Socialite
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
+// SSLCOMMERZ Start
+    Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+    Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+
+    // Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
+    Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+    Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+    Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+    Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+    Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+//SSLCOMMERZ END
+
+// Cache:clear
 Route::get('/clear', function() {
     Artisan::call('cache:clear');
     Artisan::call('config:clear');

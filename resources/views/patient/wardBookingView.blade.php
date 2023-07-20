@@ -15,7 +15,7 @@
       <div class="col-md-6">
          <div class="card">            
             <h6 class="card-header bg-warning text-center py-1">Booking information</h6>
-            <form action="{{ route('bookingNow2') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('bookingNow') }}" method="post" enctype="multipart/form-data">
                @csrf
                <div class="card-body">
                   <table class="table table-bordered">
@@ -24,6 +24,7 @@
                           <td>
                              <label class="capitalize">Booking type :</label>
                           </td>
+                          <input type="hidden" name="bookingType" value="{{ $ward->roomNo->room_type ?? '' }}">
                           <td>{{ $ward->roomNo->room_type ?? '' }}</td>
                        </tr>
                        <tr>

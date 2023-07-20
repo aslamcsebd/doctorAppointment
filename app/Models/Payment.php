@@ -19,6 +19,6 @@ class Payment extends Model
     }
 
     public function getDoctor(){
-        return $this->belongsTo(User::class, 'doctor_id', 'id');
+        return $this->belongsTo(User::class, 'doctor_id', 'id')->withDefault();
     }
 }

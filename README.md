@@ -45,3 +45,7 @@
     1. Date wise cabin/ward bed show
     2. Booking process ok
     3. Booking list show
+
+### Bed booking
+    1. Payment complete with sslcommerz
+    

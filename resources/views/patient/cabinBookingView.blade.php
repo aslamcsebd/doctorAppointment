@@ -24,6 +24,7 @@
                           <td>
                              <label class="capitalize">Booking type :</label>
                           </td>
+                            <input type="hidden" name="bookingType" value="{{ $room->room_type ?? '' }}">
                           <td>{{ $room->room_type ?? '' }}</td>
                        </tr>
                        <tr>

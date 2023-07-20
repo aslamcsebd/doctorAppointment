@@ -20,6 +20,8 @@ class CreateCabinBookingsTable extends Migration
             $table->date('check_out')->nullable()->comment('End day');
             $table->string('room_no')->nullable();
             $table->integer('rent')->nullable();
+            $table->string('tran_id')->nullable();
+            $table->string('card_type')->nullable();            
             $table->timestamps();
         });
     }
