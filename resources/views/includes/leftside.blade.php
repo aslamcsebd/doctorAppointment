@@ -48,6 +48,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('patient.list') }}" class="nav-link {{ (request()->routeIs('patient.list*'))  ? 'active' : '' }}">
+                        <i class="fas fa-list-alt nav-icon"></i>
+                        <p>Patient report</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('doctorInfo') }}" class="nav-link {{ (request()->routeIs('doctorInfo*'))  ? 'active' : '' }}">
                         <i class="fas fa-user-cog nav-icon"></i>
                         <p>Doctor profile</p>

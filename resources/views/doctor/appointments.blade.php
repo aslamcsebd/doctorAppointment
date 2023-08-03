@@ -42,7 +42,10 @@
                            </td>
                            <td width="auto">
                               <div class="btn-group">
-                                    <a href="{{ url('single-patient', [$appointment->patient_id, Route::currentRouteName()])}}" class="btn btn-sm btn-info py-1">View</a>
+                                    <a href="{{ url('single-patient', [$appointment->id, Route::currentRouteName()])}}" class="btn btn-sm btn-info py-1">View</a>
+                                    @if($appointment->status == 1)
+                                        <a href="{{ url('patient-view', [$appointment->patient_id]) }}" class="btn btn-sm btn-success py-1 ml-1">Add report</a>
+                                    @endif
                                     <a href="{{ url('itemDelete', ['appointments', $appointment->id, 'tabName'])}}" class="btn btn-sm btn-danger ml-1 py-1 px-3" onclick="return confirm('Are you want to delete this?')">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>

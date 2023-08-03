@@ -1,5 +1,5 @@
 @extends('layouts.app')
-   @section('title') Update patient info @endsection
+   @section('title') Patient info @endsection
 @section('content')
 @include('includes.alertMessage')
 
@@ -77,19 +77,21 @@
                             </div>
                         </div>
                     </div>
+
                      <div class="form-group col-4">
+                        @php
+                            $sources = array('Facebook', 'Instagram', 'Youtube', 'Google', 'Other',);
+                        @endphp
                         <label for="source">Source of information</label>
                         <select class="form-control" name="source" id="source">
                            <option value="">Select source</option>
-                           <option value="Facebook" {{$patientInfo->source == 'Facebook' ? 'selected' : ''}}>Facebook</option>
-                           <option value="Instagram" {{$patientInfo->source == 'Instagram' ? 'selected' : ''}}>Instagram</option>
-                           <option value="Youtube" {{$patientInfo->source == 'Youtube' ? 'selected' : ''}}>Youtube</option>
-                           <option value="Google" {{$patientInfo->source == 'Google' ? 'selected' : ''}}>Google</option>
-                           <option value="Other" {{$patientInfo->source == 'Other' ? 'selected' : ''}}>Other</option>
+                           @foreach($sources as $source)
+                               <option value="{{$source}}" {{$patientInfo->source == $source ? 'selected' : ''}}>{{$source}}</option>
+                           @endforeach
                         </select>
                      </div>
-                  </div>     
-                  
+                  </div>   
+
                   <div class="row">
                      <div class="form-group col-12">
                         <label for="address">Address*</label>

@@ -71,13 +71,14 @@ class PatientController extends Controller
 
     // Show appointment list
     public function report_list(){
-        $data['reports'] = Report::where('patient_id', Auth::id())->with('user')->orderBy('id', 'DESC')->get();
+        $data['reports'] = Report::where('patient_id', Auth::id())->with('user')->orderBy('id', 'DESC')->get()->groupBy('doctor_id');
         return view('patient.reports', $data);
     }
 
     // Report view
     public function report_view($id){ 
-        $data['report'] = Report::find($id);
+        $data['user'] = User::find($id);
+        $data['reports'] = Report::where('patient_id', Auth::id())->where('doctor_id', $id)->get();
         return view('patient.reportView', $data);
     }        
 

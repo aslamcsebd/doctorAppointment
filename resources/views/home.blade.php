@@ -96,6 +96,22 @@
                         </a>
                      </div>
                   </div>
+                  
+                  <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
+                     <div class="small-box bg-success">
+                        <div class="inner text-center">
+                           <h3>{{$patientReport->count() ?? '0'}}</h3> 
+                           <span>
+                              <i class="fas fa-calendar-check mr-2"></i>
+                              Patient report
+                           </span>
+                        </div>                        
+                        <a href="{{ route('patient.list') }}" class="small-box-footer">
+                           More info
+                           <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                     </div>
+                  </div>
                @elseif(Auth::user()->role==3)
                   <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
                      <div class="small-box bg-success">
@@ -157,7 +173,7 @@
                         <div class="inner text-center">
                            <h3>{{$report->count() ?? '0'}}</h3>
                            <span>
-                              <i class="fas fa-calendar-check mr-2"></i>
+                              <i class="fas fa-list-alt mr-2"></i>
                               Report list
                            </span>
                         </div>                        

@@ -47,3 +47,8 @@
     2. Booking process ok
     3. Booking list show
     4. Payment complete with sslcommerz
+
+### Report section
+    1. Doctor add patient report
+    2. Doctor can see patient report
+    3. Patient can see his/her report

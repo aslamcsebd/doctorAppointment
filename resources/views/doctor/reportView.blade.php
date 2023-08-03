@@ -33,7 +33,7 @@
                   </tbody>
                </table>
 
-               <a href="{{ route('report.list') }}" class="btn btn-primary col-auto mt-2">
+               <a href="{{ route('patient.list') }}" class="btn btn-primary col-auto mt-2">
                   <i class="fas fa-arrow-circle-left nav-icon"></i> &nbsp;
                   Back previous page
                </a>

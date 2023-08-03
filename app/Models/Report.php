@@ -11,6 +11,10 @@ class Report extends Model
     protected $guarded = [];
 
     public function user(){
-        return $this->belongsTo(User::class, 'doctor_id', 'id');
+        return $this->belongsTo(User::class, 'doctor_id', 'id')->withDefault();
+    }
+
+    public function user2(){
+        return $this->belongsTo(Doctor::class, 'doctor_id', 'user_id')->withDefault();
     }
 }

@@ -8,8 +8,9 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Doctor;
 
-use App\Models\Patient;
+use App\Models\Report;
 
+use App\Models\Patient;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -67,12 +68,14 @@ class DoctorController extends Controller {
     }
 
     // View patient full info
-    public function singlePatient($id, $route){   
+    public function singlePatient($id, $route){
         if($route=='appointment.request'){
-            $data['appointmentDate'] = Appointment::where('doctor_id', Auth::id())->where('patient_id', $id)->first();
-        }    
+            $data['appointmentDate'] = Appointment::find($id);
+            $patient_id = $data['appointmentDate']->patient_id;
+        }
+
         $data['route'] = $route;
-        $data['patient'] = Patient::where('user_id', $id)->first();
+        $data['patient'] = Patient::where('user_id', $patient_id)->first();
         return view('doctor.view', $data);
     }
 
@@ -84,5 +87,56 @@ class DoctorController extends Controller {
             'status' => 1
         ]);
         return back()->with('success', 'Appointment accept successfully');
+    }
+
+    // Patient report
+    public function patient_list(){
+        $data['patients'] = Appointment::where('doctor_id', Auth::id())->get()->groupBy('patient_id');   
+        return view('doctor.patients', $data);
+    }  
+
+    // Single report 
+    public function patient_view($id){
+        $data['user'] = User::find($id);
+        $data['patient'] = Patient::where('user_id', $id)->first();
+        return view('doctor.reportAdd', $data);
+    }
+
+    // Add report 
+    public function report_add(Request $request){
+        $path="images/report/";
+        $validator = Validator::make($request->all(),[
+            'id'=>'required',
+            'title'=>'required',
+            'file'=>'required',
+        ]);
+
+        if($validator->fails()){
+            $messages = $validator->messages();
+            return Redirect::back()->withErrors($validator);
+        }
+
+        if($files=$request->file('file')){
+            $file = $request->file;
+            $fullName=time().".".$file->getClientOriginalExtension();
+            $files->move(public_path($path), $fullName);
+            $fileLink = $path . $fullName;
+        }
+
+        Report::create([
+            'patient_id' => $request->id,
+            'doctor_id' => Auth::id(),
+            'title' => $request->title,
+            'file' => $fileLink,
+            'date' => Carbon::now()
+        ]);
+        return back()->with('success', 'Report file add successfully');       
+    }
+
+    // Single report
+    public function patient_report($id){
+        $data['user'] = User::find($id);
+        $data['reports'] = Report::where('patient_id', $id)->where('doctor_id', Auth::id())->get();
+        return view('doctor.reportView', $data);
     }
 }

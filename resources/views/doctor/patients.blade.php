@@ -1,5 +1,5 @@
 @extends('layouts.app')
-   @section('title') Report list @endsection
+   @section('title') patient list @endsection
 @section('content')
 @include('includes.alertMessage')
 
@@ -14,30 +14,25 @@
                      <th>Sl</th>
                      <th>Name</th>
                      <th>Gender</th>
-                     <th>Age</th>
-                     <th>Fee</th>
+                     <th>Appointment</th>
                      <th>Action</th>
                   </thead>
                   <tbody>
-                     @php $si=1; @endphp
-                     @foreach($reports as $report2)
-                        @foreach($report2->take(1) as $report)
+                     @php $si=1;@endphp
+                     @foreach($patients as $patient2)
+                     @foreach($patient2->take(1) as $patient)
                            <tr>
-                              <td width="30">{{$si}}</td> @php $si++; @endphp
+                              <td width="30">{{$si}}</td> @php $si++;@endphp
                               <td>
-                                 <img src="{{asset('')}}/{{$report->photo ?? 'images/default.jpg'}}" class="img-thumbnail" alt="No Image found" width="60">
+                                 <img src="{{asset('')}}/{{$patient->user3->photo ?? 'images/default.jpg'}}" class="img-thumbnail" alt="No Image found" width="60">
                                  <br>
-                                 <span>{!!$report->user->name!!}</span>
+                                 <span>{!!$patient->user2->name!!}</span>
                               </td>                        
-                              <td>{!!$report->user2->gender!!}</td>
-                              <td>
-                                 {{\Carbon\Carbon::parse($report->user2->dob)->diff(\Carbon\Carbon::now())->format('%y years')}}
-                              </td>                          
-                              <td>{!!$report->user2->fee!!}</td>                          
-
+                              <td>{!!$patient->user3->gender!!}</td>
+                              <td>{!!$patient->date!!}</td>
                               <td width="auto">
                                  <div class="btn-group">
-                                       <a href="{{ url('report-view', [$report->doctor_id]) }}" class="btn btn-sm btn-info py-1">View</a>
+                                       <a href="{{ url('patient-report', [$patient->patient_id]) }}" class="btn btn-sm btn-info py-1">View</a>
                                  </div>
                               </td>
                            </tr>

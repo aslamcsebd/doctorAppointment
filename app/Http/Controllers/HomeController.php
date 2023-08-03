@@ -43,6 +43,7 @@ class HomeController extends Controller
 
         // Doctor
         $data['Appointment'] = Appointment::where('doctor_id', Auth::id())->where('status', '0')->get();
+        $data['patientReport'] = Report::where('doctor_id', Auth::id())->get()->groupBy('patient_id');   
 
         // Patient
         $data['favouriteDoctor'] = FavouriteDoctor::where('patient_id', Auth::id())->get();
