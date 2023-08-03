@@ -14,7 +14,7 @@
                         <div class="text-center">
                            <img src="{{asset('')}}/{{$doctor->photo ?? 'images/default.jpg'}}" class="img-thumbnail" alt="No Image found" width="100">
                            <br>
-                           <span class="singerName">{{$doctor->user->name}}</span>                         
+                           <span>{{$doctor->user->name}}</span>                         
                         </div>
                      </td>
                   </tr>
@@ -62,7 +62,7 @@
                   </tr>
                   @if($route=='appointment.list')
                     <tr>
-                        <td width="20%" class="bg-warning">
+                        <td width="25%" class="bg-warning">
                             <label for="date" class="capitalize">Fixed Appointment</label>
                         </td>
                         <td class="row p-0 m-0">

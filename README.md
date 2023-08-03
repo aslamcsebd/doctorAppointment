@@ -24,6 +24,7 @@
     1. Payment data list show
     2. Payment single data view
     3. Payment money add
+    3. Payment due complete
 
 ### Patient side
     1. Show all doctor list
@@ -45,7 +46,4 @@
     1. Date wise cabin/ward bed show
     2. Booking process ok
     3. Booking list show
-
-### Bed booking
-    1. Payment complete with sslcommerz
-    
+    4. Payment complete with sslcommerz

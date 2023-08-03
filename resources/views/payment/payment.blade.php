@@ -13,12 +13,9 @@
                   <thead class="bg-info">
                      <th>Sl</th>
                      <th>Patient</th>
-                     <th>Doctor</th>
-                     <th>Doctor fee</th>
                      <th>Bed rent</th>
-                     <th class="bg-warning">Total</th>
                      <th>Advance</th>
-                     <th class="bg-warning">Sub-total</th>
+                     <th class="bg-warning">Due</th>
                      <th>Status</th>
                      <th>Action</th>
                   </thead>
@@ -30,18 +27,11 @@
                            <td>
                               <img src="{{asset('')}}/{{$payment->photo ?? 'images/default.jpg'}}" class="img-thumbnail" alt="No Image found" width="60">
                               <br>
-                              <span class="singerName">{!!$payment->getPatient->name!!}</span>
-                           </td>   
-                           <td>
-                              <img src="{{asset('')}}/{{$payment->photo ?? 'images/default.jpg'}}" class="img-thumbnail" alt="No Image found" width="60">
-                              <br>
-                              <span class="singerName">{!!$payment->getDoctor->name!!}</span>
-                           </td>                        
-                           <td>{!!$payment->doctor_fee!!}</td>
+                              <span>{!!$payment->getPatient->name!!}</span>
+                           </td> 
                            <td>{!!$payment->bed_fee!!}</td>
-                           <td>{!!$payment->doctor_fee + $payment->bed_fee!!}</td>
                            <td>{!!$payment->advance!!}</td>
-                           <td>{!!$payment->sub_total!!}</td>
+                           <td>{!!$payment->bed_fee - $payment->advance!!}</td>
                             @php
                                 $payment->status == 0 ? $bg='bg-primary' : $bg='bg-success';
                                 $payment->status == 0 ? $title='Unpaid' : $title='Paid';

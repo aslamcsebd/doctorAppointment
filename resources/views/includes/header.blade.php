@@ -11,7 +11,7 @@
             <span class="line"></span>
             <span class="line"></span>
             <span class="line"></span>
-            <span class="minimize">Minimize</span>
+            <span class="minimize hide">Minimize</span>
          </a>
       </ul>
       {{-- @auth --}}

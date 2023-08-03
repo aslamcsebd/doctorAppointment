@@ -24,7 +24,7 @@
                      </div>
                      <div class="form-group col-4">
                         <label for="phone">Mobile number*</label>
-                        <input type="number" class="form-control" name="phone" id="phone" placeholder="Enter phone" required>
+                        <input type="number" class="form-control" name="phone" id="phone" placeholder="Enter phone">
                      </div>
                   </div>
 
@@ -52,25 +52,29 @@
                      </div>
                      <div class="form-group col-4">
                         <label for="dob">Date of birth</label>
-                        <input type="text" class="form-control datepicker" name="dob" id="dob" placeholder="Day-Month-Year"/>
-                     </div>  
+                        <input type="date" class="form-control" name="dob" id="dob" placeholder="Day-Month-Year"/>
+                     </div>                      
                   </div>
 
                   <div class="row">
-                     <div class="form-group col-6">
+                     <div class="form-group col-4">
                         <label for="password">Password*</label>
                         <input type="text" class="form-control" name="password" id="password" placeholder="Enter password" value="123456"  autocomplete="new-password" required>
                         <small class="form-text bg-secondary px-1 rounded font-italic">
                            Minimum 6 characters. Leave blank to assign auto-generated password.
                         </small>
                      </div>
-                     <div class="form-group col-6">
+                     <div class="form-group col-4">
                         <label for="photo">Photo</label>
                         <input type="file" class="form-control p-1" name="photo"/>
                         <small class="form-text bg-secondary px-1 rounded font-italic">
                            <i>Image format: jpeg, png, jpg, gif, svg. Maximum size : 2 MB.</i>
                         </small>
                      </div>
+                     <div class="form-group col-4">
+                        <label for="fee">Fee</label>
+                        <input type="text" class="form-control" name="fee" id="fee" placeholder="Doctor fee"/>
+                     </div> 
                   </div>     
                   
                   <div class="row">

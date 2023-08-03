@@ -20,6 +20,7 @@ class CreateDoctorsTable extends Migration
             $table->string('gender')->nullable();
             $table->string('blood')->nullable();            
             $table->date('dob')->nullable();
+            $table->integer('fee')->nullable();
             $table->string('photo')->nullable();
             $table->text('qualification')->nullable();
             $table->text('service')->nullable();

@@ -111,6 +111,10 @@ class PatientController extends Controller
             $photoLink =$request->oldPhoto;
         }
 
+        User::where('id', $request->user_id)->where('phone', null)->update([
+            'phone' => $request->phone
+        ]);
+
         Patient::where('id', $request->id)->update([
             'gender' => $request->gender,
             'blood' => $request->blood,
@@ -132,7 +136,7 @@ class PatientController extends Controller
     public function setPasswordNow(Request $request){
         $validator = Validator::make($request->all(),[
             'id'=>'required',
-            'password'=>['required', 'string', 'min:6', 'confirmed'],
+            'password'=>['required', 'string', 'min:3', 'confirmed'],
             'password_confirmation'=>'required|same:password'
         ]);
 

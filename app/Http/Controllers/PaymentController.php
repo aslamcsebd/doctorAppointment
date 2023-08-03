@@ -35,7 +35,7 @@ class PaymentController extends Controller
 
         $validator = Validator::make($request->all(),[            
             'payment_id'=>'required',
-            'sub_total'=>'required'
+            'due'=>'required'
         ]);
     
         if($validator->fails()){
@@ -44,7 +44,7 @@ class PaymentController extends Controller
         }
 
         Payment::where('id', $request->payment_id)->update([
-            'sub_total' => $request->sub_total,
+            'due' => $request->due,
             'status' => 1,
         ]);
         return redirect()->route('payment')->with('success','Payment add successfully');

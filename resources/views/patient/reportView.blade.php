@@ -14,7 +14,7 @@
                         <div class="text-center">
                            <img src="{{asset('')}}/{{$report->photo ?? 'images/default.jpg'}}" class="img-thumbnail" alt="No Image found" width="100">
                            <br>
-                           <span class="singerName">{{$report->user->name}}</span>                         
+                           <span>{{$report->user->name}}</span>                         
                         </div>
                      </td>
                   </tr>

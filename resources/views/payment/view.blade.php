@@ -43,33 +43,15 @@
                     <table class="table table-bordered">
                        <tr>
                           <td>
-                             <label class="capitalize">Doctor fee:</label>
-                          </td>
-                          <td>{!!$payment->doctor_fee!!}</td>
-                       </tr>
-                       <tr>
-                          <td>
                              <label class="capitalize">Bed rent:</label>
                           </td>
                           <td>{!!$payment->bed_fee!!}</td>
                        </tr>
                        <tr>
                           <td>
-                             <label class="capitalize">Total:</label>
-                          </td>
-                          <td>{!! $total = $payment->doctor_fee + $payment->bed_fee!!}</td>
-                       </tr>
-                       <tr>
-                          <td>
                              <label class="capitalize">Advance:</label>
                           </td>
                           <td>{!!$adv = $payment->advance!!}</td>
-                       </tr>
-                       <tr>
-                          <td>
-                             <label class="capitalize">Sub-total:</label>
-                          </td>
-                          <td>{!! $total - $adv !!}</td>
                        </tr>
                         <form action="{{ route('payment.add') }}" method="post" enctype="multipart/form-data">
                             @csrf
@@ -79,7 +61,7 @@
                                     <label class="capitalize">Need to pay:</label>
                                 </td>
                                 <td style="width:35%">
-                                    <input type="number" class="form-control font-weight-bold text-right" name="sub_total" value="{!!$total - $adv !!}" required>
+                                    <input type="number" class="form-control font-weight-bold text-right" name="due" value="{!!$payment->bed_fee - $payment->advance!!}" required>
                                 </td>
                             </tr>
                             <tr>

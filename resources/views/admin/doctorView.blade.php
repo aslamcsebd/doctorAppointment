@@ -14,7 +14,7 @@
                         <div class="text-center">
                            <img src="{{asset('')}}/{{$doctor->photo ?? 'images/default.jpg'}}" class="img-thumbnail" alt="No Image found" width="100">
                            <br>
-                           <span class="singerName">{{$doctor->user->name}}</span>                         
+                           <span>{{$doctor->user->name}}</span>                         
                         </div>
                      </td>
                   </tr>               
@@ -53,6 +53,12 @@
                         <label class="capitalize">Date of birth</label>
                      </td>
                      <td>{{$doctor->dob}}</td>
+                  </tr>
+                  <tr>
+                     <td width="20%">
+                        <label class="capitalize">Fee</label>
+                     </td>
+                     <td>{{ $doctor->fee ?? '' }}</td>
                   </tr>
                   <tr>
                      <td width="20%">

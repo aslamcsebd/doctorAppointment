@@ -62,25 +62,19 @@
                             <i class="fas fa-search nav-icon"></i>                    
                             <p>Search doctor</p>
                         </a>
+                    </li>                          
+                    <li class="nav-item">
+                        <a href="{{ route('favourite.list') }}" class="nav-link {{ (request()->routeIs('favourite.list*'))  ? 'active' : '' }}">
+                            <i class="fas fa-heart nav-icon"></i>
+                            <p>Favourite doctor</p>
+                        </a>
+                    </li>         
+                    <li class="nav-item">
+                        <a href="{{ route('appointment.list') }}" class="nav-link {{ (request()->routeIs('appointment.list*'))  ? 'active' : '' }}">
+                            <i class="fas fa-calendar-check nav-icon"></i>
+                            <p>Appointment list</p>
+                        </a>
                     </li>
-
-                    @if($favourite = \App\Models\FavouriteDoctor::where('patient_id', Auth::id())->count())            
-                        <li class="nav-item">
-                            <a href="{{ route('favourite.list') }}" class="nav-link {{ (request()->routeIs('favourite.list*'))  ? 'active' : '' }}">
-                                <i class="fas fa-heart nav-icon"></i>
-                                <p>Favourite doctor ({{$favourite}})</p>
-                            </a>
-                        </li>
-                    @endif
-
-                    @if($appointment = \App\Models\Appointment::where('patient_id', Auth::id())->count())            
-                        <li class="nav-item">
-                            <a href="{{ route('appointment.list') }}" class="nav-link {{ (request()->routeIs('appointment.list*'))  ? 'active' : '' }}">
-                                <i class="fas fa-calendar-check nav-icon"></i>
-                                <p>Appointment list ({{$appointment}})</p>
-                            </a>
-                        </li>
-                    @endif
 
                     <li class="nav-item">
                         <a href="{{ route('booking') }}" class="nav-link {{ (request()->routeIs('booking*'))  ? 'active' : '' }}">

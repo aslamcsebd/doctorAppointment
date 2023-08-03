@@ -69,6 +69,7 @@ class AdminController extends Controller {
             'gender' => $request->gender,
             'blood' => $request->blood,
             'dob' => date('Y-m-d', strtotime($request->dob)),
+            'fee' => $request->fee,
             'photo' => $photoLink,
             'qualification' => $request->qualification,
             'service' => $request->service,

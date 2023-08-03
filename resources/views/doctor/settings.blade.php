@@ -51,11 +51,9 @@
                             @endforeach
                         </select>
                     </div>
-
-
                      <div class="form-group col-4">
                         <label for="dob">Date of birth</label>
-                        <input type="text" class="form-control datepicker" name="dob" value="{{ date('d-m-Y', strtotime($doctorInfo->dob)) ?? '' }}" id="dob" placeholder="Day-Month-Year"/>
+                        <input type="{{$doctorInfo->dob==null ? 'date' : 'text'}}" class="form-control" name="dob" value="{{ date('d-m-Y', strtotime($doctorInfo->dob)) ?? '' }}" id="dob" placeholder="Day-Month-Year"/>
                      </div>  
                   </div>
 
@@ -65,7 +63,7 @@
                             <img src="{{asset('')}}/{{$doctorInfo->photo ?? 'images/default.jpg'}}" class="img-thumbnail" alt="No Image found" width="60">
                         </div>
                     </div>  
-                     <div class="form-group col-10">
+                     <div class="form-group col-6">
                         <label for="photo">Photo</label>
                         <input type="hidden" name="oldPhoto" value="{{ $doctorInfo->photo ?? '' }}">
                         <input type="file" class="form-control p-1" name="photo"/>
@@ -73,6 +71,10 @@
                            <i>Image format: jpeg, png, jpg, gif, svg. Maximum size : 2 MB.</i>
                         </small>
                      </div>
+                     <div class="form-group col-4">
+                        <label for="fee">Fee</label>
+                        <input type="text" class="form-control" name="fee" value="{{ $doctorInfo->fee ?? '' }}" id="fee" placeholder="Doctor fee"/>
+                     </div>  
                   </div>   
 
                   <div class="row">

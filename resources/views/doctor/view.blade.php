@@ -14,7 +14,7 @@
                         <div class="text-center">
                            <img src="{{asset('')}}/{{$patient->photo ?? 'images/default.jpg'}}" class="img-thumbnail" alt="No Image found" width="100">
                            <br>
-                           <span class="singerName">{{$patient->user->name}}</span>                         
+                           <span>{{$patient->user->name}}</span>                         
                         </div>
                      </td>
                   </tr>
@@ -49,7 +49,7 @@
                      <td>{{date('d-m-Y', strtotime($patient->dob))}}</td>
                   </tr>
                     <tr>
-                        <td width="20%">
+                        <td width="25%">
                             <label for="date" class="capitalize">Add Appointment</label>
                         </td>
                         <td>

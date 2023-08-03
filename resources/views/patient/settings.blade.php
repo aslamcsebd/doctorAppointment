@@ -13,6 +13,7 @@
                @csrf
                <div class="card-body">
                     <input type="hidden" name="id" value="{{ $patientInfo->id }}">
+                    <input type="hidden" name="user_id" value="{{ $patientInfo->user_id }}">
 
                   <div class="row">
                      <div class="form-group col-4">
@@ -25,7 +26,7 @@
                      </div>
                      <div class="form-group col-4">
                         <label for="phone">Mobile number*</label>
-                        <input type="number" class="form-control" name="phone" id="phone" value="{{ $patientInfo->user->phone ?? '' }}" placeholder="Enter phone" readonly>
+                        <input type="number" class="form-control" name="phone" id="phone" value="{{ $nullOr = $patientInfo->user->phone ?? '' }}" placeholder="Enter phone" {{ $nullOr ? 'readonly' : '' }} required>
                      </div>
                   </div>
 
@@ -54,7 +55,7 @@
                         </div>
                      <div class="form-group col-4">
                         <label for="dob">Date of birth</label>
-                        <input type="text" class="form-control datepicker" name="dob" value="{{ date('d-m-Y', strtotime($patientInfo->dob)) ?? '' }}" id="dob" placeholder="Day-Month-Year"/>
+                        <input type="{{$patientInfo->dob==null ? 'date' : 'text'}}" class="form-control" name="dob" value="{{ date('d-m-Y', strtotime($patientInfo->dob)) ?? '' }}" id="dob" placeholder="Day-Month-Year"/>
                      </div>  
                   </div>
 

@@ -25,7 +25,7 @@
                            <td>
                               <img src="{{asset('')}}/{{$doctor->photo ?? 'images/default.jpg'}}" class="img-thumbnail" alt="No Image found" width="60">
                               <br>
-                              <span class="singerName">{!!$doctor->user->name!!}</span>
+                              <span>{!!$doctor->user->name!!}</span>
                            </td>                        
                            <td>{!!$doctor->user->phone!!}</td>
                            <td>{!!$doctor->user->email!!}</td>

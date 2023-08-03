@@ -25,7 +25,7 @@
                            <td>
                               <img src="{{asset('')}}/{{$report->photo ?? 'images/default.jpg'}}" class="img-thumbnail" alt="No Image found" width="60">
                               <br>
-                              <span class="singerName">{!!$report->user->name!!}</span>
+                              <span>{!!$report->user->name!!}</span>
                            </td>                        
                            <td>{!!$report->title!!}</td>
                            <td>

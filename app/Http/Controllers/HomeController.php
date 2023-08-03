@@ -7,11 +7,15 @@ use App\Models\Room;
 use App\Models\User;
 use App\Models\Ward;
 use App\Models\Floor;
-
 use App\Models\Doctor;
-
+use App\Models\Report;
 use App\Models\Payment;
+
+use App\Models\Appointment;
+use App\Models\WardBooking;
+use App\Models\CabinBooking;
 use Illuminate\Http\Request;
+use App\Models\FavouriteDoctor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 
@@ -24,6 +28,7 @@ class HomeController extends Controller
     }
 
     public function index(){
+        // Admin
         $data['doctors'] = Doctor::all();
 
         $data['floors'] = Floor::all();
@@ -35,6 +40,19 @@ class HomeController extends Controller
         if(Auth::user()->role=='3' && Auth::user()->password == null){
             return redirect('/set-password')->with('success', 'Patient\'s registration complete'); 
         }
+
+        // Doctor
+        $data['Appointment'] = Appointment::where('doctor_id', Auth::id())->where('status', '0')->get();
+
+        // Patient
+        $data['favouriteDoctor'] = FavouriteDoctor::where('patient_id', Auth::id())->get();
+        $data['appointmentReq'] = Appointment::where('patient_id', Auth::id())->where('status', '0')->get();
+
+        $data['cabinBooking'] = CabinBooking::where('patient_id', Auth::id())->get();
+        $data['wardBooking'] = WardBooking::where('patient_id', Auth::id())->get();
+
+        $data['report'] = Report::where('patient_id', Auth::id())->get();
+        
         return view('home', $data);
     }
 

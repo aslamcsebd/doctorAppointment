@@ -6,14 +6,6 @@
 <div class="content-wrapper p-3">
    <div class="row justify-content-center">
       <div class="col-md-12">
-         <div class="card-header p-1">
-            <ul class="nav nav-pills" id="tabMenu">              
-               <li class="nav-item">
-                  <a class="nav-link active btn-sm py-1 m-1" data-toggle="pill" href="#floorRoom">Floor & room</a>
-               </li>
-            </ul>
-         </div>
-
          <div class="card-body p-1">
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="floorRoom">

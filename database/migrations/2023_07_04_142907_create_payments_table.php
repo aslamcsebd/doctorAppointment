@@ -16,12 +16,9 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->integer('patient_id')->comment('user id');
-            $table->integer('doctor_id')->comment('user id');
-            $table->integer('doctor_fee')->nullable();
             $table->integer('bed_fee')->nullable();
-            $table->integer('total')->nullable();
             $table->integer('advance')->nullable();
-            $table->integer('sub_total')->nullable();
+            $table->integer('due')->nullable();
             $table->tinyInteger('status')->default('0')->comment('0=Incomplete, 1=Done');
             $table->timestamps();
         });

@@ -51,6 +51,7 @@ class DoctorController extends Controller {
         Doctor::where('id', $request->id)->update([
             'gender' => $request->gender,
             'blood' => $request->blood,
+            'fee' => $request->fee,
             'dob' => date('Y-m-d', strtotime($request->dob)),
             'photo' => $photoLink,
             'qualification' => $request->qualification,

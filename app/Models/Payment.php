@@ -11,7 +11,7 @@ class Payment extends Model
     protected $guarded = [];
 
     public function getPatient(){
-        return $this->belongsTo(User::class, 'patient_id', 'id');
+        return $this->belongsTo(User::class, 'patient_id', 'id')->withDefault();
     }
     
     public function patientInfo(){
