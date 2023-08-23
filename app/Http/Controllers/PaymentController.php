@@ -81,15 +81,15 @@ class PaymentController extends Controller
 
         if($data['room_type'] == 'cabin'){
             $rooms = Room::where('room_type', 'cabin')->orderBy('room_no', 'Asc')->pluck('room_no');
-           
+              
             $booked = CabinBooking::where([
-                    ['cabin_bookings.check_in', '<=', $check_in],
-                    ['cabin_bookings.check_out', '>=', $check_out]
-                ])
-                ->orwhere([
-                    ['cabin_bookings.check_in', '>=', $check_in],
-                    ['cabin_bookings.check_out', '<=', $check_out]
-                ])->pluck('room_no');
+                ['cabin_bookings.check_in', '<=', $check_in],
+                ['cabin_bookings.check_out', '>=', $check_in]
+            ])
+            ->orwhere([
+                ['cabin_bookings.check_in', '>=', $check_out],
+                ['cabin_bookings.check_out', '<=', $check_out]
+            ])->pluck('room_no');
             
             $data['unBook'] = $rooms->diff($booked);
 

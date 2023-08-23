@@ -17,10 +17,10 @@ class Appointment extends Model
 
     // Patient info
     public function user2(){
-        return $this->belongsTo(User::class, 'patient_id', 'id');
+        return $this->belongsTo(User::class, 'patient_id', 'id')->withDefault();
     }
     
     public function user3(){
-        return $this->belongsTo(Patient::class, 'patient_id', 'user_id');
+        return $this->belongsTo(Patient::class, 'patient_id', 'user_id')->withDefault();
     }
 }

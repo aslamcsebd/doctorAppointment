@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 
-
 class PatientController extends Controller
 {
     // Show all doctor
@@ -53,8 +52,9 @@ class PatientController extends Controller
     }
 
     // Add appointment
-    public function appointment_add(Request $request){
-        Appointment::Create([
+    public function appointment_add(Request $request){       
+        Appointment::Create([            
+            'appointment_id' => uniqid(),
             'patient_id' => Auth::id(),
             'doctor_id' => $request->user_id,
             'date' => date('Y-m-d', strtotime($request->date)),

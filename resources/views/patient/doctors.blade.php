@@ -5,9 +5,9 @@
 
 <div class="content-wrapper p-3">
    <div class="row justify-content-center">
-      <div class="col-md-12">
-        
+      <div class="col-md-12">        
          <div class="card">
+            <h6 class="card-header bg-success text-center py-1 mx-1">Doctor list</h6>
             <div class="card-body p-1">
                <table class="table table-bordered">
                   <thead class="bg-info">

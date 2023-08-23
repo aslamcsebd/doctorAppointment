@@ -5,17 +5,16 @@
 
 <div class="content-wrapper p-3">
    <div class="row justify-content-center">
-      <div class="col-md-12">
-        
+      <div class="col-md-12">        
          <div class="card">
+            <h6 class="card-header bg-success text-center py-1 mx-1">Appointment list</h6>
             <div class="card-body p-1">
                <table class="table table-bordered">
                   <thead class="bg-info">
                      <th>Sl</th>
-                     <th>Name</th>
-                     <th>Mobile</th>
-                     <th>Email</th>
-                     <th>Appointment</th>
+                     <th>Appointment id</th>
+                     <th>Doctor name</th>
+                     <th>Appointment date</th>
                      <th>Status</th>
                      <th>Action</th>
                   </thead>
@@ -23,15 +22,14 @@
                      @foreach($appointments as $appointment)
                         <tr>
                            <td width="30">{{$loop->iteration}}</td>
+                           <td>{{$appointment->appointment_id}}</tdwidth=>
                            <td>
                               <img src="{{asset('')}}/{{$appointment->photo ?? 'images/default.jpg'}}" class="img-thumbnail" alt="No Image found" width="60">
                               <br>
                               <span>{!!$appointment->user->name!!}</span>
-                           </td>                        
-                           <td>{!!$appointment->user->phone!!}</td>
-                           <td>{!!$appointment->user->email!!}</td>
+                           </td>
                            <td>
-                              {!!$appointment->date!!} ({{date('l', strtotime($appointment->date))}})
+                              {!!$appointment->date!!}
                            </td>
                             @php
                                 $appointment->status == 0 ? $bg='bg-primary' : $bg='bg-success';

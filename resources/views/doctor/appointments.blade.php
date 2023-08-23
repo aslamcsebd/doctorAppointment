@@ -5,17 +5,17 @@
 
 <div class="content-wrapper p-3">
    <div class="row justify-content-center">
-      <div class="col-md-12">
-        
+      <div class="col-md-12">        
          <div class="card">
+            <h6 class="card-header bg-success text-center py-1 mx-1">Appointment list</h6>
             <div class="card-body p-1">
                <table class="table table-bordered">
                   <thead class="bg-info">
                      <th>Sl</th>
-                     <th>Name</th>
+                     <th>Appointment id</th>
+                     <th>Patient name</th>
                      <th>Mobile</th>
-                     <th>Email</th>
-                     <th>Appointment</th>
+                     <th>Appointment date</th>
                      <th>Status</th>
                      <th>Action</th>
                   </thead>
@@ -28,8 +28,8 @@
                               <br>
                               <span>{!!$appointment->user2->name!!}</span>
                            </td>                        
+                           <td>{!!$appointment->appointment_id!!}</td>
                            <td>{!!$appointment->user2->phone!!}</td>
-                           <td>{!!$appointment->user2->email!!}</td>
                            <td>
                               {!!$appointment->date!!} ({{date('l', strtotime($appointment->date))}})
                            </td>

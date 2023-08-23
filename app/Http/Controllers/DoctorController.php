@@ -90,7 +90,7 @@ class DoctorController extends Controller {
     }
 
     // Patient report
-    public function patient_list(){
+    public function patient_list2(){
         $data['patients'] = Appointment::where('doctor_id', Auth::id())->get()->groupBy('patient_id');   
         return view('doctor.patients', $data);
     }  

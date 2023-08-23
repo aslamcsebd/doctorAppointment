@@ -1,5 +1,5 @@
 @extends('layouts.app')
-   @section('title') Doctor-list @endsection
+   @section('title') Patient-list @endsection
 @section('content')
 @include('includes.alertMessage')
 
@@ -7,12 +7,12 @@
    <div class="row justify-content-center">
       <div class="col-md-12">        
          <div class="card">
-            <h6 class="card-header bg-success text-center py-1 mx-1">Doctor list</h6>
+            <h6 class="card-header bg-success text-center py-1 mx-1">Patient list</h6>
             <div class="card-body p-1">
                <table class="table table-bordered">
                   <thead class="bg-info">
                      <th>Sl</th>
-                     <th>Doctor ID</th>
+                     <th>Patient ID</th>
                      <th>Name</th>
                      <th>Mobile</th>
                      <th>Email</th>
@@ -21,33 +21,33 @@
                      <th>Action</th>
                   </thead>
                   <tbody>
-                     @foreach($doctors as $doctor)
+                     @foreach($patients as $patient)
                         <tr>
                            <td width="30">{{$loop->iteration}}</td>
-                           <td>{!!$doctor->doctor_id!!}</td>
+                           <td>{!!$patient->patient_id!!}</td>
                            <td>
-                              <img src="{{asset('')}}/{{$doctor->photo ?? 'images/default.jpg'}}" class="img-thumbnail" alt="No Image found" width="60">
+                              <img src="{{asset('')}}/{{$patient->photo ?? 'images/default.jpg'}}" class="img-thumbnail" alt="No Image found" width="60">
                               <br>
-                              <span>{!!$doctor->user->name!!}</span>
+                              <span>{!!$patient->user->name!!}</span>
                            </td>                        
-                           <td>{!!$doctor->user->phone!!}</td>
-                           <td>{!!$doctor->user->email!!}</td>
+                           <td>{!!$patient->user->phone!!}</td>
+                           <td>{!!$patient->user->email!!}</td>
                            <td>
-                              {{\Carbon\Carbon::parse($doctor->dob)->diff(\Carbon\Carbon::now())->format(' %y years ')}}
+                              {{\Carbon\Carbon::parse($patient->dob)->diff(\Carbon\Carbon::now())->format(' %y years ')}}
                            </td>
                            <td>
                               <input type="checkbox" class="js-switch status"
-                                 data-model="doctors" 
+                                 data-model="patients" 
                                  data-field="status"
-                                 data-id="{{ $doctor->id }}" 
+                                 data-id="{{ $patient->id }}" 
                                  data-tab="tabName"
-                                 {{ $doctor->status == 1 ? 'checked' : '' }}
+                                 {{ $patient->status == 1 ? 'checked' : '' }}
                               />
                            </td>
                            <td width="auto">
                               <div class="btn-group">
-                                 <a href="{{ url('doctorView', [$doctor->id])}}" class="btn btn-sm btn-outline-info py-1">View</a>
-                                 <a href="{{ url('itemDelete', ['doctors', $doctor->id, 'tabName'])}}" class="btn btn-sm btn-danger py-1" onclick="return confirm('Are you want to delete this?')">Delete</a>
+                                 <a href="{{ url('patientView', [$patient->id])}}" class="btn btn-sm btn-outline-info py-1">View</a>
+                                 <a href="{{ url('itemDelete', ['patients', $patient->id, 'tabName'])}}" class="btn btn-sm btn-danger py-1" onclick="return confirm('Are you want to delete this?')">Delete</a>
                               </div>
                            </td>
                         </tr>

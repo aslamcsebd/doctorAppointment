@@ -41,7 +41,7 @@
 
                   <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
                      <div class="small-box bg-primary">
-                        <div class="inner text-center">
+                        <div class="inner text-center pb-3">
                            <table class="table table-bordered">
                               <tbody>
                                  <tr class="bg-primary">
@@ -106,7 +106,7 @@
                               Patient report
                            </span>
                         </div>                        
-                        <a href="{{ route('patient.list') }}" class="small-box-footer">
+                        <a href="{{ route('patientList') }}" class="small-box-footer">
                            More info
                            <i class="fas fa-arrow-circle-right"></i>
                         </a>

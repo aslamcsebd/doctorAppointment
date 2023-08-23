@@ -1,13 +1,13 @@
 @extends('layouts.app')
-   @section('title') patient list @endsection
+   @section('title') Patient list @endsection
 @section('content')
 @include('includes.alertMessage')
 
 <div class="content-wrapper p-3">
    <div class="row justify-content-center">
-      <div class="col-md-12">
-        
+      <div class="col-md-12">        
          <div class="card">
+            <h6 class="card-header bg-success text-center py-1 mx-1">Patient list</h6>
             <div class="card-body p-1">
                <table class="table table-bordered">
                   <thead class="bg-info">
@@ -20,7 +20,7 @@
                   <tbody>
                      @php $si=1;@endphp
                      @foreach($patients as $patient2)
-                     @foreach($patient2->take(1) as $patient)
+                        @foreach($patient2->take(1) as $patient)
                            <tr>
                               <td width="30">{{$si}}</td> @php $si++;@endphp
                               <td>

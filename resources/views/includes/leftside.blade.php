@@ -6,7 +6,8 @@
             @endphp
 
             <!-- 1 = Admin -->
-            @if($role==1)            
+            @if($role==1)       
+
                 <li class="nav-item">
                     <a href="{{ route('doctor.registration') }}" class="nav-link {{ (request()->routeIs('doctor.registration*'))  ? 'active' : '' }}">
                         <i class="fas fa-briefcase-medical nav-icon"></i>                    
@@ -17,6 +18,12 @@
                     <a href="{{ route('doctor.list') }}" class="nav-link {{ (request()->routeIs('doctor.list*'))  ? 'active' : '' }}">
                         <i class="fas fa-user-md nav-icon"></i>              
                         <p>Doctor list</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('patient.list') }}" class="nav-link {{ (request()->routeIs('patient.list'))  ? 'active' : '' }}">
+                        <i class="fas fa-list-alt nav-icon"></i>                   
+                        <p>Patient list</p>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -41,6 +48,7 @@
 
             <!-- 2 = Doctor -->
             @elseif($role==2)
+
                 <li class="nav-item">
                     <a href="{{ route('appointment.request') }}" class="nav-link {{ (request()->routeIs('appointment.request*'))  ? 'active' : '' }}">
                         <i class="fas fa-calendar-check nav-icon"></i>
@@ -48,9 +56,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('patient.list') }}" class="nav-link {{ (request()->routeIs('patient.list*'))  ? 'active' : '' }}">
+                    <a href="{{ route('patientList') }}" class="nav-link {{ (request()->routeIs('patientList*'))  ? 'active' : '' }}">
                         <i class="fas fa-list-alt nav-icon"></i>
-                        <p>Patient report</p>
+                        <p>Patient list</p>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -62,6 +70,7 @@
 
             <!-- 3 = Patient -->
             @elseif($role==3)
+
                 @if(Auth::user()->password != null)
                     <li class="nav-item">
                         <a href="{{ route('doctor.search') }}" class="nav-link {{ (request()->routeIs('doctor.search*'))  ? 'active' : '' }}">
@@ -114,6 +123,7 @@
                         </a>
                     </li>
                 @endif
+
             @endif
         </ul>
     </nav>

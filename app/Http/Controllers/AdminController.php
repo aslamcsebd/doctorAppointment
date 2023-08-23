@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Models\User;
 
 use App\Models\Doctor;
+use App\Models\Patient;
 use App\Models\HospitalInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -27,13 +28,6 @@ class AdminController extends Controller {
             'email'=>'required|unique:users',
             'phone'=>'required',
             'password'=>'required|min:6',
-            /*    
-            'gender'=>'required',
-            'blood'=>'required',
-            'dob'=>'required',
-            'photo'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'qualification'=>'required',
-            'service'=>'required' */
         ]);
     
         if($validator->fails()){
@@ -163,4 +157,10 @@ class AdminController extends Controller {
             return back()->with('success','Hospital info update successfully');
         }
     }   
+
+    // Patient info
+    public function patient_list(){
+        $data['patients'] = Patient::with('user')->get();
+        return view('admin.patients', $data);
+    }
 }

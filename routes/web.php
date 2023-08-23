@@ -20,8 +20,12 @@ Route::middleware(['auth'])->group(function(){
     // Doctor registration
         Route::get('doctor/registration/', 'AdminController@registration')->name('doctor.registration');
         Route::post('doctor-create/', 'AdminController@doctor_create')->name('doctor.create');       
-        Route::get('doctor/list/', 'AdminController@doctor_list')->name('doctor.list');
+        Route::get('doctor-list/', 'AdminController@doctor_list')->name('doctor.list');
         Route::get('doctorView/{id}/','AdminController@doctorView')->name('doctorView');
+
+    // Patient info
+        Route::get('/patient-list', 'AdminController@patient_list')->name('patient.list');
+    
 
     // Room management
         Route::get('room', 'RoomController@room')->name('room');
@@ -38,7 +42,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('single-patient/{id}/{route}', 'DoctorController@singlePatient')->name('singlePatient');   
     Route::post('appointment-accept', 'DoctorController@appointment_accept')->name('appointment.accept');
 
-    Route::get('patient-list','DoctorController@patient_list')->name('patient.list');
+    Route::get('/patient_list','DoctorController@patient_list2')->name('patientList');
     Route::get('patient-view/{id}', 'DoctorController@patient_view')->name('patient_view');    
     Route::post('report-add', 'DoctorController@report_add')->name('report.add');
     Route::get('patient-report/{id}', 'DoctorController@patient_report')->name('patient-report');    
