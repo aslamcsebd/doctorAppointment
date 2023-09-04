@@ -5,6 +5,56 @@
 
 <div class="content-wrapper p-3">
     <div class="row justify-content-center">
+            
+        @php
+            $user = App\Models\User::where('id', Auth::id())->first();
+            $info = App\Models\Patient::where('user_id', Auth::id())->get();
+            
+            $check = App\Models\Patient::where('user_id', Auth::id())->select('patients.*')
+                ->whereNull('gender')
+                ->orWhereNull('blood')
+                ->orWhereNull('dob')
+                ->orWhereNull('photo')
+                ->orWhereNull('address')
+                ->orWhereNull('source')
+                ->get();         
+        @endphp
+
+        @if($user->phone == null || $check->isEmpty() == false)
+            <div class="col-md-12 mb-4">
+                <div class="card-body p-1">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr >
+                                <td colspan="100%" class="text-danger">
+                                    <h5>
+                                        Please add bellow field data
+                                    </h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                @foreach($info as $in) 
+                                    @if($user->phone == null)
+                                        <td>Phone</td>
+                                        @php $disabled = 1; @endphp
+                                    @endif
+                                    @foreach($needed_columns as $co)   
+                                        @if($in->$co == null)
+                                            <td>{{$co}}</td>
+                                            @php $disabled = 1; @endphp
+                                        @endif                        
+                                    @endforeach
+                                @endforeach
+                                <td>
+                                    <a href="{{ route('patientInfo') }}" class="btn btn-danger btn-auto">Update profile</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>    
+            </div>    
+        @endif
+
         <div class="col-md-12">
             <div class="card-body p-1">
                 <form action="{{ route('booking_search') }}" method="post" enctype="multipart/form-data" class="needs-validation" >
@@ -13,7 +63,7 @@
                         <legend class="mb-0">Select room type</legend>
                         <div class="row justify-content-center">
 
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-auto">
                                 <label for="start">Bed type*</label>
                                 <div class="border border-secondary rounded p-1 mt-2">
                                     <div class="radio-toolbar form-check form-check-inline">
@@ -40,7 +90,7 @@
                             </div>
 
                             <div class="form-group col-md-2 pt-2">
-                                <button type="submit" class="btn btn-success mt-4">
+                                <button type="submit" class="btn btn-success mt-4" {{ isset($disabled) ? 'disabled' : '' }}>
                                     <i class="fas fa-search nav-icon"></i> &nbsp; Search now
                                 </button>
                             </div>   

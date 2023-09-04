@@ -7,6 +7,7 @@ use App\Models\Room;
 use App\Models\Ward;
 use App\Models\Floor;
 use App\Models\Booking;
+use App\Models\Patient;
 use App\Models\Payment;
 use App\Models\WardBooking;
 use App\Models\CabinBooking;
@@ -54,6 +55,9 @@ class PaymentController extends Controller
     public function booking() {         
         $data['floors'] = Floor::all();       
         $data['roomWards'] = Room::where('room_type', 'ward')->orderBy('room_no', 'Asc')->get();
+
+        $allColumns = array_keys(json_decode(Patient::first(), true));
+        $data['needed_columns'] = array_diff($allColumns, ['id', 'user_id', 'patient_id', 'status', 'created_at', 'updated_at']);
 
         return view('patient.booking', $data);
     }

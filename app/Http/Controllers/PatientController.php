@@ -33,6 +33,10 @@ class PatientController extends Controller
         }    
         $data['route'] = $route;
         $data['doctor'] = Doctor::where('user_id', $id)->first();
+
+        $allColumns = array_keys(json_decode(Patient::first(), true));
+        $data['needed_columns'] = array_diff($allColumns, ['id', 'user_id', 'patient_id', 'status', 'created_at', 'updated_at']);
+
         return view('patient.view', $data);
     }
 

@@ -2,9 +2,59 @@
    @section('title') Single doctor @endsection
 @section('content')
 @include('includes.alertMessage')
-<div class="content-wrapper p-3 view">
+<div class="content-wrapper p-3 ">
    <div class="row justify-content-center">
-      <div class="col-md-10">
+                  
+      @php
+         $user = App\Models\User::where('id', Auth::id())->first();
+         $info = App\Models\Patient::where('user_id', Auth::id())->get();
+         
+         $check = App\Models\Patient::where('user_id', Auth::id())->select('patients.*')
+            ->whereNull('gender')
+            ->orWhereNull('blood')
+            ->orWhereNull('dob')
+            ->orWhereNull('photo')
+            ->orWhereNull('address')
+            ->orWhereNull('source')
+            ->get();         
+      @endphp
+
+      @if($user->phone == null || $check->isEmpty() == false)
+         <div class="col-md-12 mb-4">
+            <div class="card-body p-1">
+                  <table class="table table-bordered">
+                     <tbody>
+                        <tr >
+                              <td colspan="100%" class="text-danger">
+                                 <h5>
+                                    Please add bellow field data
+                                 </h5>
+                              </td>
+                        </tr>
+                        <tr>
+                              @foreach($info as $in) 
+                                 @if($user->phone == null)
+                                    <td>Phone</td>
+                                    @php $disabled = 1; @endphp
+                                 @endif
+                                 @foreach($needed_columns as $co)   
+                                    @if($in->$co == null)
+                                          <td>{{$co}}</td>
+                                          @php $disabled = 1; @endphp
+                                    @endif                        
+                                 @endforeach
+                              @endforeach
+                              <td>
+                                 <a href="{{ route('patientInfo') }}" class="btn btn-danger btn-auto">Update profile</a>
+                              </td>
+                        </tr>
+                     </tbody>
+                  </table>
+            </div>    
+         </div>    
+      @endif
+      
+      <div class="col-md-12 view">      
          <div class="card">
             <h6 class="card-header bg-success text-center py-2">Single doctor</h6>
             <div class="card-body">
@@ -83,7 +133,7 @@
                                 
                                 @include('patient.time')
 
-                                <button type="submit" class="btn btn-success ml-2 col-auto">
+                                <button type="submit" class="btn btn-success ml-2 col-auto" {{isset($disabled) ? 'disabled':''}}>
                                     <i class="fas fa-calendar-plus nav-icon"></i> &nbsp; Add now
                                 </button>
                             </form>
@@ -100,6 +150,8 @@
             </div>
          </div>
       </div>
+
+      
    </div>
 </div>
 @endsection
