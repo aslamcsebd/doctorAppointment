@@ -39,13 +39,15 @@ Route::middleware(['auth'])->group(function(){
 
 // Doctor
     Route::get('appointment-request', 'DoctorController@appointment_request')->name('appointment.request');
-    Route::get('single-patient/{id}/{route}', 'DoctorController@singlePatient')->name('singlePatient');   
+    Route::get('appointment-request/{tab}', 'DoctorController@appointment_request2')->name('appointment.request.tab');
+    Route::get('single-patient/{id}/{route}/{tab}', 'DoctorController@singlePatient')->name('singlePatient');   
     Route::post('appointment-accept', 'DoctorController@appointment_accept')->name('appointment.accept');
 
     Route::get('/patient_list','DoctorController@patient_list2')->name('patientList');
     Route::get('patient-view/{id}', 'DoctorController@patient_view')->name('patient_view');    
     Route::post('report-add', 'DoctorController@report_add')->name('report.add');
     Route::get('patient-report/{id}', 'DoctorController@patient_report')->name('patient-report');    
+    Route::get('patient-last-report/{id}/{route}/{tab}', 'DoctorController@patient_last_report')->name('patient-last-report');    
 
 // Patient
     // Doctor search

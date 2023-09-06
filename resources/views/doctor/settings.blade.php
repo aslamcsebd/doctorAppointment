@@ -8,7 +8,7 @@
       <div class="col-md-12">
          <div class="card">
             
-            <h6 class="card-header bg-info text-center py-1">Patient information (ID: {{$doctorInfo->doctor_id}})</h6>
+            <h6 class="card-header bg-info text-center py-1">Doctor information (ID: {{$doctorInfo->doctor_id}})</h6>
             <form action="{{ route('updateDoctorInfo') }}" method="post" enctype="multipart/form-data">
                @csrf
                <div class="card-body">

@@ -82,7 +82,7 @@ class PatientController extends Controller
     // Report view
     public function report_view($id){ 
         $data['user'] = User::find($id);
-        $data['reports'] = Report::where('patient_id', Auth::id())->where('doctor_id', $id)->get();
+        $data['reports'] = Report::where('patient_id', Auth::id())->where('doctor_id', $id)->orderBy('id', 'DESC')->get();
         return view('patient.reportView', $data);
     }        
 

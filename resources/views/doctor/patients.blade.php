@@ -13,8 +13,8 @@
                   <thead class="bg-info">
                      <th>Sl</th>
                      <th>Name</th>
+                     <th>Mobile</th>
                      <th>Gender</th>
-                     <th>Appointment</th>
                      <th>Action</th>
                   </thead>
                   <tbody>
@@ -28,8 +28,8 @@
                                  <br>
                                  <span>{!!$patient->user2->name!!}</span>
                               </td>                        
+                              <td>{!!$patient->user2->phone!!}</td>
                               <td>{!!$patient->user3->gender!!}</td>
-                              <td>{!!$patient->date!!}</td>
                               <td width="auto">
                                  <div class="btn-group">
                                        <a href="{{ url('patient-report', [$patient->patient_id]) }}" class="btn btn-sm btn-info py-1">View</a>

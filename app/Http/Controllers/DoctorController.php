@@ -27,7 +27,6 @@ class DoctorController extends Controller {
 
     // Add hospital info 
     public function updateDoctorInfo(Request $request){
-
         $path="images/doctor/";
         if ($request->hasFile('photo')){                
             $validator = Validator::make($request->all(),[
@@ -63,18 +62,26 @@ class DoctorController extends Controller {
 
     // Show appointment list
     public function appointment_request(){
-        $data['appointments'] = Appointment::where('doctor_id', Auth::id())->with('user2')->get();
+        $data['appointments'] = Appointment::where('doctor_id', Auth::id())->with('user2')->orderBy('id', 'DESC')->get();
         return view('doctor.appointments', $data);
     }
 
+    public function appointment_request2($tab){
+        $tab = $tab;
+        $appointments = Appointment::where('doctor_id', Auth::id())->with('user2')->orderBy('id', 'DESC')->get();
+        return view('doctor.appointments', ['tab' => 'accept']);
+        // ->with(['tab' => $tab]);
+    }
+
     // View patient full info
-    public function singlePatient($id, $route){
+    public function singlePatient($id, $route, $tab){
         if($route=='appointment.request'){
             $data['appointmentDate'] = Appointment::find($id);
             $patient_id = $data['appointmentDate']->patient_id;
         }
 
         $data['route'] = $route;
+        $data['tab'] = $tab;
         $data['patient'] = Patient::where('user_id', $patient_id)->first();
         return view('doctor.view', $data);
     }
@@ -91,14 +98,22 @@ class DoctorController extends Controller {
 
     // Patient report
     public function patient_list2(){
-        $data['patients'] = Appointment::where('doctor_id', Auth::id())->get()->groupBy('patient_id');   
+        $data['patients'] = Appointment::where('doctor_id', Auth::id())->orderBy('id', 'DESC')->get()->groupBy('patient_id');   
         return view('doctor.patients', $data);
-    }  
+    }
 
     // Single report 
     public function patient_view($id){
+        Appointment::where('id', $id)->update([
+            'status' => 2
+        ]);
+        $id = Appointment::find($id)->patient_id;
+
         $data['user'] = User::find($id);
         $data['patient'] = Patient::where('user_id', $id)->first();
+
+        $data['report2'] = Report::where('patient_id', $id)->where('doctor_id', Auth::id())->orderBy('id', 'DESC')->get();
+
         return view('doctor.reportAdd', $data);
     }
 
@@ -136,7 +151,22 @@ class DoctorController extends Controller {
     // Single report
     public function patient_report($id){
         $data['user'] = User::find($id);
-        $data['reports'] = Report::where('patient_id', $id)->where('doctor_id', Auth::id())->get();
+        $data['reports'] = Report::where('patient_id', $id)->where('doctor_id', Auth::id())->orderBy('id', 'DESC')->get();
         return view('doctor.reportView', $data);
+    }
+
+    // Last report
+    public function patient_last_report($id, $route, $tab){    
+        
+        $data['appointmentDate'] = Appointment::find($id);
+        $patient_id = $data['appointmentDate']->patient_id;
+
+        $data['route'] = $route;
+        $data['tab'] = $tab;
+        $data['patient'] = Patient::where('user_id', $patient_id)->first();
+
+
+        $data['report'] = Report::where('patient_id', $patient_id)->where('doctor_id', Auth::id())->get()->last();
+        return view('doctor.lastReport', $data);
     }
 }
