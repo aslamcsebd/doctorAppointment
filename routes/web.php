@@ -55,7 +55,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('single-doctor/{id}/{route}','PatientController@singleDoctor')->name('singleDoctor');      
     Route::get('addFavourite/{id}','PatientController@addFavourite')->name('addFavourite');
     Route::get('favourite-list','PatientController@favourite_list')->name('favourite.list');
-
+    
+    Route::get('search-date', 'PatientController@search_date')->name('search.date');   
     Route::post('appointment-add', 'PatientController@appointment_add')->name('appointment.add');   
     Route::get('appointment-list','PatientController@appointment_list')->name('appointment.list');
 
@@ -98,8 +99,9 @@ Route::middleware(['auth'])->group(function(){
 
         // Delete item
         Route::get('itemDelete/{model}/{id}/{tab}','HomeController@itemDelete')->name('itemDelete');  
-});
- 
+
+    });
+    
 // Google Socialite
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('{provider}/callback', 'Auth\LoginController@handleProviderCallback');
