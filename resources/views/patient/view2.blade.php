@@ -119,29 +119,7 @@
                             <input type="text" class="form-control col-4 ml-2" name="date" id="date" placeholder="Day-Month-Year" value="{{$appointmentDate->date}}" readonly/>                            
                             @include('patient.time')          
                         </td>
-                    </tr>
-                  @else
-                    <tr>
-                        <td width="20%">
-                            <label for="date" class="capitalize">Add Appointment</label>
-                        </td>
-                        <td>
-                            <form action="{{ route('appointment.add') }}" method="post" enctype="multipart/form-data" class="row p-0 m-0">
-                                @csrf
-                                <input type="hidden" name="user_id" value="{{$doctorId = $doctor->user_id}}">
-                                <input type="text" class="select-date form-control datepicker col-4" name="date" id="date" placeholder="Day-Month-Year"/>                            
-                                
-                                {{-- @include('patient.time') --}}
-                                <select class="select-time form-control col-3 ml-2" name="time" id="time">
-                                    <option value="">Select time</option>
-                                </select>
-
-                                <button type="submit" class="btn btn-success ml-2 col-auto" {{isset($disabled) ? 'disabled':''}}>
-                                    <i class="fas fa-calendar-plus nav-icon"></i> &nbsp; Add now
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
+                    </tr>                  
                   @endif
                </table>             
             </div>
@@ -158,28 +136,5 @@
 
 @endsection
 @section('js')
-    <script>
-        $(document).ready(function() {
-            $('.select-date').change(function() {
-                var date = $(this).val();
-                var doctorId = '{{$doctorId}}';
-                $('.select-time').html('');
-                $.ajax({
-                    url:"{{ route('search.date') }}",
-                    method: "get",
-                    data: {                        
-                        date : date,
-                        doctorId : doctorId
-                    },
-                    success: function(result) {
-                     console.log(result);
-                        $('.select-time').append('<option selected>Select time</option>');
-                        $.each(result, function(key, value) {
-                           $('.select-time').append('<option disabled2 value="' + value + '">' + value + '</option>');
-                        });
-                    }
-                })
-            });
-        });
-    </script>
+
 @endsection

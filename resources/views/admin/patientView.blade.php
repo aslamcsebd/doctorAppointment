@@ -4,7 +4,7 @@
 @include('includes.alertMessage')
 <div class="content-wrapper p-3 view">
    <div class="row justify-content-center">
-      <div class="col-md-10">
+      <div class="col-md-12">
          <div class="card">
             <h6 class="card-header bg-success text-center py-2">Single patient</h6>
             <div class="card-body">
@@ -17,6 +17,12 @@
                            <span>{{$patient->user->name}}</span>                         
                         </div>
                      </td>
+                  </tr>               
+                  <tr>
+                     <td width="20%">
+                        <label class="capitalize">patient Id</label>
+                     </td>
+                     <td>{{$patient->patient_id}}</td>
                   </tr>
                   <tr>
                      <td width="20%">
@@ -46,38 +52,15 @@
                      <td width="20%">
                         <label class="capitalize">Date of birth</label>
                      </td>
-                     <td>{{date('d-m-Y', strtotime($patient->dob))}}</td>
+                     <td>{{$patient->dob}}</td>
                   </tr>
-                    <tr>
-                        <td width="25%">
-                            <label for="date" class="capitalize">Add Appointment</label>
-                        </td>
-                        <td>
-                            <form action="{{ route('appointment.accept') }}" method="post" enctype="multipart/form-data" class="row p-0 m-0">
-                                @csrf
-                                <input type="hidden" name="id" value="{{$appointmentDate->id}}">
-                                <input type="text" class="form-control col-4" name="date" id="date" placeholder="Day-Month-Year" value="{{date('d-m-Y', strtotime($appointmentDate->date))}}" readonly='true' />                         
-                                
-                                <select class="form-control col-3 ml-2" name="time" id="time" {{$appointmentDate->status == 1 ? 'disabled' : ''}}>
-                                    <option value="">Select time</option>
-                                    @foreach($unBook as $time)
-                                          <option value="{{$time}}" {{$appointmentDate->time == $time ? 'selected' : ''}}>{{$time}}</option>
-                                    @endforeach
-                                 </select>
-
-                                <button type="submit" class="btn btn-success ml-2 col-auto {{$appointmentDate->status == 1 ? 'hide' : ''}}">
-                                    <i class="fas fa-calendar-plus nav-icon"></i> &nbsp; Accept request
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
                </table>             
             </div>
+
             <div class="card-footer row justify-content-center">
-               @php $route2 = $route.'.tab'; @endphp
-               <a href="{{ route($route2, [$tab]) }}" class="btn btn-primary col-auto">
-                  <i class="fas fa-arrow-circle-left nav-icon"></i> &nbsp;
-                  Back previous page
+               <a href="{{ route('patient.list') }}" class="btn btn-primary col-2">
+                  <i class="fas fa-arrow-circle-left nav-icon"></i>   &nbsp;
+                  Back
                </a>
             </div>
          </div>

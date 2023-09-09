@@ -22,17 +22,35 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('patient.list') }}" class="nav-link {{ (request()->routeIs('patient.list'))  ? 'active' : '' }}">
-                        <i class="fas fa-list-alt nav-icon"></i>                   
+                        <i class="fas fa-user-injured nav-icon"></i>                   
                         <p>Patient list</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('room') }}" class="nav-link {{ (request()->routeIs('room*'))  ? 'active' : '' }}">
-                        <!-- <i class="fas fa-bed nav-icon"></i> -->
                         <i class="fas fa-procedures nav-icon"></i>
                         <p>Room-seat</p>
                     </a>
-                </li>   
+                </li>  
+
+                <li class="nav-item {{ (request()->routeIs('cabin*'))  ? 'menu-open' : '' }} {{ (request()->routeIs('ward*'))  ? 'menu-open' : '' }}"">
+                    <a href="#" class="nav-link {{ (request()->routeIs('cabin*'))  ? 'active' : '' }} {{ (request()->routeIs('ward*'))  ? 'active' : '' }}">
+                        <i class="fas fa-bed nav-icon"></i>
+                        <p>Booking list<i class="right fas fa-angle-left"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview pl-3">                       
+                        <li class="nav-item">
+                            <a href="{{ route('cabin.booking') }}" class="nav-link {{ (request()->routeIs('cabin.booking*'))  ? 'active' : '' }}">
+                                <p>Cabin booking</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('ward.booking') }}" class="nav-link {{ (request()->routeIs('ward.booking*'))  ? 'active' : '' }}">
+                                <p>Ward booking</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a href="{{ route('payment') }}" class="nav-link {{ (request()->routeIs('payment*'))  ? 'active' : '' }}">
                         <i class="fas fa-money-check-alt nav-icon"></i>
@@ -57,7 +75,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('patientList') }}" class="nav-link {{ (request()->routeIs('patientList*'))  ? 'active' : '' }}">
-                        <i class="fas fa-list-alt nav-icon"></i>
+                        <i class="fas fa-user-injured nav-icon"></i>
                         <p>Patient list</p>
                     </a>
                 </li>

@@ -4,7 +4,7 @@
 @include('includes.alertMessage')
 <div class="content-wrapper p-3 view">
    <div class="row justify-content-center">
-      <div class="col-md-10">
+      <div class="col-md-12">
          <div class="card">
             <h6 class="card-header bg-success text-center py-2">Single doctor</h6>
             <div class="card-body">

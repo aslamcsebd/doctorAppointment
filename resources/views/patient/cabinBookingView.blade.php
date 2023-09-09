@@ -44,7 +44,7 @@
                        <tr>
                            <td>
                               <label class="capitalize">Check out : <br>
-                                    <small class="font-italic text-primary">Before 10:00 am</small>
+                                    <small class="font-italic text-primary">Before 10:00 AM</small>
                                  </label>
                            </td>
                               <input type="hidden" name="check_out" value="{{ $check_out ?? '' }}">

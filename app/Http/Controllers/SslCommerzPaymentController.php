@@ -263,29 +263,27 @@ class SslCommerzPaymentController extends Controller
 
         // Hospital code start     
         $bookingType = $request->value_a;
-        if($bookingType == 'cabin'){
+        $tran_id = $request->value_c;
 
+        if($bookingType == 'cabin'){
             CabinBooking::where('id', $request->value_b)->where('tran_id', $request->value_c)->update([
                 'card_type' => $request->card_type
             ]);
 
-            Payment::create([
-                'patient_id' => Auth::id(),
-                'bed_fee' => $request->value_d,
-                'advance' => $request->amount
-            ]);
-
         }elseif($bookingType == 'ward'){
+
             WardBooking::where('id', $request->value_b)->where('tran_id', $request->value_c)->update([
                 'card_type' => $request->card_type
             ]);
-
-            Payment::create([
-                'patient_id' => Auth::id(),
-                'bed_fee' => $request->value_d,
-                'advance' => $request->amount
-            ]);
         }
+
+        Payment::create([
+            'tran_id' => $tran_id,
+            'patient_id' => Auth::id(),
+            'bed_fee' => $request->value_d,
+            'advance' => $request->amount
+        ]);
+
         // Hospital code end
       
         return redirect('/booking-list')->with('success', 'Transaction is successfully Completed');

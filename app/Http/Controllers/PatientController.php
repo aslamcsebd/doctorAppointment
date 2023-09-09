@@ -40,6 +40,20 @@ class PatientController extends Controller
         return view('patient.view', $data);
     }
 
+    // View doctor appointment
+    public function doctor_appointment($id, $route){
+        if($route=='appointment.list'){
+            $data['appointmentDate'] = Appointment::where('patient_id', Auth::id())->where('doctor_id', $id)->first();
+        }    
+        $data['route'] = $route;
+        $data['doctor'] = Doctor::where('user_id', $id)->first();
+
+        $allColumns = array_keys(json_decode(Patient::first(), true));
+        $data['needed_columns'] = array_diff($allColumns, ['id', 'user_id', 'patient_id', 'status', 'created_at', 'updated_at']);
+
+        return view('patient.view2', $data);
+    }
+
     // Add favourite doctor
     public function addFavourite($id){
         FavouriteDoctor::Create([

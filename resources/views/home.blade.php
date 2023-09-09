@@ -40,6 +40,22 @@
                   </div>
 
                   <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
+                     <div class="small-box bg-success">
+                        <div class="inner text-center">
+                           <h3>{{$patients->count() ?? '0'}}</h3> 
+                           <span>
+                              <i class="fas fa-user-injured mr-2"></i>
+                              All patient
+                           </span>
+                        </div>                        
+                        <a href="{{ route('patient.list') }}" class="small-box-footer">
+                           More info
+                           <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                     </div>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
                      <div class="small-box bg-primary">
                         <div class="inner text-center pb-3">
                            <table class="table table-bordered">

@@ -9,8 +9,9 @@ use App\Models\Ward;
 use App\Models\Floor;
 use App\Models\Doctor;
 use App\Models\Report;
-use App\Models\Payment;
+use App\Models\Patient;
 
+use App\Models\Payment;
 use App\Models\Appointment;
 use App\Models\WardBooking;
 use App\Models\CabinBooking;
@@ -30,6 +31,7 @@ class HomeController extends Controller
     public function index(){
         // Admin
         $data['doctors'] = Doctor::all();
+        $data['patients'] = Patient::all();
 
         $data['floors'] = Floor::all();
         $data['cabins'] = Room::where('room_type', 'cabin')->get();

@@ -2,9 +2,9 @@
 @section('title') Appointment list @endsection
 @section('content')
 @include('includes.alertMessage')
- @php $route = 'appointment.request'; 
-         $appointments = App\Models\Appointment::where('doctor_id', Auth::id())->with('user2')->orderBy('id', 'DESC')->get();
-         @endphp
+@php $route = 'appointment.request'; 
+   $appointments = App\Models\Appointment::where('doctor_id', Auth::id())->with('user2')->orderBy('id', 'DESC')->get();
+@endphp
 <div class="content-wrapper p-3">
    <div class="row justify-content-center">
       <div class="col-md-12">      

@@ -55,7 +55,7 @@
                         </div>
                      <div class="form-group col-4">
                         <label for="dob">Date of birth</label>
-                        <input type="{{$patientInfo->dob==null ? 'date' : 'text'}}" class="form-control" name="dob" value="{{ date('d-m-Y', strtotime($patientInfo->dob)) ?? '' }}" id="dob" placeholder="Day-Month-Year"/>
+                        <input type="{{$patientInfo->dob==null ? 'date' : 'text'}}" class="form-control" name="dob" value="{{ date('d-M-Y', strtotime($nullOr = $patientInfo->dob)) ?? '' }}" {{ $nullOr ? 'readonly' : '' }} id="dob" placeholder="Day-Month-Year"/>
                      </div>  
                   </div>
 

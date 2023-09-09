@@ -16,7 +16,7 @@ class CreateDoctorsTable extends Migration
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
-            $table->bigInteger('doctor_id');
+            $table->string('doctor_id');
             $table->string('gender')->nullable();
             $table->string('blood')->nullable();            
             $table->date('dob')->nullable();

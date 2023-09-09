@@ -163,4 +163,10 @@ class AdminController extends Controller {
         $data['patients'] = Patient::with('user')->get();
         return view('admin.patients', $data);
     }
+
+    // Patient full info
+    public function patientView($id){
+        $data['patient'] = Patient::find($id);        
+        return view('admin.patientView', $data);
+    }
 }

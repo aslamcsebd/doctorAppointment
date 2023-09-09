@@ -68,11 +68,11 @@
                                 <div class="border border-secondary rounded p-1 mt-2">
                                     <div class="radio-toolbar form-check form-check-inline">
                                         <div class="radio">
-                                            <input type="radio" id="cabin" name="room_type" value="cabin" @if(isset($room_type)) {{ $room_type == 'cabin' ? 'checked' : '' }} @endif>
+                                            <input type="radio" id="cabin" name="room_type" value="cabin" @if(isset($room_type)) {{ $room_type == 'cabin' ? 'checked' : '' }} @endif required>
                                             <label for="cabin">Cabin/room</label>
                                         </div>
                                         <div class="radio ml-3 mt-1">
-                                            <input type="radio" id="ward" name="room_type" value="ward" @if(isset($room_type)) {{ $room_type == 'ward' ? 'checked' : '' }} @endif>
+                                            <input type="radio" id="ward" name="room_type" value="ward" @if(isset($room_type)) {{ $room_type == 'ward' ? 'checked' : '' }} @endif required>
                                             <label for="ward">Ward(bed)</label> 
                                         </div>
                                     </div>
@@ -81,12 +81,12 @@
             
                             <div class="form-group col-md-2">
                                 <label for="check_in">Check in*</label>
-                                <input type="text" class="form-control datepicker mt-2" name="check_in" id="check_in" value="{{$check_in ?? ''}}" placeholder="Day-Month-Year" required/>                            
+                                <input type="text" class="form-control datepicker mt-2" name="check_in" id="check_in" value="{{$check_in = $check_in ?? ''}}" placeholder="Day-Month-Year"  required onfocus= "clearInput(this)"/>                            
                             </div>
 
                             <div class="form-group col-md-2">
                                 <label for="check_out">Check out*</label>
-                                <input type="text" class="form-control datepicker mt-2" name="check_out" id="check_out" value="{{$check_out ?? ''}}" placeholder="Day-Month-Year" required/>                            
+                                <input type="text" class="form-control datepicker mt-2" name="check_out" id="check_out" value="{{$check_out = $check_out ?? ''}}" placeholder="Day-Month-Year" required onfocus= "clearInput2(this)"/>                            
                             </div>
 
                             <div class="form-group col-md-2 pt-2">
@@ -190,4 +190,17 @@
 @endsection
 
 @section('js')
+   <script type="text/javascript">
+        function clearInput(target){
+            if (target.value== '{{$check_in}}'){
+                target.value= "";
+            }
+        }
+
+        function clearInput2(target){
+            if (target.value== '{{$check_out}}'){
+                target.value= "";
+            }
+        }
+    </script>
 @endsection

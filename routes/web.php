@@ -25,12 +25,19 @@ Route::middleware(['auth'])->group(function(){
 
     // Patient info
         Route::get('/patient-list', 'AdminController@patient_list')->name('patient.list');
-    
+        Route::get('patientView/{id}/','AdminController@patientView')->name('patientView');
 
     // Room management
         Route::get('room', 'RoomController@room')->name('room');
         Route::post('add-room/', 'RoomController@addRoom')->name('addRoom');
         Route::post('add-floor/', 'RoomController@addFloor')->name('addFloor');
+
+    // Booking process
+        Route::get('cabin-booking', 'RoomController@cabin_booking')->name('cabin.booking');
+        Route::get('booking-view/{id}/{type}/{route}/{tab}', 'RoomController@booking_view');
+        Route::post('/booking-complete', 'RoomController@bookingComplete')->name('bookingComplete');
+
+        Route::get('ward-booking', 'RoomController@ward_booking')->name('ward.booking');
 
     // Payment system
         Route::get('payment', 'PaymentController@payment')->name('payment');
@@ -53,6 +60,7 @@ Route::middleware(['auth'])->group(function(){
     // Doctor search
     Route::get('doctor-search', 'PatientController@doctor_search')->name('doctor.search');
     Route::get('single-doctor/{id}/{route}','PatientController@singleDoctor')->name('singleDoctor');      
+    Route::get('doctor-appointment/{id}/{route}','PatientController@doctor_appointment');      
     Route::get('addFavourite/{id}','PatientController@addFavourite')->name('addFavourite');
     Route::get('favourite-list','PatientController@favourite_list')->name('favourite.list');
     

@@ -40,7 +40,7 @@
                            </td>
                            <td width="auto">
                               <div class="btn-group">
-                                    <a href="{{ url('single-doctor', [$appointment->doctor_id, Route::currentRouteName()])}}" class="btn btn-sm btn-info py-1">View</a>
+                                    <a href="{{ url('doctor-appointment', [$appointment->doctor_id, Route::currentRouteName()])}}" class="btn btn-sm btn-info py-1">View</a>
                                     <a href="{{ url('itemDelete', ['appointments', $appointment->id, 'tabName'])}}" class="btn btn-sm btn-danger ml-1 py-1 px-3" onclick="return confirm('Are you want to delete this?')">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
