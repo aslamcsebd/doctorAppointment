@@ -16,8 +16,8 @@ class CreateWardBookingsTable extends Migration
         Schema::create('ward_bookings', function (Blueprint $table) {
             $table->id();
             $table->integer('patient_id');
-            $table->date('check_in')->nullable()->comment('Start day');
-            $table->date('check_out')->nullable()->comment('End day');
+            $table->dateTime('check_in')->nullable()->comment('Start day');
+            $table->dateTime('check_out')->nullable()->comment('End day');
             $table->integer('ward_id')->nullable();
             $table->integer('rent')->nullable();            
             $table->string('tran_id')->nullable();

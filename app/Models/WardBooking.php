@@ -24,4 +24,9 @@ class WardBooking extends Model
     public function patient(){
         return $this->belongsTo(Patient::class, 'patient_id', 'user_id')->withDefault();
     }
+
+    // Payment info
+    public function payment(){
+        return $this->belongsTo(Payment::class, 'tran_id', 'tran_id')->withDefault();
+    }
 }

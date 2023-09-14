@@ -25,49 +25,55 @@
                              <label class="capitalize">Booking type :</label>
                           </td>
                           <input type="hidden" name="bookingType" value="{{ $ward->roomNo->room_type ?? '' }}">
-                          <td>{{ $ward->roomNo->room_type ?? '' }}</td>
+                          <td class="capitalize">{{ $ward->roomNo->room_type ?? '' }}</td>
                        </tr>
                        <tr>
                            <td>
-                              <label class="capitalize">Ward number :</label>
+                              <label class="capitalize">
+                                 Floor ({{ $ward->roomNo->floorNo->floor ?? ''}}), 
+                                 Room ({{ $ward->roomNo->room_no ?? '' }}), 
+                                 <span class="font-weight-bold">Ward number : </span>
+                              </label>
                            </td>
-                           <td>{{ $ward->ward_no ?? '' }}</td>
+                           <td>
+                              {{ $ward->ward_no ?? '' }}
+                           </td>
                        </tr>
                        <tr>
                            <td>
                               <label class="capitalize">Check in :</label>
                            </td>
                               <input type="hidden" name="check_in" value="{{ $check_in ?? '' }}">
-                           <td>{{ $check_in ?? '' }}</td>
+                           <td>{{ date('Y-m-d (h:s a)', strtotime($check_in)) ?? '' }}</td>
                        </tr>
                        <tr>
                            <td>
                               <label class="capitalize">Check out : <br>
-                                    <small class="font-italic text-primary">Before 10:00 am</small>
+                                    {{-- <small class="font-italic text-primary">Before 10:00 am</small> --}}
                                  </label>
                            </td>
                               <input type="hidden" name="check_out" value="{{ $check_out ?? '' }}">
-                           <td>{{ $check_out ?? '' }}</td>
+                           <td>{{ date('Y-m-d (h:s a)', strtotime($check_out)) ?? '' }}</td>
                        </tr>
                        <tr>
                           <td>
-                             <label class="capitalize">Total night :</label>
+                             <label class="capitalize">Total hour :</label>
                           </td>
-                          <td>{{ $totalNight ?? '' }}</td>
+                          <td>{{ $totalHour ?? '' }}</td>
                        </tr>
                        <tr>
                           <td>
-                             <label class="capitalize">Per night rent :</label>
+                             <label class="capitalize">Per day rent :</label>
                           </td>
                           <input type="hidden" name="rent" value="{{ $ward->roomNo->rent ?? '' }}">
-                          <td>{{ $rent = $ward->roomNo->rent ?? '' }}</td>
+                          <td>{{ $rent = $ward->roomNo->rent ?? '' }}/=</td>
                        </tr>
                        <tr>
                           <td>
                              <label class="capitalize">Total rent :</label>
                           </td>
                           <td class="font-weight-bold">
-                              {{$total = $totalNight * $rent}}
+                              {{ $total = round($totalHour * $rent/24) }}/=
                           </td>
                           <input type="hidden" name="totalRent" value="{{ $total ?? '' }}">                          
                        </tr>
@@ -75,8 +81,8 @@
                            <td>
                                <label class="capitalize">Advance pay :</label>
                            </td>
-                           <td>                           
-                               <input type="number" class="form-control btn-block font-weight-bold text-center" name="advance" min="{{ $rent ?? '' }}" max="{{ $total }}" value="{{ $total }}" required>
+                           <td>
+                              <input type="number" class="form-control btn-block font-weight-bold text-center" name="advance" min="{{ round($rent/24) ?? '' }}" max="{{ $total }}" value="{{ $total }}" required>
                            </td>
                        </tr>
                        <tr>

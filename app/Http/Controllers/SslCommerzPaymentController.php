@@ -85,8 +85,8 @@ class SslCommerzPaymentController extends Controller
         
             $bookingId = CabinBooking::create([
                 'patient_id' => Auth::id(),
-                'check_in' => date('Y-m-d', strtotime($request->check_in)),
-                'check_out' => date('Y-m-d', strtotime($request->check_out)),
+                'check_in' => $request->check_in,
+                'check_out' => $request->check_out,
                 'room_no' => $request->room_no,
                 'rent' => $request->rent,
                 'tran_id' => $post_data['tran_id']
@@ -110,8 +110,8 @@ class SslCommerzPaymentController extends Controller
             
             $bookingId = WardBooking::create([
                 'patient_id' => Auth::id(),
-                'check_in' => date('Y-m-d', strtotime($request->check_in)),
-                'check_out' => date('Y-m-d', strtotime($request->check_out)),
+                'check_in' => $request->check_in,
+                'check_out' => $request->check_out,
                 'ward_id' => $request->id,
                 'rent' => $request->rent,
                 'tran_id' => $post_data['tran_id']

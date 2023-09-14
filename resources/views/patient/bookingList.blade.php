@@ -18,17 +18,19 @@
                             <th>Check out</th>
                             <th>Floor no</th>
                             <th>Room no</th>
-                            <th>Rent per night</th>
+                            <th>Rent per day</th>
+                            <th>Advance</th>
                             <th>Card type</th>
                         </thead>
-                        <tbody>
+                        <tbody> 
                             @foreach($cabines as $cabin)                         
                                 <tr>
-                                    <td>{{$cabin->check_in}}</td>
-                                    <td>{{$cabin->check_out}}</td>
+                                    <td>{{ date('Y-m-d (h:s a)', strtotime($cabin->check_in))}}</td>
+                                    <td>{{ date('Y-m-d (h:s a)', strtotime($cabin->check_out))}}</td>
                                     <td>{{$cabin->floorId->floorNo->floor}}</td>
                                     <td class="{{ $cabin->check_out >= date('Y-m-d') ? 'bg-warning' : '' }}">{{$cabin->room_no}} </td>
                                     <td>{{$cabin->rent}}</td>
+                                    <td>{{$cabin->payment->advance}}</td>
                                     <td>{{$cabin->card_type}}</td>
                                 </tr>  
                             @endforeach
@@ -48,18 +50,20 @@
                             <th>Floor no</th>
                             <th>Room no</th>
                             <th>Ward no</th>
-                            <th>Rent per night</th>
+                            <th>Rent per day</th>
+                            <th>Advance</th>
                             <th>Card type</th>
                         </thead>
                         <tbody>
                             @foreach($wards as $ward)
                                 <tr>
-                                    <td>{{$ward->check_in}}</td>
-                                    <td>{{$ward->check_out}}</td>
+                                    <td>{{ date('Y-m-d (h:s a)', strtotime($ward->check_in))}}</td>
+                                    <td>{{ date('Y-m-d (h:s a)', strtotime($ward->check_out))}}</td>
                                     <td>{{$ward->wardNo->roomNo->floorNo->floor}}</td> 
                                     <td>{{$ward->wardNo->roomNo->room_no}}</td>
                                     <td class="{{ $ward->check_out >= date('Y-m-d') ? 'bg-warning' : '' }}">{{$ward->wardNo->ward_no}}</td>
                                     <td>{{$ward->rent}}</td>
+                                    <td>{{$ward->payment->advance}}</td>
                                     <td>{{$ward->card_type}}</td>
                                 </tr>  
                             @endforeach

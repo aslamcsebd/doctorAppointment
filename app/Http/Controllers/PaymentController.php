@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DateTime;
+use Carbon\Carbon;
 use App\Models\Room;
 use App\Models\Ward;
 use App\Models\Floor;
@@ -67,21 +68,27 @@ class PaymentController extends Controller
         $validator = Validator::make($request->all(),[            
             'room_type'=>'required',
             'check_in'=>'required|date',
-            'check_out'=>'required|date|after:check_in'
+            'check_in_time'=>'required',
+            'check_out'=>'required|date|after_or_equal:check_in',
+            'check_out_time'=>'required'
         ]);
-    
+        
         if($validator->fails()){
             $messages = $validator->messages();
             return Redirect::back()->withErrors($validator);
         }
         
+        $check_in = date('Y-m-d H:s:i', strtotime($request->check_in . $request->check_in_time));
+        $check_out = date('Y-m-d H:s:i', strtotime($request->check_out . $request->check_out_time));
+       
+        // $check_in =   Carbon::createFromFormat('Y-m-d H:s:i', $check_in);        
+        // $check_out = Carbon::createFromFormat('Y-m-d H:s:i', $check_out);
+        // $hours = $check_in->diffInHours($check_out);
+        
         $data['room_type'] = $request->room_type;
 
-        $data['check_in'] = $request->check_in;
-        $data['check_out'] = $request->check_out;
-
-        $check_in = date('Y-m-d', strtotime($data['check_in']));
-        $check_out = date('Y-m-d', strtotime($data['check_out']));
+        $data['check_in'] = $check_in;
+        $data['check_out'] = $check_out;
 
         if($data['room_type'] == 'cabin'){
             $rooms = Room::where('room_type', 'cabin')->orderBy('room_no', 'Asc')->pluck('room_no');
@@ -98,6 +105,7 @@ class PaymentController extends Controller
             $data['unBook'] = $rooms->diff($booked);
 
         } else {
+
             $wards = Ward::pluck('id');
             $booked = WardBooking::where([
                 ['ward_bookings.check_in', '<=', $check_in],
@@ -109,7 +117,7 @@ class PaymentController extends Controller
             ])->pluck('ward_id');
             $data['unBook'] = $wards->diff($booked);
         }
-   
+        
         $data['floors'] = Floor::all();
         $data['roomWards'] = Room::where('room_type', 'ward')->orderBy('room_no', 'Asc')->get();
 
@@ -117,14 +125,10 @@ class PaymentController extends Controller
     }
 
     // Cabin booking info
-    public function cabin_book($check_in, $check_out, $id){
-        $data['check_in'] = $check_in;       
-        $data['check_out'] = $check_out;
-
-        $in = new DateTime($check_in);
-        $out = new DateTime($check_out);
-        
-        $data['totalNight'] = $out->diff($in)->format('%d');
+    public function cabin_book($check_in, $check_out, $id) {
+        $data['check_in'] =   Carbon::createFromFormat('Y-m-d H:s:i', $check_in);        
+        $data['check_out'] = Carbon::createFromFormat('Y-m-d H:s:i', $check_out);
+        $data['totalHour'] = $data['check_in']->diffInHours($data['check_out']);
        
         $data['room'] = Room::find($id);
 
@@ -133,16 +137,11 @@ class PaymentController extends Controller
 
     // Ward booking info
     public function ward_book($check_in, $check_out, $id){
-        $data['check_in'] = $check_in;       
-        $data['check_out'] = $check_out;
-
-        $in = new DateTime($check_in);
-        $out = new DateTime($check_out);
+        $data['check_in'] =   Carbon::createFromFormat('Y-m-d H:s:i', $check_in);        
+        $data['check_out'] = Carbon::createFromFormat('Y-m-d H:s:i', $check_out);
+        $data['totalHour'] = $data['check_in']->diffInHours($data['check_out']);
         
-        $data['totalNight'] = $out->diff($in)->format('%d');
-       
         $data['ward'] = Ward::find($id);
-        // dd($data['ward']->roomNo->room_no);
 
         return view('patient.wardBookingView', $data);
     }
