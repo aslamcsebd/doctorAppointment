@@ -22,7 +22,7 @@ class PaymentController extends Controller
 {
     // Payment list
     public function payment(){
-        $data['payments'] = Payment::all();
+        $data['payments'] = Payment::orderBy('id', 'DESC')->get();
         return view('payment.payment', $data);
     }
 
@@ -80,11 +80,7 @@ class PaymentController extends Controller
         
         $check_in = date('Y-m-d H:s:i', strtotime($request->check_in . $request->check_in_time));
         $check_out = date('Y-m-d H:s:i', strtotime($request->check_out . $request->check_out_time));
-       
-        // $check_in =   Carbon::createFromFormat('Y-m-d H:s:i', $check_in);        
-        // $check_out = Carbon::createFromFormat('Y-m-d H:s:i', $check_out);
-        // $hours = $check_in->diffInHours($check_out);
-        
+             
         $data['room_type'] = $request->room_type;
 
         $data['check_in'] = $check_in;
@@ -146,6 +142,7 @@ class PaymentController extends Controller
         return view('patient.wardBookingView', $data);
     }
 
+/* Before SSL    
     // Booking now [Cabin]
     public function bookingNow(Request $request){
         $validator = Validator::make($request->all(),[            
@@ -200,4 +197,6 @@ class PaymentController extends Controller
 
         return Redirect('booking-list')->with('success', 'Booking complete successfully');
     }
+Before SSL */
+
 }

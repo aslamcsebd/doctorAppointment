@@ -105,7 +105,7 @@ class RoomController extends Controller
     public function bookingComplete(Request $request){ 
         $validator = Validator::make($request->all(),[            
             'check_in'=>'required|date',
-            'check_out'=>'required|date|after:check_in'
+            'check_out'=>'required|date|after_or_equal:check_in'
         ]);
     
         if($validator->fails()){

@@ -34,7 +34,7 @@
                 </li> 
 
                 <li class="nav-item">
-                    <a href="{{ route('new.booking') }}" class="nav-link {{ (request()->routeIs('new.booking*'))  ? 'active' : '' }}">
+                    <a href="{{ route('admin.booking') }}" class="nav-link {{ (request()->routeIs('admin.booking*'))  ? 'active' : '' }}">
                         <i class="fas fa-plus-square nav-icon"></i>
                         <p>Add new booking</p>
                     </a>

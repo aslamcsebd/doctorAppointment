@@ -51,7 +51,7 @@
                            <td width="auto">
                               <div class="btn-group">
                                  @if(isset($new_booking))
-                                    <a href="#" class="btn btn-sm btn-outline-info py-1">New booking</a>
+                                    <a href="{{ url('admin/booking', [$patient->user_id])}}" class="btn btn-sm btn-outline-info py-1">New booking</a>
                                  @else
                                     <a href="{{ url('patientView', [$patient->id])}}" class="btn btn-sm btn-outline-info py-1">View</a>
                                     <a href="{{ url('itemDelete', ['patients', $patient->id, 'tabName'])}}" class="btn btn-sm btn-danger py-1" onclick="return confirm('Are you want to delete this?')">Delete</a>

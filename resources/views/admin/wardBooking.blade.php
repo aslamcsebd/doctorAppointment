@@ -11,17 +11,17 @@
          <div class="card-header p-1">
             <ul class="nav nav-pills" id="tabMenu">
                <li class="nav-item">
-                  <a class="nav-link active btn-sm py-1 m-1" data-toggle="pill" href="#active">Active ({{$wards->count()}})</a>
+                  <a class="nav-link active btn-sm py-1 m-1" data-toggle="pill" href="#running">Running ({{$wards->count()}})</a>
                </li>
                <li class="nav-item">
-                  <a class="nav-link btn-sm py-1 m-1" data-toggle="pill" href="#inactive">Inactive</a>
+                  <a class="nav-link btn-sm py-1 m-1" data-toggle="pill" href="#past">Past</a>
                </li>
             </ul>
          </div>
         
          <div class="card-body p-1">            
             <div class="tab-content" id="pills-tabContent">
-               <div class="tab-pane fade show active" id="active">
+               <div class="tab-pane fade show active" id="running">
                   <div class="card">
                      <div class="card-body p-1">
                         <table class="table table-bordered">
@@ -32,7 +32,7 @@
                               <th>Check out</th>
                               <th>Room no</th>
                               <th>Ward no</th>
-                              <th>Rent per night</th>
+                              <th>Rent per day</th>
                               <th>View</th>
                            </thead>
                            <tbody>
@@ -44,8 +44,8 @@
                                        <br>
                                        <span>{!!$ward->user->name!!}</span>
                                     </td>
-                                    <td>{{$ward->check_in}}</td>
-                                    <td>{{$ward->check_out}}</td>
+                                    <td>{{ date('Y-m-d (h:s a)', strtotime($ward->check_in)) }}</td>
+                                    <td>{{ date('Y-m-d (h:s a)', strtotime($ward->check_out)) }}</td>
                                     <td>{{$ward->wardNo->roomNo->room_no}} </td>
                                     <td>{{$ward->wardNo->ward_no}} </td>
                                     <td>{{$ward->rent}}</td>
@@ -62,7 +62,7 @@
                   </div>
                </div>
 
-               <div class="tab-pane fade show" id="inactive">                 
+               <div class="tab-pane fade show" id="past">                 
                   <div class="card">
                      <div class="card-body p-1">
                         <table class="table table-bordered">
@@ -73,7 +73,7 @@
                               <th>Check out</th>
                               <th>Floor no</th>
                               <th>Room no</th>
-                              <th>Rent per night</th>
+                              <th>Rent per day</th>
                               <th>View</th>
                            </thead>
                            <tbody>
@@ -85,8 +85,8 @@
                                        <br>
                                        <span>{!!$ward->user->name!!}</span>
                                     </td>
-                                    <td>{{$ward->check_in}}</td>
-                                    <td>{{$ward->check_out}}</td>
+                                    <td>{{ date('Y-m-d (h:s a)', strtotime($ward->check_in)) }}</td>
+                                    <td>{{ date('Y-m-d (h:s a)', strtotime($ward->check_out)) }}</td>
                                     <td>{{$ward->wardNo->roomNo->room_no}} </td>
                                     <td>{{$ward->wardNo->ward_no}} </td>
                                     <td>{{$ward->rent}}</td>

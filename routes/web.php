@@ -35,7 +35,18 @@ Route::middleware(['auth'])->group(function(){
         Route::post('add-floor/', 'RoomController@addFloor')->name('addFloor');
 
     // New booking from admin
-        Route::get('/new-booking', 'AdminController@new_booking')->name('new.booking');  
+        Route::get('/new-booking', 'AdminController@new_booking')->name('admin.booking');  
+        Route::get('/admin/booking/{patientId}', 'AdminController@booking')->name('admin.booking.patientId'); 
+        Route::post('/admin/booking-search', 'AdminController@booking_search')->name('admin.booking_search');
+
+        // Cabin
+        Route::get('admin/cabin_book/{check_in}/{check_out}/{id}/{patientId}', 'AdminController@cabin_book')->name('cabin_book');
+    
+        // Ward
+        Route::get('admin/ward_book/{check_in}/{check_out}/{id}/{patientId}', 'AdminController@ward_book')->name('ward_book');
+        
+        // Final booking
+        Route::post('admin/booking-now', 'AdminController@bookingNow')->name('admin.bookingNow');
 
     // Booking process
         Route::get('cabin-booking', 'RoomController@cabin_booking')->name('cabin.booking');
