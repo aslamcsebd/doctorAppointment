@@ -27,10 +27,15 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/patient-list', 'AdminController@patient_list')->name('patient.list');
         Route::get('patientView/{id}/','AdminController@patientView')->name('patientView');
 
+        Route::post('/create-patient','AdminController@create_patient')->name('create.patient');
+        
     // Room management
         Route::get('room', 'RoomController@room')->name('room');
         Route::post('add-room/', 'RoomController@addRoom')->name('addRoom');
         Route::post('add-floor/', 'RoomController@addFloor')->name('addFloor');
+
+    // New booking from admin
+        Route::get('/new-booking', 'AdminController@new_booking')->name('new.booking');  
 
     // Booking process
         Route::get('cabin-booking', 'RoomController@cabin_booking')->name('cabin.booking');

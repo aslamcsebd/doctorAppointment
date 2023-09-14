@@ -23,7 +23,7 @@ class RoomController extends Controller
         $data['floors'] = Floor::all();       
         $data['roomWards'] = Room::where('room_type', 'ward')->orderBy('room_no', 'Asc')->get();
 
-        return view('room.index', $data);
+        return view('admin.rooms', $data);
     }
 
     // Create room

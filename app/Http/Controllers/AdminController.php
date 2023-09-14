@@ -22,7 +22,7 @@ class AdminController extends Controller {
     }
 
     // Create doctor account
-    public function doctor_create(Request $request){               
+    public function doctor_create(Request $request){
         $validator = Validator::make($request->all(),[
             'name'=>'required',
             'email'=>'required|unique:users',
@@ -156,6 +156,38 @@ class AdminController extends Controller {
             ]);
             return back()->with('success','Hospital info update successfully');
         }
+    }
+    
+    // Create new patient
+    public function create_patient(Request $request){
+        $validator = Validator::make($request->all(),[
+            'name'=>'required',
+            'email'=>'required|unique:users',
+            'password'=>'required|min:6',
+            'phone'=>'required|unique:users'
+        ]);
+    
+        if($validator->fails()){
+            $messages = $validator->messages();
+            return Redirect::back()->withErrors($validator);
+        }
+    
+        $user_id = User::create([
+            'role' => 3,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'password' => Hash::make($request->password)
+        ]);
+
+        $id = $user_id->id;
+
+        Patient::create([
+            'user_id' => $id,
+            'patient_id' => str_pad($id, 6, '0', STR_PAD_LEFT)
+        ]);
+
+        return back()->with('success', 'Patient registration successfully');
     }   
 
     // Patient info
@@ -169,4 +201,12 @@ class AdminController extends Controller {
         $data['patient'] = Patient::find($id);        
         return view('admin.patientView', $data);
     }
+
+    // New booking
+    public function new_booking(){
+        $data['new_booking'] = true;
+        $data['patients'] = Patient::with('user')->get();
+        return view('admin.patients', $data);
+    }
+
 }

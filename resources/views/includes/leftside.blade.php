@@ -31,7 +31,14 @@
                         <i class="fas fa-procedures nav-icon"></i>
                         <p>Room-seat</p>
                     </a>
-                </li>  
+                </li> 
+
+                <li class="nav-item">
+                    <a href="{{ route('new.booking') }}" class="nav-link {{ (request()->routeIs('new.booking*'))  ? 'active' : '' }}">
+                        <i class="fas fa-plus-square nav-icon"></i>
+                        <p>Add new booking</p>
+                    </a>
+                </li>   
 
                 <li class="nav-item {{ (request()->routeIs('cabin*'))  ? 'menu-open' : '' }} {{ (request()->routeIs('ward*'))  ? 'menu-open' : '' }}"">
                     <a href="#" class="nav-link {{ (request()->routeIs('cabin*'))  ? 'active' : '' }} {{ (request()->routeIs('ward*'))  ? 'active' : '' }}">
