@@ -11,7 +11,7 @@
          <div class="card-header p-1">
             <ul class="nav nav-pills" id="tabMenu">
                <li class="nav-item">
-                  <a class="nav-link active btn-sm py-1 m-1" data-toggle="pill" href="#running">Running ({{$cabines->count()}})</a>
+                  <a class="nav-link active btn-sm py-1 m-1" data-toggle="pill" href="#running">Running ({{ $cabines->where('check_out', '>=', date('Y-m-d'))->count() }})</a>
                </li>
                <li class="nav-item">
                   <a class="nav-link btn-sm py-1 m-1" data-toggle="pill" href="#past">Past</a>

@@ -311,8 +311,7 @@ class AdminController extends Controller {
     }
 
     // Final booking
-    public function bookingNow(Request $request) {
-        
+    public function bookingNow(Request $request) {        
         $patientId = $request->patientId;
         $post_data['tran_id'] = uniqid();
  

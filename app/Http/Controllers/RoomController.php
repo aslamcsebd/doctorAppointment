@@ -82,7 +82,7 @@ class RoomController extends Controller
 
     // Cabin booking
     public function cabin_booking(){ 
-        $data['cabines'] = CabinBooking::all();
+        $data['cabines'] = CabinBooking::orderBy('id', 'desc')->get();
         return view('admin.cabinBooking', $data);
     }
 
@@ -104,8 +104,8 @@ class RoomController extends Controller
     // Booking complete
     public function bookingComplete(Request $request){ 
         $validator = Validator::make($request->all(),[            
-            'check_in'=>'required|date',
-            'check_out'=>'required|date|after_or_equal:check_in'
+            'check_out'=>'required|date',
+            'check_out_time'=>'required'
         ]);
     
         if($validator->fails()){
@@ -113,29 +113,25 @@ class RoomController extends Controller
             return Redirect::back()->withErrors($validator);
         }
 
+		$check_out = date('Y-m-d H:s:i', strtotime($request->check_out . $request->check_out_time));
+		
         if($request->type=='cabin'){
             CabinBooking::where('id', $request->id)->update([
-                'check_out' => date('Y-m-d', strtotime($request->check_out))
+                'check_out' => $check_out
             ]);
 
         }else{
 
             WardBooking::where('id', $request->id)->update([
-                'check_out' => date('Y-m-d', strtotime($request->check_out)),
+                'check_out' => $check_out
             ]);
-        }
-
-        Payment::where('tran_id', $request->tran_id)->update([
-            'due' => $request->due,
-            'status' => 1
-        ]);
-        
+        }        
         return redirect()->route($request->route)->with('success','All information update successfully');
     }
 
     // Ward booking
     public function ward_booking(){ 
-        $data['wards'] = WardBooking::all();
+        $data['wards'] = WardBooking::orderBy('id', 'desc')->get();
         return view('admin.wardBooking', $data);
     }
 }
