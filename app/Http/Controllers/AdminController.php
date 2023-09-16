@@ -202,7 +202,7 @@ class AdminController extends Controller {
 			'password' 	=>	$request->password,
 			'website'	=>	request()->root()
         ];
-        Mail::to('aslamhossainctg@gmail.com')->send(new SendMail($mailData));
+        Mail::to($request->email)->send(new SendMail($mailData));
 
         return back()->with('success', 'Patient registration successfully');
     }   

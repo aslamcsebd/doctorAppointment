@@ -15,7 +15,6 @@
                     <p>Sign in to your account</p>
                     <hr>
                 </div>        
-                {{-- <div class="card-header text-center bg-info">{{ __('Admin login') }}</div> --}}
                 <div class="card-body py-0">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
@@ -23,17 +22,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                @php
-                                    $users = App\Models\User::all();
-                                @endphp
-
-                                <select class="form-control" name="email" required>
-                                    @foreach($users as $user)
-                                        <option value="{{$user->email}}">{{$user->email}}</option>
-                                    @endforeach
-                                </select>
-
-                                {{-- <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus> --}}
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -45,7 +34,7 @@
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="123" required autocomplete="current-password" value="123">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

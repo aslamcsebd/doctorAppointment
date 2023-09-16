@@ -27,7 +27,8 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
-        $roles = array('admin', 'doctor', 'patient');
+        // $roles = array('admin', 'doctor', 'patient');
+        $roles = array('admin');
         $loop = 1;
         foreach($roles as $role){
             DB::table('users')->insert([
@@ -36,8 +37,8 @@ class CreateUsersTable extends Migration
                 'email' => $role.'@gmail.com',
                 'email_verified_at' => now(),
                 'phone' => '0123456789',
-                'password' => Hash::make('123'),
-                'remember_token' => '123',
+                'password' => Hash::make('admin'),
+                'remember_token' => '',
             ]);
             $loop++;
         }

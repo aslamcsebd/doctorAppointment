@@ -6,9 +6,11 @@ use Artisan;
 
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+/* 
+Route::get('/', function () {
+     return view('welcome');
+}); 
+*/
 
 Auth::routes();
 
@@ -154,8 +156,4 @@ Route::get('/clear', function() {
     Artisan::call('optimize:clear');   
     
     return "Cleared!";
-});
- 
-Route::get('test', function(){
-   
 });
