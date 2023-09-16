@@ -154,5 +154,8 @@ Route::get('/clear', function() {
     Artisan::call('optimize:clear');   
     
     return "Cleared!";
- });
+});
  
+Route::get('test', function(){
+   
+});
