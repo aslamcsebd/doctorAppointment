@@ -229,13 +229,18 @@ class AdminController extends Controller {
 
     // Booking search
     public function booking_search(Request $request){
-        $validator = Validator::make($request->all(),[
+		$validator = Validator::make($request->all(),[
             'room_type'=>'required',
             'check_in'=>'required|date',
             'check_in_time'=>'required',
             'check_out'=>'required|date|after_or_equal:check_in',
             'check_out_time'=>'required'
         ]);
+
+		if($request->check_in == $request->check_out && $request->check_in_time >= $request->check_out_time){
+			$messages = 'In same day checkout time must be big than checkin time';
+            return Redirect::back()->withErrors($messages);
+		}
         
         if($validator->fails()){
             $messages = $validator->messages();

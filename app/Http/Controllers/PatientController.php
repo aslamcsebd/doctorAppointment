@@ -165,7 +165,7 @@ class PatientController extends Controller
     public function setPasswordNow(Request $request){
         $validator = Validator::make($request->all(),[
             'id'=>'required',
-            'password'=>['required', 'string', 'min:3', 'confirmed'],
+            'password'=>['required', 'string', 'min:6', 'confirmed'],
             'password_confirmation'=>'required|same:password'
         ]);
 

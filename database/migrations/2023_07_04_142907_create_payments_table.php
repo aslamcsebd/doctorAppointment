@@ -23,6 +23,19 @@ class CreatePaymentsTable extends Migration
             $table->tinyInteger('status')->default('0')->comment('0=Incomplete, 1=Done');
             $table->timestamps();
         });
+				
+		Schema::create('orders', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->double('amount')->nullable();
+            $table->text('address')->nullable();
+            $table->string('status', 10)->nullable();
+            $table->string('transaction_id')->nullable();
+            $table->string('currency', 20)->nullable();
+        });
+
         /*
         CREATE TABLE `orders` (
             `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
