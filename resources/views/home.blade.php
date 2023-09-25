@@ -73,7 +73,7 @@
                               </tbody>
                            </table>
                         </div>                        
-                        <a href="{{ route('room') }}" class="small-box-footer">
+                        <a href="{{ route('room.admin') }}" class="small-box-footer">
                            More info
                            <i class="fas fa-arrow-circle-right"></i>
                         </a>

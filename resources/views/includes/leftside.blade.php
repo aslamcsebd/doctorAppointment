@@ -27,9 +27,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('room') }}" class="nav-link {{ (request()->routeIs('room*'))  ? 'active' : '' }}">
+                    <a href="{{ route('room.admin') }}" class="nav-link {{ (request()->routeIs('room.admin*'))  ? 'active' : '' }}">
                         <i class="fas fa-procedures nav-icon"></i>
-                        <p>Room-seat</p>
+                        <p>Room-seat info</p>
                     </a>
                 </li> 
 
@@ -115,6 +115,13 @@
                             <p>Appointment list</p>
                         </a>
                     </li>
+
+					<li class="nav-item">
+						<a href="{{ route('room.patient') }}" class="nav-link {{ (request()->routeIs('room.patient*'))  ? 'active' : '' }}">
+							<i class="fas fa-procedures nav-icon"></i>
+							<p>Room-seat info</p>
+						</a>
+					</li> 
 
                     <li class="nav-item">
                         <a href="{{ route('booking') }}" class="nav-link {{ (request()->routeIs('booking*'))  ? 'active' : '' }}">

@@ -78,6 +78,14 @@ class AdminController extends Controller {
             'service' => $request->service,
         ]);
 
+		// For email
+		$mailData = [
+            'email' 	=>	$request->email,
+			'password' 	=>	$request->password,
+			'website'	=>	request()->root()
+        ];
+        // Mail::to($request->email)->send(new SendMail($mailData));
+
         return back()->with('success','Doctor registration successfully');
     }
 
@@ -202,7 +210,7 @@ class AdminController extends Controller {
 			'password' 	=>	$request->password,
 			'website'	=>	request()->root()
         ];
-        Mail::to($request->email)->send(new SendMail($mailData));
+        // Mail::to($request->email)->send(new SendMail($mailData));
 
         return back()->with('success', 'Patient registration successfully');
     }   

@@ -19,7 +19,8 @@
             <div class="card-body p-1">
                <table class="table table-bordered">
                   <thead class="bg-info">
-                        <th>Floor</th>
+					  	<th>Floor</th>
+					  	<th>Room name</th>
                         <th>Room no</th>
                         <th>Rent</th>
                   </thead>
@@ -31,6 +32,7 @@
                            <td rowspan="{{($roomCount > 1) ? $roomCount+1 : ''}}">{{$floor->floor}}</td>
                            @if($roomCount == 1)
                               @foreach($floor->rooms->where('room_type', 'cabin')->sortBy('room') as $room)
+                                    <td>{{$room->name}}</td>
                                     <td>{{$room->room_no}}</td>
                                     <td>{{$room->rent}}</td>
                               @endforeach
@@ -39,6 +41,7 @@
                            @if($roomCount > 1)
                               @foreach($floor->rooms->where('room_type', 'cabin')->sortBy('room') as $room)
                                     <tr>
+										<td>{{$room->name}}</td>
                                        <td>{{$room->room_no}}</td>
                                        <td>{{$room->rent}}</td>
                                     </tr>     
@@ -49,11 +52,12 @@
                </table>
             </div>                   
             
-            <h6 class="card-header bg-secondary text-center py-1 mx-1 mt-4">Ward list</h6>
+            <h6 class="card-header bg-secondary text-center py-1 mx-1 mt-3">Ward list</h6>
             <div class="card-body p-1">
                <table class="table table-bordered">
                   <thead class="bg-info">
                         <th>Room no</th>
+                        <th>Room name</th>
                         <th>Ward no</th>
                         <th>Rent</th>
                   </thead>
@@ -63,6 +67,7 @@
 
                         <tr>
                            <td rowspan="{{($wardCount > 1) ? $wardCount+1 : ''}}">{{$room->room_no}}</td>
+                           <td rowspan="{{($wardCount > 1) ? $wardCount+1 : ''}}">{{$room->name}}</td>
                         </tr>
                            @if($wardCount > 1)
                               @foreach($room->wards->sortBy('ward_no') as $ward)
@@ -151,8 +156,8 @@
 
                                  <div class="modal-footer">
                                     <div class="btn-group">
-                                       <button class="btn btn-sm btn-success">Save</button>
-                                       <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal">Close</button>
+                                       <button class="btn btn-sm btn-success px-4">Save</button>
+                                       {{-- <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal">Close</button> --}}
                                     </div>
                                  </div>
                               </form>
@@ -170,8 +175,8 @@
                                  </div>
                                  <div class="modal-footer">
                                     <div class="btn-group">
-                                       <button class="btn btn-sm btn-success">Save</button>
-                                       <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal">Close</button>
+                                       <button class="btn btn-sm btn-success px-4">Save</button>
+                                       {{-- <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal">Close</button> --}}
                                     </div>
                                  </div>
                               </form>                                      

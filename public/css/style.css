@@ -106,14 +106,17 @@ table.dataTable tbody tr { background-color: whitesmoke; }
    .modal-header { padding: 0.5rem; background-color: aquamarine; }
    .modal-body { padding: 0.3rem 1rem 0rem; }
    .modal-footer { padding: 0rem; margin-bottom: 5px;}
-   .close span{ 
-      color: red; 
-      border: 1px dashed red;
-      padding: 0px 6px;
-   }
-   .close span:hover{ 
+   .modal-header .close{ 
+		color: red; 
+		border: 1px solid #000;
+		border-radius: 50%;
+		padding: 5px 10px 10px 10px;
+    	margin: -6px -4px -6px 0px;
+	}
+	.modal-header .close:hover{ 
       background-color: red; 
       color: #fff;
+	  border: 1px solid red;
    }
 
 /*Font Awesome*/

@@ -32,7 +32,7 @@ Route::middleware(['auth'])->group(function(){
         Route::post('/create-patient','AdminController@create_patient')->name('create.patient');
         
     // Room management
-        Route::get('room', 'RoomController@room')->name('room');
+        Route::get('room', 'RoomController@room')->name('room.admin');
         Route::post('add-room/', 'RoomController@addRoom')->name('addRoom');
         Route::post('add-floor/', 'RoomController@addFloor')->name('addFloor');
 
@@ -88,6 +88,9 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('report-list','PatientController@report_list')->name('report.list');
     Route::get('report-view/{id}','PatientController@report_view')->name('report-view');
+
+	// Room-bed info
+	Route::get('room-info', 'RoomController@room2')->name('room.patient');
 
     // Booking
     Route::get('booking/', 'PaymentController@booking')->name('booking');

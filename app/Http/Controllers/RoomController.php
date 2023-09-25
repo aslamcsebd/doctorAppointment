@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Validator;
 
 class RoomController extends Controller
 {
-    // Room info
+    // Room info [admin-page]
     public function room(){
         $data['floors'] = Floor::all();       
         $data['roomWards'] = Room::where('room_type', 'ward')->orderBy('room_no', 'Asc')->get();
@@ -26,8 +26,16 @@ class RoomController extends Controller
         return view('admin.rooms', $data);
     }
 
+	// Room info [patient-page]
+    public function room2(){
+        $data['floors'] = Floor::all();       
+        $data['roomWards'] = Room::where('room_type', 'ward')->orderBy('room_no', 'Asc')->get();
+
+        return view('patient.rooms', $data);
+    }
+
     // Create room
-    public function addRoom(Request $request){               
+    public function addRoom(Request $request){  
         $validator = Validator::make($request->all(),[
             'room_type'=>'required',     
             'name'=>'required',
