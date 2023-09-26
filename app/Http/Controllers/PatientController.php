@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 
-class PatientController extends Controller
-{
+class PatientController extends Controller {
+	
     // Show all doctor
     public function doctor_search(){
         $data['doctors'] = Doctor::where('status', 1)->with('user')->get();

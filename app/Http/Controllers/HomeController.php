@@ -13,22 +13,58 @@ use App\Models\Patient;
 
 use App\Models\Payment;
 use App\Models\Appointment;
+use App\Models\PatientForm;
 use App\Models\WardBooking;
 use App\Models\CabinBooking;
 use Illuminate\Http\Request;
 use App\Models\FavouriteDoctor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
-class HomeController extends Controller
-{
-   
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+class HomeController extends Controller {
+       
+	public function index(){
+        $data['doctors'] = Doctor::all();
+		return view('welcome', $data);
+	}
 
-    public function index(){
+	public function appointment_create(Request $request) {	
+		$validator = Validator::make($request->all(),[
+            'name'=>'required',
+            'email'=>'required|unique:patient_forms',
+            'phone'=>'required',
+            'age'=>'required',
+            'doctor_id'=>'required',
+            'appointment_date'=>'required',
+            'diseases_info'=>'required',
+            'address'=>'required'
+        ]);
+    
+        if($validator->fails()){
+            $messages = $validator->messages();
+            return Redirect::back()->withErrors($validator);
+        }
+    
+        PatientForm::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'age' => $request->age,
+            'doctor_id' => $request->doctor_id,
+            'appointment_date' => date('Y-m-d', strtotime($request->appointment_date)),
+            'diseases_info' => $request->diseases_info,
+            'address' => $request->address,
+        ]);     
+        return back()->with('success', 'Patient appointment form fillup successfully');
+	}
+
+    public function index2(){
+		if(Auth::check() == false){			
+			return Redirect::route('login');		
+		}
+
         // Admin
         $data['doctors'] = Doctor::all();
         $data['patients'] = Patient::all();

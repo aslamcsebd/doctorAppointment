@@ -15,7 +15,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index2'])->name('home');
 Route::middleware(['auth'])->group(function(){
 
 // Admin
@@ -120,16 +120,19 @@ Route::middleware(['auth'])->group(function(){
     Route::post('updatePatientInfo', 'PatientController@updatePatientInfo')->name('updatePatientInfo');
 
     Route::get('set-password', 'PatientController@setPassword')->name('setPassword');
-    Route::post('set-password-now', 'PatientController@setPasswordNow')->name('setPasswordNow');        
-    
-// Default option
-        // All status change
-        Route::get('/status/update', 'HomeController@changeStatus')->name('status');
+    Route::post('set-password-now', 'PatientController@setPasswordNow')->name('setPasswordNow');  
+	
+	// Default option
+	// All status change
+	Route::get('/status/update', 'HomeController@changeStatus')->name('status');
+	
+	// Delete item
+	Route::get('itemDelete/{model}/{id}/{tab}','HomeController@itemDelete')->name('itemDelete');  
+	
+});
 
-        // Delete item
-        Route::get('itemDelete/{model}/{id}/{tab}','HomeController@itemDelete')->name('itemDelete');  
-
-    });
+// patient appointment
+Route::post('appointment-create', 'HomeController@appointment_create')->name('appointment.create');
     
 // Google Socialite
 Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
