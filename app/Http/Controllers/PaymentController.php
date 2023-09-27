@@ -65,29 +65,41 @@ class PaymentController extends Controller
     
     // Booking search
     public function booking_search(Request $request){
-        $validator = Validator::make($request->all(),[            
-            'room_type'=>'required',
-            'check_in'=>'required|date',
-            'check_in_time'=>'required',
-            'check_out'=>'required|date|after_or_equal:check_in',
-            'check_out_time'=>'required'
-        ]);
 
-		if($request->check_in == $request->check_out && $request->check_in_time >= $request->check_out_time){
-			$messages = 'In same day checkout time must be big than checkin time';
-            return Redirect::back()->withErrors($messages);
+		$data['room_type'] = $request->room_type;
+		if($data['room_type'] == 'cabin'){
+			$validator = Validator::make($request->all(),[            
+				'room_type'=>'required',
+				'check_in'=>'required|date',
+				'check_in_time'=>'required',
+				'check_out'=>'required|date|after_or_equal:check_in',
+				'check_out_time'=>'required'
+			]);
+
+			if($request->check_in == $request->check_out && $request->check_in_time >= $request->check_out_time){
+				$messages = 'In same day checkout time must be big than checkin time';
+				return Redirect::back()->withErrors($messages);
+			}
+
+			$check_in = date('Y-m-d H:s:i', strtotime($request->check_in . $request->check_in_time));
+			$check_out = date('Y-m-d H:s:i', strtotime($request->check_out . $request->check_out_time));
+		}
+		else{
+			$validator = Validator::make($request->all(),[            
+				'room_type'=>'required',
+				'check_in'=>'required|date',
+				'check_out'=>'required|date|after_or_equal:check_in',
+			]);
+
+			$check_in = date('Y-m-d', strtotime($request->check_in));
+			$check_out = date('Y-m-d', strtotime($request->check_out));
 		}
         
         if($validator->fails()){
             $messages = $validator->messages();
             return Redirect::back()->withErrors($validator);
         }
-        
-        $check_in = date('Y-m-d H:s:i', strtotime($request->check_in . $request->check_in_time));
-        $check_out = date('Y-m-d H:s:i', strtotime($request->check_out . $request->check_out_time));
-             
-        $data['room_type'] = $request->room_type;
-
+       
         $data['check_in'] = $check_in;
         $data['check_out'] = $check_out;
 
@@ -104,9 +116,8 @@ class PaymentController extends Controller
             ])->pluck('room_no');
             
             $data['unBook'] = $rooms->diff($booked);
-
-        } else {
-
+        } 
+		else{
             $wards = Ward::pluck('id');
             $booked = WardBooking::where([
                 ['ward_bookings.check_in', '<=', $check_in],
@@ -132,18 +143,16 @@ class PaymentController extends Controller
         $data['totalHour'] = $data['check_in']->diffInHours($data['check_out']);
        
         $data['room'] = Room::find($id);
-
         return view('patient.cabinBookingView', $data);
     }
 
     // Ward booking info
     public function ward_book($check_in, $check_out, $id){
-        $data['check_in'] =   Carbon::createFromFormat('Y-m-d H:s:i', $check_in);        
-        $data['check_out'] = Carbon::createFromFormat('Y-m-d H:s:i', $check_out);
-        $data['totalHour'] = $data['check_in']->diffInHours($data['check_out']);
+        $data['check_in'] =   Carbon::createFromFormat('Y-m-d', $check_in);        
+        $data['check_out'] = Carbon::createFromFormat('Y-m-d', $check_out);
+        $data['totalDay'] = $data['check_in']->diffInDays($data['check_out']);
         
         $data['ward'] = Ward::find($id);
-
         return view('patient.wardBookingView', $data);
     }
 

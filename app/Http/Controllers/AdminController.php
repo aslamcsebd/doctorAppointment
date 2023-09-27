@@ -134,7 +134,7 @@ class AdminController extends Controller {
 			'password' 	=>	$guest->phone,
 			'website'	=>	request()->root()
         ];
-        Mail::to($guest->email)->send(new SendMail($mailData));
+        // Mail::to($guest->email)->send(new SendMail($mailData));
 
 		PatientForm::find($id)->update([
 			'status' => 'accept'

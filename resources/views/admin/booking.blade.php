@@ -1,5 +1,4 @@
 @extends('layouts.app')
-    {{-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> --}}
     @section('title') Room-seat @endsection
 @section('content')
 @include('includes.alertMessage')

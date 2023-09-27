@@ -57,8 +57,8 @@
                         <tbody>
                             @foreach($wards as $ward)
                                 <tr>
-                                    <td>{{ date('Y-m-d (h:s a)', strtotime($ward->check_in))}}</td>
-                                    <td>{{ date('Y-m-d (h:s a)', strtotime($ward->check_out))}}</td>
+                                    <td>{{ date('Y-m-d', strtotime($ward->check_in))}}</td>
+                                    <td>{{ date('Y-m-d', strtotime($ward->check_out))}}</td>
                                     <td>{{$ward->wardNo->roomNo->floorNo->floor}}</td> 
                                     <td>{{$ward->wardNo->roomNo->room_no}}</td>
                                     <td class="{{ $ward->check_out >= date('Y-m-d') ? 'bg-warning' : '' }}">{{$ward->wardNo->ward_no}}</td>

@@ -4,10 +4,10 @@
 @include('includes.alertMessage')
 
 <style>
-   input[type="number"] {
-      padding-left: 1.6rem!important;
-      height: calc(1.8rem);
-   }
+	input[type="number"] {
+		padding-left: 1.6rem !important;
+		height: calc(1.8rem);
+	}
 </style>
 
 <div class="content-wrapper p-3 bookingView">
@@ -44,7 +44,7 @@
                               <label class="capitalize">Check in :</label>
                            </td>
                               <input type="hidden" name="check_in" value="{{ $check_in ?? '' }}">
-                           <td>{{ date('Y-m-d (h:s a)', strtotime($check_in)) ?? '' }}</td>
+                           <td>{{ date('Y-m-d', strtotime($check_in)) ?? '' }}</td>
                        </tr>
                        <tr>
                            <td>
@@ -53,13 +53,13 @@
                                  </label>
                            </td>
                               <input type="hidden" name="check_out" value="{{ $check_out ?? '' }}">
-                           <td>{{ date('Y-m-d (h:s a)', strtotime($check_out)) ?? '' }}</td>
+                           <td>{{ date('Y-m-d', strtotime($check_out)) ?? '' }}</td>
                        </tr>
                        <tr>
                           <td>
-                             <label class="capitalize">Total hour :</label>
+                             <label class="capitalize">Total day :</label>
                           </td>
-                          <td>{{ $totalHour ?? '' }}</td>
+                          <td>{{ $totalDay = ($totalDay==0 ? 1 : $totalDay) }}</td>
                        </tr>
                        <tr>
                           <td>
@@ -73,7 +73,7 @@
                              <label class="capitalize">Total rent :</label>
                           </td>
                           <td class="font-weight-bold">
-                              {{ $total = round($totalHour * $rent/24) }}/=
+                              {{ $total = round($totalDay * $rent) }}/=
                           </td>
                           <input type="hidden" name="totalRent" value="{{ $total ?? '' }}">                          
                        </tr>
@@ -82,7 +82,7 @@
                                <label class="capitalize">Advance pay :</label>
                            </td>
                            <td>
-                              <input type="number" class="form-control btn-block font-weight-bold text-center" name="advance" min="{{ round($rent/24) ?? '' }}" max="{{ $total }}" value="{{ $total }}" required>
+                              <input type="number" class="form-control btn-block font-weight-bold text-center" name="advance" min="{{ $rent ?? '' }}" max="{{ $total }}" value="{{ $total }}" required>
                            </td>
                        </tr>
                        <tr>
