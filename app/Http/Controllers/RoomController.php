@@ -119,26 +119,32 @@ class RoomController extends Controller {
     }
 
     // Booking complete [Cabin & Ward]
-    public function bookingComplete(Request $request){ 
-        $validator = Validator::make($request->all(),[            
-            'check_out'=>'required|date',
-            'check_out_time'=>'required'
-        ]);
+    public function bookingComplete(Request $request){
+		if($request->type=='cabin'){
+			$validator = Validator::make($request->all(),[            
+				'check_out'=>'required|date',
+				'check_out_time'=>'required'
+			]);
+			$check_out = date('Y-m-d H:s:i', strtotime($request->check_out . $request->check_out_time));		
+		}
+		else{
+			$validator = Validator::make($request->all(),[            
+				'check_out'=>'required|date',
+			]);
+			$check_out = date('Y-m-d', strtotime($request->check_out));
+		}
     
         if($validator->fails()){
             $messages = $validator->messages();
             return Redirect::back()->withErrors($validator);
         }
-
-		$check_out = date('Y-m-d H:s:i', strtotime($request->check_out . $request->check_out_time));
 		
         if($request->type=='cabin'){
             CabinBooking::where('id', $request->id)->update([
                 'check_out' => $check_out
             ]);
-
-        }else{
-
+        }
+		else{
             WardBooking::where('id', $request->id)->update([
                 'check_out' => $check_out
             ]);

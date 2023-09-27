@@ -134,7 +134,7 @@
 								</form>
 							</div>
 
-							<div class=" form-group col-auto {{ isset($room_type) ? '' : 'hide' }} {{ (isset($room_type) && $room_type == 'cabin') ? 'hide' : '' }}" id="wardStatus">
+							<div class="form-group col-auto {{ isset($room_type) ? '' : 'hide' }} {{ (isset($room_type) && $room_type == 'cabin') ? 'hide' : '' }}" id="wardStatus">
 								<form action="{{ route('booking_search') }}" method="post" data_id="wardAction" enctype="multipart/form-data" class="needs-validation">
 									@csrf
 									<div class="row justify-content-center">

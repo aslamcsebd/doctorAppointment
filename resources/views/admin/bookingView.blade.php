@@ -46,7 +46,11 @@
                                     <td>
                                         <label class="capitalize">Check in :</label>
                                     </td>
-                                    <td>{{ date('d-m-Y (h:s a)', strtotime($booking->check_in)) }}</td>
+									@if($type== 'cabin')
+                                    	<td>{{ date('d-m-Y (h:s a)', strtotime($booking->check_in)) }}</td>
+									@else
+                                    	<td>{{ date('d-m-Y', strtotime($booking->check_in)) }}</td>
+									@endif
                                 </tr>
                                 <tr>
                                     <td>
@@ -54,16 +58,18 @@
                                     </td>
                                     <td class="row mx-0 border-0">
                                         <input type="text" class="form-control datepicker col-3" name="check_out" value="{{ date('d-m-Y', strtotime($booking->check_out)) ?? '' }}" placeholder="Day-Month-Year" required onfocus="clearInput(this)" />
-                                        <select class="form-control ml-2 col-3" name="check_out_time" required>
-                                            <option value="">Select time</option>
-                                            <?php $hour = 0; ?>
-                                            @while ($hour++ < 24)
-                                                <?php $time = date('h:i a', mktime($hour, 0, 0, 1, 1, date('Y'))); ?>
-                                                <option class="pr-2" value="{{ $time }}"
-                                                    @if (isset($booking->check_in)) {{ date('h:i a', strtotime($booking->check_out)) == $time ? 'selected' : '' }} @endif>
-                                                    {{ $time }}</option>
-                                            @endwhile
-                                        </select>
+                                        @if($type== 'cabin')
+											<select class="form-control ml-2 col-3" name="check_out_time" required>
+												<option value="">Select time</option>
+												<?php $hour = 0; ?>
+												@while ($hour++ < 24)
+													<?php $time = date('h:i a', mktime($hour, 0, 0, 1, 1, date('Y'))); ?>
+													<option class="pr-2" value="{{ $time }}"
+														@if (isset($booking->check_in)) {{ date('h:i a', strtotime($booking->check_out)) == $time ? 'selected' : '' }} @endif>
+														{{ $time }}</option>
+												@endwhile
+											</select>											
+										@endif
                                     </td>
                                 </tr>
                                 <tr>

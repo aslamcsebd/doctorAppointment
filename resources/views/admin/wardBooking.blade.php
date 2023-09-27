@@ -44,8 +44,8 @@
                                        <br>
                                        <span>{!!$ward->user->name!!}</span>
                                     </td>
-                                    <td>{{ date('Y-m-d (h:s a)', strtotime($ward->check_in)) }}</td>
-                                    <td>{{ date('Y-m-d (h:s a)', strtotime($ward->check_out)) }}</td>
+                                    <td>{{ date('Y-m-d', strtotime($ward->check_in)) }}</td>
+                                    <td>{{ date('Y-m-d', strtotime($ward->check_out)) }}</td>
                                     <td>{{$ward->wardNo->roomNo->room_no}} </td>
                                     <td>{{$ward->wardNo->ward_no}} </td>
                                     <td>{{$ward->rent}}</td>
