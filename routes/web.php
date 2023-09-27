@@ -25,6 +25,12 @@ Route::middleware(['auth'])->group(function(){
         Route::get('doctor-list/', 'AdminController@doctor_list')->name('doctor.list');
         Route::get('doctorView/{id}/','AdminController@doctorView')->name('doctorView');
 
+	// Guest appointment 
+		Route::get('guest-appointment', 'AdminController@appointment_request')->name('appointment.request.admin');
+		Route::get('admin/appointment/accept/{id}', 'AdminController@accept');
+		Route::get('admin/appointment/reject/{id}', 'AdminController@reject');
+
+
     // Patient info
         Route::get('/patient-list', 'AdminController@patient_list')->name('patient.list');
         Route::get('patientView/{id}/','AdminController@patientView')->name('patientView');
@@ -42,20 +48,20 @@ Route::middleware(['auth'])->group(function(){
         Route::post('/admin/booking-search', 'AdminController@booking_search')->name('admin.booking_search');
 
         // Cabin
-        Route::get('admin/cabin_book/{check_in}/{check_out}/{id}/{patientId}', 'AdminController@cabin_book')->name('cabin_book');
+        Route::get('admin/cabin_book/{check_in}/{check_out}/{id}/{patientId}', 'AdminController@cabin_book');
     
         // Ward
-        Route::get('admin/ward_book/{check_in}/{check_out}/{id}/{patientId}', 'AdminController@ward_book')->name('ward_book');
+        Route::get('admin/ward_book/{check_in}/{check_out}/{id}/{patientId}', 'AdminController@ward_book');
         
         // Final booking
         Route::post('admin/booking-now', 'AdminController@bookingNow')->name('admin.bookingNow');
 
-    // Booking process
+    // Booking list
         Route::get('cabin-booking', 'RoomController@cabin_booking')->name('cabin.booking');
+        Route::get('ward-booking', 'RoomController@ward_booking')->name('ward.booking');
+
         Route::get('booking-view/{id}/{type}/{route}/{tab}', 'RoomController@booking_view');
         Route::post('/booking-complete', 'RoomController@bookingComplete')->name('bookingComplete');
-
-        Route::get('ward-booking', 'RoomController@ward_booking')->name('ward.booking');
 
     // Payment system
         Route::get('payment', 'PaymentController@payment')->name('payment');

@@ -21,6 +21,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('appointment.request.admin') }}" class="nav-link {{ (request()->routeIs('appointment.request.admin'))  ? 'active' : '' }}">
+                        <i class="fas fa-user-clock nav-icon"></i>                
+                        <p>Appointment request</p>
+                    </a>
+                </li>
+				<li class="nav-item">
                     <a href="{{ route('patient.list') }}" class="nav-link {{ (request()->routeIs('patient.list'))  ? 'active' : '' }}">
                         <i class="fas fa-user-injured nav-icon"></i>                   
                         <p>Patient list</p>

@@ -10,21 +10,23 @@ use App\Models\Room;
 use App\Models\User;
 use App\Models\Ward;
 use App\Models\Floor;
+use App\Mail\SendMail;
 use App\Models\Doctor;
 use App\Models\Patient;
 use App\Models\Payment;
+use App\Models\PatientForm;
 use App\Models\WardBooking;
 use App\Models\CabinBooking;
 use App\Models\HospitalInfo;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
-use App\Mail\SendMail;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller {
 
+// Doctor...
     // Doctor registration
     public function registration(){
         return view('admin.registration');
@@ -100,81 +102,56 @@ class AdminController extends Controller {
         $data['doctor'] = Doctor::find($id);        
         return view('admin.doctorView', $data);
     }    
+// Guest appointment
+	// Guest appointment
+	public function appointment_request(Request $request){		
+		return view('admin.appointment-request');
+	}
 
-    // All settings
-    public function hospitalInfo(){
-        $data['hospitalInfo'] = HospitalInfo::first();
-        return view('admin.settings', $data);
-    }
+	public function accept($id){
+		$guest = PatientForm::find($id);
 
-    // Add hospital info 
-    public function updateHospitalInfo(Request $request){
-        if($request->id==null){
-            $validator = Validator::make($request->all(),[
-                'name'=>'required',
-                'address'=>'required',
-                'photo'=>'required|image|mimes:jpeg,png,jpg,gif,svg'
-            ]);
+		$user_id = User::create([
+            'role' => 3,
+            'name' => $guest->name,
+            'email' => $guest->email,
+            'phone' => $guest->phone,
+            'password' => Hash::make($guest->phone),
+            'created_at' => Carbon::now()
+        ]);
 
-            if($validator->fails()){
-                $messages = $validator->messages();
-                return Redirect::back()->withErrors($validator);
-            }
+        $id2 = $user_id->id;
 
-            $path="images/admin/";
-            $default="default.jpg";
-            if ($request->hasFile('photo')){
-                if($files=$request->file('photo')){
-                    $photo = $request->photo;
-                    $fullName=time().".".$photo->getClientOriginalExtension();
-                    $files->move(public_path($path), $fullName);
-                    $photoLink = $path . $fullName;
-                }
-            }else{
-                $photoLink = $path . $default;
-            }
+        Patient::create([
+            'user_id' => $id2,
+            'patient_id' => str_pad($id2, 6, '0', STR_PAD_LEFT),
+			'address' => $guest->address
+        ]);
 
-            HospitalInfo::create([
-                'name' => $request->name,
-                'address' => $request->address,
-                'photo' => $photoLink
-            ]);
-            return back()->with('success','Hospital info save successfully');
-            
-        }else{
+		// For email
+		$mailData = [
+            'email' 	=>	$guest->email,
+			'password' 	=>	$guest->phone,
+			'website'	=>	request()->root()
+        ];
+        Mail::to($guest->email)->send(new SendMail($mailData));
 
-            $path="images/admin/";
-            if ($request->hasFile('photo')){                
-                $validator = Validator::make($request->all(),[
-                    'name'=>'required',
-                    'address'=>'required',
-                    'photo'=>'required|image|mimes:jpeg,png,jpg,gif,svg'
-                ]);
+		PatientForm::find($id)->update([
+			'status' => 'accept'
+		]);
 
-                if($validator->fails()){
-                    $messages = $validator->messages();
-                    return Redirect::back()->withErrors($validator);
-                }
+		return back()->with('success', 'Appointment request accept successfully');
+	}
 
-                if($files=$request->file('photo')){
-                    $photo = $request->photo;
-                    $fullName=time().".".$photo->getClientOriginalExtension();
-                    $files->move(public_path($path), $fullName);
-                    $photoLink = $path . $fullName;
-                }
-            }else{
-                $photoLink =$request->oldPhoto;
-            }
+	public function reject($id){
+		PatientForm::find($id)->update([
+			'status' => 'reject'
+		]);
+		return back()->with('danger', 'Appointment request reject');
+	}
 
-            HospitalInfo::where('id', $request->id)->update([
-                'name' => $request->name,
-                'address' => $request->address,
-                'photo' => $photoLink
-            ]);
-            return back()->with('success','Hospital info update successfully');
-        }
-    }
-    
+
+// Patient
     // Create new patient
     public function create_patient(Request $request){
         $validator = Validator::make($request->all(),[
@@ -227,14 +204,17 @@ class AdminController extends Controller {
         return view('admin.patientView', $data);
     }
 
-    // New booking
+// Room-seat [Room controller]
+
+// New booking...
+    // Booking for patient list
     public function new_booking(){
         $data['new_booking'] = true;
         $data['patients'] = Patient::with('user')->get();
         return view('admin.patients', $data);
     }
 
-    // Booking list
+    // New booking process
     public function booking($patientId) {
         $data['patientId'] = $patientId;
         $data['floors'] = Floor::all();       
@@ -305,7 +285,6 @@ class AdminController extends Controller {
         
         $data['floors'] = Floor::all();
         $data['roomWards'] = Room::where('room_type', 'ward')->orderBy('room_no', 'Asc')->get();
-
  
         return view('admin.booking', $data);
     }
@@ -405,4 +384,82 @@ class AdminController extends Controller {
         return redirect($url)->with('success', 'Booking & transaction is successfully completed');
     }
 
+// Booking list	[Room controller]
+
+// Payment system [Payment controller]
+
+// Setting...
+	// All settings
+    public function hospitalInfo(){
+        $data['hospitalInfo'] = HospitalInfo::first();
+        return view('admin.settings', $data);
+    }
+
+    // Add hospital info 
+    public function updateHospitalInfo(Request $request){
+        if($request->id==null){
+            $validator = Validator::make($request->all(),[
+                'name'=>'required',
+                'address'=>'required',
+                'photo'=>'required|image|mimes:jpeg,png,jpg,gif,svg'
+            ]);
+
+            if($validator->fails()){
+                $messages = $validator->messages();
+                return Redirect::back()->withErrors($validator);
+            }
+
+            $path="images/admin/";
+            $default="default.jpg";
+            if ($request->hasFile('photo')){
+                if($files=$request->file('photo')){
+                    $photo = $request->photo;
+                    $fullName=time().".".$photo->getClientOriginalExtension();
+                    $files->move(public_path($path), $fullName);
+                    $photoLink = $path . $fullName;
+                }
+            }else{
+                $photoLink = $path . $default;
+            }
+
+            HospitalInfo::create([
+                'name' => $request->name,
+                'address' => $request->address,
+                'photo' => $photoLink
+            ]);
+            return back()->with('success','Hospital info save successfully');
+            
+        }else{
+
+            $path="images/admin/";
+            if ($request->hasFile('photo')){                
+                $validator = Validator::make($request->all(),[
+                    'name'=>'required',
+                    'address'=>'required',
+                    'photo'=>'required|image|mimes:jpeg,png,jpg,gif,svg'
+                ]);
+
+                if($validator->fails()){
+                    $messages = $validator->messages();
+                    return Redirect::back()->withErrors($validator);
+                }
+
+                if($files=$request->file('photo')){
+                    $photo = $request->photo;
+                    $fullName=time().".".$photo->getClientOriginalExtension();
+                    $files->move(public_path($path), $fullName);
+                    $photoLink = $path . $fullName;
+                }
+            }else{
+                $photoLink =$request->oldPhoto;
+            }
+
+            HospitalInfo::where('id', $request->id)->update([
+                'name' => $request->name,
+                'address' => $request->address,
+                'photo' => $photoLink
+            ]);
+            return back()->with('success','Hospital info update successfully');
+        }
+    }
 }

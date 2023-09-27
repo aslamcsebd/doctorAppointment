@@ -16,8 +16,9 @@ use App\Models\CabinBooking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class RoomController extends Controller
-{
+class RoomController extends Controller {
+
+// Room-seat
     // Room info [admin-page]
     public function room(){
         $data['floors'] = Floor::all();       
@@ -88,13 +89,21 @@ class RoomController extends Controller
         return back()->with('success', $request->floor.' floor add successfully');
     }
 
+
+// Booking list
     // Cabin booking
     public function cabin_booking(){ 
         $data['cabines'] = CabinBooking::orderBy('id', 'desc')->get();
         return view('admin.cabinBooking', $data);
     }
 
-    // Booking-view
+	// Ward booking
+	public function ward_booking(){ 
+        $data['wards'] = WardBooking::orderBy('id', 'desc')->get();
+        return view('admin.wardBooking', $data);
+    }
+
+    // Booking-view [Cabin & Ward]
     public function booking_view($id, $type, $route, $tab){
         if($type=='cabin'){
             $data['booking'] = CabinBooking::find($id);
@@ -109,7 +118,7 @@ class RoomController extends Controller
         return view('admin.bookingView', $data);
     }
 
-    // Booking complete
+    // Booking complete [Cabin & Ward]
     public function bookingComplete(Request $request){ 
         $validator = Validator::make($request->all(),[            
             'check_out'=>'required|date',
@@ -135,11 +144,5 @@ class RoomController extends Controller
             ]);
         }        
         return redirect()->route($request->route)->with('success','All information update successfully');
-    }
-
-    // Ward booking
-    public function ward_booking(){ 
-        $data['wards'] = WardBooking::orderBy('id', 'desc')->get();
-        return view('admin.wardBooking', $data);
-    }
+    }   
 }

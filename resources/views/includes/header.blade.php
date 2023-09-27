@@ -3,7 +3,7 @@
       $hospitalInfo = App\Models\HospitalInfo::first();
    @endphp   
 
-   <a class="navbar-brand" href="{{ url('/') }}">
+   <a class="navbar-brand" href="{{ url('/home') }}">
       {{ $hospitalInfo->name ?? 'Add hospital name' }}
    </a>
    <button class="navbar-toggler text-primary" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

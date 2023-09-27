@@ -8,12 +8,12 @@
 	<title>Email</title>
 </head>
 <body class="container-fluid p-4">
-	<div class="card">
-	   <h5 class="card-header text-center">Account create successfully</h5>
-	   <h6 class="card-header text-justify">
+	<h4 class="card">
+	   <p class="card-header text-center">Account create successfully</p>
+	   <p class="card-header text-justify">
 		   Dear patient,
 		   welcome to our hospital, we create your account successfully. Now you can login and update your full profile from setting. Otherwise you cann't take any appointment and booking any room/ward. 
-	   </h6>
+	   </p>
 	   <div class="card-body">  
 		   <table class="table table-bordered">
 			   <tr>
@@ -29,8 +29,8 @@
 				   <td><a href="{{ $mailData['website'] ?? 'No link found'}}">{{ $mailData['website'] ?? 'No link found'}}</a></td>
 			   </tr>
 		   </table>
-		   <h6 class="text-center m-0">copyright © {{ date('Y')}} all rights reserved</h6>
+		   <p class="text-center m-0">copyright © {{ date('Y')}} all rights reserved</p>
 	   </div>
-	</div>
+	</h4>
 </body>
 </html>

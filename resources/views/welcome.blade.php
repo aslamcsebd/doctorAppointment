@@ -7,7 +7,6 @@
         @php
             $hospitalInfo = App\Models\HospitalInfo::first();
         @endphp
-
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ $hospitalInfo->name ?? 'Add hospital name' }}
         </a>
@@ -26,6 +25,10 @@
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                     @endif
+                @else
+					<li class="nav-item">
+						<a class="nav-link" href="{{ url('/home') }}">{{ __('Dashboard') }}</a>
+					</li>
                 @endguest
             </ul>
         </div>
