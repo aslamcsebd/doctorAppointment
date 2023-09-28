@@ -1,0 +1,133 @@
+.gradient-custom {
+	/* fallback for old browsers */
+	background: #6a11cb;
+
+	/* Chrome 10-25, Safari 5.1-6 */
+	background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+
+	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+}
+.col-6 .form-control,
+.col-4 .form-control,
+.col-md-6 .form-control,
+.form-outline .form-control {
+	min-height: auto;
+	padding: 0.32rem 0.75rem;
+	border: 0;
+	background: transparent;
+	transition: all .2s linear;
+	border-color: #f8f9fa!important;
+	border: 1px solid #dee2e6!important;
+}
+.form-control:focus {
+    color: unset;
+}
+
+.form-outline {
+	position: relative;
+	width: 100%;
+}
+
+.inputb {
+	position: relative;
+	width: 250px;
+}
+
+.col-6 textarea,
+.col-4 input,
+.col-4 select,
+.col-4 option,
+.col-md-6 input,
+.inputb input {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.25);
+	background: #162b41;
+	border-radius: 5px;
+	outline: none;
+	color: #fff;
+	font-size: 1em;
+	transition: 0.5s;
+}
+
+.inputb span {
+	position: absolute;
+	left: 0;
+	padding: 10px;
+	pointer-events: none;
+	font-size: 1em;
+	color: rgba(255, 255, 255, 0.25);
+	text-transform: uppercase;
+	transition: 0.5s;
+}
+
+.inputb input:valid~span,
+.inputb input:focus~span {
+	color: #00dfc4;
+	transform: translateX(10px) translateY(-7px);
+	font-size: 0.7em;
+	padding: 0 10px;
+	background: #162b41;
+	border-left: 1px solid #00dfc4;
+	border-right: 1px solid #00dfc4;
+	letter-spacing: 0.25em;
+}
+
+.inputb input:valid,
+.inputb input:focus {
+	border: 1px solid #00dfc4;
+}
+
+.inputb:nth-child(1) input:valid~span,
+.inputb:nth-child(1) input:focus~span {
+	background: #00dfc4;
+	color: #162b41;
+	border-radius: 2px;
+}
+
+.rounded-pill:first-child:hover {
+	background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+	background-size: 400%;
+}
+
+.rounded-pill:last-child:hover {
+	background: linear-gradient(90deg, #f23d74, #f1bb26, #ba2d03, #c14168);
+	background-size: 400%;
+}
+
+.rounded-pill:first-child:before,
+.rounded-pill:last-child:before {
+	content: '';
+	position: absolute;
+	background: inherit;
+	top: -5px;
+	right: -5px;
+	bottom: -5px;
+	left: -5px;
+	border-radius: 50px;
+	filter: blur(20px);
+	opacity: 0;
+	transition: opacity 0.5s;
+}
+
+.rounded-pill:first-child:hover:before,
+.rounded-pill:last-child:hover:before {
+	opacity: 1;
+	z-index: -1;
+}
+
+.rounded-pill:hover {
+	z-index: 1;
+	animation: glow 8s linear infinite;
+}
+
+@keyframes glow {
+	0% {
+		background-position: 0%;
+	}
+
+	100% {
+		background-position: 400%;
+	}
+}
