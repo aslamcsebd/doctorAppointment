@@ -110,7 +110,6 @@ class AdminController extends Controller {
 
 	public function accept($id){
 		$guest = PatientForm::find($id);
-
 		$user_id = User::create([
             'role' => 3,
             'name' => $guest->name,
@@ -121,7 +120,6 @@ class AdminController extends Controller {
         ]);
 
         $id2 = $user_id->id;
-
         Patient::create([
             'user_id' => $id2,
             'patient_id' => str_pad($id2, 6, '0', STR_PAD_LEFT),
@@ -132,14 +130,13 @@ class AdminController extends Controller {
 		$mailData = [
             'email' 	=>	$guest->email,
 			'password' 	=>	$guest->phone,
-			'website'	=>	request()->root()
+			'website'	=>	route('login')
         ];
-        // Mail::to($guest->email)->send(new SendMail($mailData));
+        Mail::to($guest->email)->send(new SendMail($mailData));
 
 		PatientForm::find($id)->update([
 			'status' => 'accept'
 		]);
-
 		return back()->with('success', 'Appointment request accept successfully');
 	}
 

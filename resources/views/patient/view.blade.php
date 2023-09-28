@@ -190,4 +190,8 @@
             });
         });
     </script>
+
+	<script>
+		
+	</script>
 @endsection

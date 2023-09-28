@@ -4,8 +4,8 @@
 @endsection
 @section('content')
     @include('includes.alertMessage')
-
-    <div class="content-wrapper p-3">
+    
+	<div class="content-wrapper p-3">
         <div class="row justify-content-center">
 
             @php
@@ -97,7 +97,8 @@
 
 										<div class="form-group col-auto">
 											<label for="check_in">Check in*</label>
-											<input type="text" class="form-control datepicker mt-2 text-center" name="check_in" id="check_in" value="{{ $check_in_date = $check_in_date ?? '' }}" placeholder="Day-Month-Year" required onfocus="clearInput(this)" />
+											<input type="text" class="form-control datepicker
+											 mt-2 text-center" name="check_in" id="check_in" value="{{ $check_in_date = $check_in_date ?? '' }}" placeholder="Day-Month-Year" required onfocus="clearInput(this)" />
 											<select class="form-control mt-2" name="check_in_time" required>
 												<option value="" class="text-center">Select time</option>
 												<?php $hour = 0; ?>
@@ -110,7 +111,8 @@
 		
 										<div class="form-group col-auto">
 											<label for="check_out">Check out*</label>
-											<input type="text" class="form-control datepicker mt-2 text-center" name="check_out"
+											<input type="text" class="form-control datepicker
+											 mt-2 text-center" name="check_out"
 												id="check_out" value="{{ $check_out_date = $check_out_date ?? '' }}"
 												placeholder="Day-Month-Year" required onfocus="clearInput2(this)" />
 		
@@ -141,12 +143,14 @@
 										<input type="hidden" name="room_type" value="ward">
 										<div class="form-group col-auto">
 											<label for="check_in">Check in*</label>
-											<input type="text" class="form-control datepicker mt-2 text-center" name="check_in" id="check_in" value="{{ $check_in_date = $check_in_date ?? '' }}" placeholder="Day-Month-Year" required onfocus="clearInput(this)" />
+											<input type="text" class="form-control datepicker
+											 mt-2 text-center" name="check_in" id="check_in" value="{{ $check_in_date = $check_in_date ?? '' }}" placeholder="Day-Month-Year" required onfocus="clearInput(this)" />
 										</div>
 		
 										<div class="form-group col-auto">
 											<label for="check_out">Check out*</label>
-											<input type="text" class="form-control datepicker mt-2 text-center" name="check_out"
+											<input type="text" class="form-control datepicker
+											 mt-2 text-center" name="check_out"
 												id="check_out" value="{{ $check_out_date = $check_out_date ?? '' }}"
 												placeholder="Day-Month-Year" required onfocus="clearInput2(this)" />	
 										</div>

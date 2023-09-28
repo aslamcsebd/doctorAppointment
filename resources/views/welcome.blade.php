@@ -78,7 +78,7 @@
                             </div>
                             <div class="form-group col-4">
                                 <label for="appointment_date">Appointment date</label>
-                                <input type="text" class="form-control datepicker mt-1" name="appointment_date" id="appointment_date" placeholder="Day-Month-Year" required>
+                                <input type="text" class="form-control datepicker2 mt-1" name="appointment_date" id="appointment_date" placeholder="Day-Month-Year" required>
                             </div>
                         </div>
 

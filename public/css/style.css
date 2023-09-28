@@ -214,7 +214,10 @@ table.dataTable tbody tr { background-color: whitesmoke; }
    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-
 label{
    margin-bottom: unset !important;
+}
+
+.ui-datepicker td span, .ui-datepicker td a {
+    text-align: center !important;
 }
