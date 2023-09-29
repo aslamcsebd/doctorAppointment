@@ -8,8 +8,8 @@
 	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 	background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
 }
-.col-6 .form-control,
-.col-4 .form-control,
+.col-md-6 .form-control,
+.col-md-4 .form-control,
 .col-md-6 .form-control,
 .form-outline .form-control {
 	min-height: auto;
@@ -31,13 +31,13 @@
 
 .inputb {
 	position: relative;
-	width: 250px;
+	width: 100%;
 }
 
-.col-6 textarea,
-.col-4 input,
-.col-4 select,
-.col-4 option,
+.col-md-6 textarea,
+.col-md-4 input,
+.col-md-4 select,
+.col-md-4 option,
 .col-md-6 input,
 .inputb input {
 	width: 100%;

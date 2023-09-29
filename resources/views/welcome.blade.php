@@ -43,22 +43,22 @@
 						@csrf
 						<div class="card-body">
 							<div class="row">
-								<div class="form-group col-4">
+								<div class="form-group col-md-4 col-sm-12">
 									<label for="name">Full name*</label>
 									<input type="text" class="form-control mt-1" name="name" id="name" value="{{ old('name') }}" placeholder="Enter name" required>
 								</div>
-								<div class="form-group col-4">
+								<div class="form-group col-md-4 col-sm-12">
 									<label for="email">Email*</label>
 									<input type="email" class="form-control mt-1" name="email" id="email" value="{!! old('email') !!}" placeholder="Enter email" autocomplete="name" required>
 								</div>
-								<div class="form-group col-4">
+								<div class="form-group col-md-4 col-sm-12">
 									<label for="phone">Mobile number*</label>
 									<input type="number" class="form-control mt-1" name="phone" id="phone" placeholder="Enter phone number" required>
 								</div>
 							</div>
 	
 							<div class="row">
-								<div class="form-group col-4">
+								<div class="form-group col-md-4 col-sm-12">
 									<label for="age">Age</label>
 									<div class="input-group mt-1">
 										<input type="text" class="form-control border-right-0" name="age" id="age" placeholder="Age number" required>
@@ -68,7 +68,7 @@
 									</div>
 								</div>
 	
-								<div class="form-group col-4">
+								<div class="form-group col-md-4 col-sm-12">
 									<label for="doctor">Doctor name</label>
 									<select class="form-control mt-1" name="doctor_id" id="doctor" required>
 										<option value="">Select doctor</option>
@@ -77,18 +77,18 @@
 										@endforeach
 									</select>
 								</div>
-								<div class="form-group col-4">
+								<div class="form-group col-md-4 col-sm-12">
 									<label for="appointment_date">Appointment date</label>
 									<input type="text" class="form-control datepicker2 mt-1" name="appointment_date" id="appointment_date" placeholder="Day-Month-Year" required>
 								</div>
 							</div>
 	
 							<div class="row">
-								<div class="form-group col-6">
+								<div class="form-group col-md-6 col-sm-12">
 									<label for="diseases_info">Diseases details:*</label>
 									<textarea class="form-control mt-1" name="diseases_info" id="diseases_info" rows="3" required></textarea>
 								</div>
-								<div class="form-group col-6">
+								<div class="form-group col-md-6 col-sm-12">
 									<label for="address">Address:*</label>
 									<textarea class="form-control mt-1" name="address" id="address" rows="3" required></textarea>
 								</div>
