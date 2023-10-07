@@ -68,6 +68,12 @@ Route::middleware(['auth'])->group(function(){
         Route::get('paymentView/{id}','PaymentController@paymentView')->name('paymentView');
         Route::post('payment-add/', 'PaymentController@payment_add')->name('payment.add');
 
+    // Sub admin info
+        Route::get('/sub-admin-list', 'AdminController@sub_admin')->name('sub_admin.list');
+        // Route::get('patientView/{id}/','AdminController@patientView')->name('patientView');
+
+        Route::post('/create-sub-admin','AdminController@create_subAdmin')->name('create.subAdmin');
+
 // Doctor
     Route::get('appointment-request', 'DoctorController@appointment_request')->name('appointment.request');
     Route::get('appointment-request/{tab}', 'DoctorController@appointment_request2')->name('appointment.request.tab');

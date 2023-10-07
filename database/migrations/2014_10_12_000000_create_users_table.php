@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('role')->comment('1 =Admin, 2=Doctor, 3=Patient');
+            $table->tinyInteger('role')->comment('1=Admin, 2=Sub_admin, 3=Doctor, 4=Patient');
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -29,8 +29,8 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
-        // $roles = array('admin', 'doctor', 'patient');
-        $roles = array('admin');
+        $roles = array('admin', 'sub_admin', 'doctor', 'patient');
+        // $roles = array('admin');
         $loop = 1;
         foreach($roles as $role){
             DB::table('users')->insert([
@@ -39,7 +39,7 @@ class CreateUsersTable extends Migration
                 'email' => $role.'@gmail.com',
                 'email_verified_at' => now(),
                 'phone' => '0123456789',
-                'password' => Hash::make('admin'),
+                'password' => Hash::make('123'),
                 'remember_token' => '',
             ]);
             $loop++;

@@ -60,7 +60,7 @@ class AdminController extends Controller {
         }
 
         $user_id = User::insertGetId([
-            'role' => 2,
+            'role' => 3,
             'name' => $request['name'],
             'email' => $request['email'],
             'phone' => $request['phone'],
@@ -84,9 +84,9 @@ class AdminController extends Controller {
 		$mailData = [
             'email' 	=>	$request->email,
 			'password' 	=>	$request->password,
-			'website'	=>	request()->root()
+			'website'	=>	route('login')
         ];
-        // Mail::to($request->email)->send(new SendMail($mailData));
+        Mail::to($request->email)->send(new SendMail($mailData));
 
         return back()->with('success','Doctor registration successfully');
     }
@@ -101,7 +101,8 @@ class AdminController extends Controller {
     public function doctorView($id){
         $data['doctor'] = Doctor::find($id);        
         return view('admin.doctorView', $data);
-    }    
+    }
+    
 // Guest appointment
 	// Guest appointment
 	public function appointment_request(Request $request){		
@@ -182,9 +183,9 @@ class AdminController extends Controller {
 		$mailData = [
             'email' 	=>	$request->email,
 			'password' 	=>	$request->password,
-			'website'	=>	request()->root()
+			'website'	=>	route('login')
         ];
-        // Mail::to($request->email)->send(new SendMail($mailData));
+        Mail::to($request->email)->send(new SendMail($mailData));
 
         return back()->with('success', 'Patient registration successfully');
     }   
@@ -321,7 +322,7 @@ class AdminController extends Controller {
 	}
 
     // Final booking
-    public function bookingNow(Request $request) {        
+    public function bookingNow(Request $request){
         $patientId = $request->patientId;
         $post_data['tran_id'] = uniqid();
  
@@ -394,6 +395,46 @@ class AdminController extends Controller {
 // Booking list	[Room controller]
 
 // Payment system [Payment controller]
+
+// Sub admin
+    // Create new sub admin
+    public function create_subAdmin(Request $request){
+        $validator = Validator::make($request->all(),[
+            'name'=>'required',
+            'email'=>'required|unique:users',
+            'password'=>'required|min:6',
+            'phone'=>'required|unique:users'
+        ]);
+    
+        if($validator->fails()){
+            $messages = $validator->messages();
+            return Redirect::back()->withErrors($validator);
+        }
+    
+        $user_id = User::create([
+            'role' => 2,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'password' => Hash::make($request->password)
+        ]);
+
+		// For email
+		$mailData = [
+            'email' 	=>	$request->email,
+			'password' 	=>	$request->password,
+			'website'	=>	route('login')
+        ];
+        Mail::to($request->email)->send(new SendMail($mailData));
+
+        return back()->with('success', 'Sub admin registration successfully');
+    }   
+
+    // Sub admin info
+    public function sub_admin(){
+        $data['subAdmins'] = User::where('role', 2)->get();
+        return view('admin.subAdmins', $data);
+    }
 
 // Setting...
 	// All settings
