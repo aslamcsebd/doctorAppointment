@@ -74,7 +74,10 @@
                         <i class="fas fa-user nav-icon"></i>                   
                         <p>Sub admin list</p>
                     </a>
-                </li>         
+                </li>                
+                
+                @include('modal.passwordTop')
+                
                 <li class="nav-item">
                     <a href="{{ route('hospitalInfo') }}" class="nav-link {{ (request()->routeIs('hospitalInfo*'))  ? 'active' : '' }}">
                         <i class="fas fa-user-cog nav-icon"></i>
@@ -89,7 +92,9 @@
                         <i class="fas fa-procedures nav-icon"></i>
                         <p>Room-seat info</p>
                     </a>
-                </li> 
+                </li>
+
+                @include('modal.passwordTop')
 
             <!-- 3 = Doctor -->
             @elseif($role==3)
@@ -105,6 +110,9 @@
                         <p>Patient list</p>
                     </a>
                 </li>
+
+                @include('modal.passwordTop')
+
                 <li class="nav-item">
                     <a href="{{ route('doctorInfo') }}" class="nav-link {{ (request()->routeIs('doctorInfo*'))  ? 'active' : '' }}">
                         <i class="fas fa-user-cog nav-icon"></i>
@@ -159,6 +167,9 @@
                             <p>My all report</p>
                         </a>
                     </li>
+
+                    @include('modal.passwordTop')
+
                     <li class="nav-item">
                         <a href="{{ route('patientInfo') }}" class="nav-link {{ (request()->routeIs('patientInfo*'))  ? 'active' : '' }}">
                             <i class="fas fa-user-cog nav-icon"></i>
@@ -174,6 +185,9 @@
                     </li>
                 @endif
             @endif
+
         </ul>
     </nav>
 </aside>
+
+@include('modal.passwordButtom')
