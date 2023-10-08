@@ -42,6 +42,9 @@ Route::middleware(['auth'])->group(function(){
         Route::post('add-room/', 'RoomController@addRoom')->name('addRoom');
         Route::post('add-floor/', 'RoomController@addFloor')->name('addFloor');
 
+    // Room management edit
+        Route::post('/cabin-edit', 'RoomController@cabinEdit')->name('cabinEdit');
+
     // New booking from admin
         Route::get('/new-booking', 'AdminController@new_booking')->name('admin.booking');  
         Route::get('/admin/booking/{patientId}', 'AdminController@booking')->name('admin.booking.patientId'); 

@@ -89,6 +89,28 @@ class RoomController extends Controller {
         return back()->with('success', $request->floor.' floor add successfully');
     }
 
+// Room-seat edit
+    // Create room
+    public function cabinEdit(Request $request){        
+        $validator = Validator::make($request->all(),[
+            'id'=>'required',
+            'name'=>'required',
+            'room_no'=>'required',
+            'rent'=>'required',
+        ]);
+
+        if($validator->fails()){
+            $messages = $validator->messages();
+            return Redirect::back()->withErrors($validator);
+        }
+
+        Room::where('id', $request->id)->update([
+            'name' => $request->name,
+            'room_no' => $request->room_no,
+            'rent' => $request->rent             
+        ]);
+        return back()->with('success', 'Cabin edit successfully');
+    }
 
 // Booking list
     // Cabin booking
