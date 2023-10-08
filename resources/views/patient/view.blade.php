@@ -13,7 +13,7 @@
                 
                 $check = App\Models\Patient::where('user_id', Auth::id())
                     ->where(function ($q) {
-                        return $q->orWhereNull(['gender', 'blood', 'dob', 'photo', 'address', 'source']);
+                        return $q->orWhereNull(['gender', 'blood', 'dob', 'address', 'source']);
                     })
                     ->get();
             @endphp
@@ -44,8 +44,7 @@
                                         @endforeach
                                     @endforeach
                                     <td>
-                                        <a href="{{ route('patientInfo') }}" class="btn btn-danger btn-auto">Update
-                                            profile</a>
+                                        <a href="{{ route('patientInfo') }}" class="btn btn-danger btn-auto">Update profile</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -191,7 +190,5 @@
         });
     </script>
 
-	<script>
-		
-	</script>
+    <script></script>
 @endsection

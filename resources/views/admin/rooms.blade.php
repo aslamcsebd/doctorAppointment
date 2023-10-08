@@ -20,7 +20,7 @@
                                 <th>Room name</th>
                                 <th>Room no</th>
                                 <th>Rent</th>
-                                <th>Action</th>
+                                {{-- <th>Action</th> --}}
                             </thead>
                             <tbody>
                                 @foreach ($floors as $floor)
@@ -33,9 +33,9 @@
                                                 <td>{{ $room->name }}</td>
                                                 <td>{{ $room->room_no }}</td>
                                                 <td>{{ $room->rent }}</td>
-                                                <td width="30">
+                                                {{-- <td width="30">
                                                     @include('modal.cabinEditTop')
-                                                </td>
+                                                </td> --}}
                                             @endforeach
                                         @endif
                                     </tr>
@@ -45,9 +45,9 @@
                                                 <td>{{ $room->name }}</td>
                                                 <td>{{ $room->room_no }}</td>
                                                 <td>{{ $room->rent }}</td>
-                                                <td width="30">
+                                                {{-- <td width="30">
                                                     @include('modal.cabinEditTop')
-                                                </td>
+                                                </td> --}}
                                             </tr>
                                         @endforeach
                                     @endif

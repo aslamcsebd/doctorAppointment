@@ -5,54 +5,7 @@
 @section('content')
     @include('includes.alertMessage')
     <div class="content-wrapper p-3 ">
-        <div class="row justify-content-center">
-
-            @php
-                $user = App\Models\User::where('id', Auth::id())->first();
-                $info = App\Models\Patient::where('user_id', Auth::id())->get();
-                
-                $check = App\Models\Patient::where('user_id', Auth::id())
-                    ->where(function ($q) {
-                        return $q->orWhereNull(['gender', 'blood', 'dob', 'photo', 'address', 'source']);
-                    })
-                    ->get();
-            @endphp
-
-            @if ($user->phone == null || $check->isEmpty() == false)
-                <div class="col-md-12 mb-4">
-                    <div class="card-body p-1">
-                        <table class="table table-bordered">
-                            <tbody>
-                                <tr>
-                                    <td colspan="100%" class="text-danger">
-                                        <h5>
-                                            Please add bellow field data
-                                        </h5>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    @foreach ($info as $in)
-                                        @if ($user->phone == null)
-                                            <td>Phone</td>
-                                            @php $disabled = 1; @endphp
-                                        @endif
-                                        @foreach ($needed_columns as $co)
-                                            @if ($in->$co == null)
-                                                <td>{{ $co }}</td>
-                                                @php $disabled = 1; @endphp
-                                            @endif
-                                        @endforeach
-                                    @endforeach
-                                    <td>
-                                        <a href="{{ route('patientInfo') }}" class="btn btn-danger btn-auto">Update
-                                            profile</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            @endif
+        <div class="row justify-content-center">           
 
             <div class="col-md-12 view">
                 <div class="card">

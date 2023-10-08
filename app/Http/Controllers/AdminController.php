@@ -165,7 +165,7 @@ class AdminController extends Controller {
         }
     
         $user_id = User::create([
-            'role' => 3,
+            'role' => 4,
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,

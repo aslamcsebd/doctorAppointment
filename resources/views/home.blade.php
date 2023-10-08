@@ -96,7 +96,7 @@
                      </div>
                   </div>
 
-               @elseif(Auth::user()->role==2)
+               @elseif(Auth::user()->role==3)
                   <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
                      <div class="small-box bg-info">
                         <div class="inner text-center">
@@ -128,7 +128,7 @@
                         </a>
                      </div>
                   </div>
-               @elseif(Auth::user()->role==3)
+               @elseif(Auth::user()->role==4)
                   <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
                      <div class="small-box bg-success">
                         <div class="inner text-center">
@@ -199,8 +199,8 @@
                         </a>
                      </div>
                   </div>
-               @endif               
-            </div>           
+               @endif         
+            </div>
          </div>
       </section>
    </div> 

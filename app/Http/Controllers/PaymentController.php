@@ -58,7 +58,7 @@ class PaymentController extends Controller
         $data['roomWards'] = Room::where('room_type', 'ward')->orderBy('room_no', 'Asc')->get();
 
         $allColumns = array_keys(json_decode(Patient::first(), true));
-        $data['needed_columns'] = array_diff($allColumns, ['id', 'user_id', 'patient_id', 'status', 'created_at', 'updated_at']);
+        $data['needed_columns'] = array_diff($allColumns, ['id', 'user_id', 'patient_id', 'photo', 'status', 'created_at', 'updated_at']);
 
         return view('patient.booking', $data);
     }
