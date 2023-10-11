@@ -7,7 +7,6 @@
     
 	<div class="content-wrapper p-3">
         <div class="row justify-content-center">
-
             @php
                 $user = App\Models\User::where('id', Auth::id())->first();
                 $info = App\Models\Patient::where('user_id', Auth::id())->get();
@@ -15,10 +14,11 @@
                 $check = App\Models\Patient::where('user_id', Auth::id())
                     ->where(function ($q) {
                         return $q->orWhereNull(['gender', 'blood', 'dob', 'address', 'source']);
-                    })
-                    ->get();
-            @endphp
+                    })->get();
 
+                // All booking time store
+                $times = App\Models\BookingTime::where('status', 1)->pluck('time')->toArray();          
+            @endphp
             @if ($user->phone == null || $check->isEmpty() == false)
                 <div class="col-md-12 mb-4">
                     <div class="card-body p-1">
@@ -56,15 +56,15 @@
 
             <?php
 				if (isset($room_type) && $room_type == 'cabin') {
-					$check_in_date = date('Y-m-d', strtotime($check_in));
+					$check_in_date = date('d-m-Y', strtotime($check_in));
 					$check_in_time = date('h:i a', strtotime($check_in));
 				
-					$check_out_date = date('Y-m-d', strtotime($check_out));
+					$check_out_date = date('d-m-Y', strtotime($check_out));
 					$check_out_time = date('h:i a', strtotime($check_out));
 				}
 				elseif(isset($room_type) && $room_type == 'ward'){
-					$check_in_date = date('Y-m-d', strtotime($check_in));
-					$check_out_date = date('Y-m-d', strtotime($check_out));
+					$check_in_date = date('d-m-Y', strtotime($check_in));
+					$check_out_date = date('d-m-Y', strtotime($check_out));
 				}
             ?>
 
@@ -97,32 +97,23 @@
 
 										<div class="form-group col-auto">
 											<label for="check_in">Check in*</label>
-											<input type="text" class="form-control datepicker
-											 mt-2 text-center" name="check_in" id="check_in" value="{{ $check_in_date = $check_in_date ?? '' }}" placeholder="Day-Month-Year" required onfocus="clearInput(this)" />
+											<input type="text" class="form-control datepicker mt-2 text-center" name="check_in" id="check_in" value="{{ $check_in_date = $check_in_date ?? '' }}" placeholder="Day-Month-Year" required onfocus="clearInput(this)" />
 											<select class="form-control mt-2" name="check_in_time" required>
 												<option value="" class="text-center">Select time</option>
-												<?php $hour = 0; ?>
-												@while ($hour++ < 24)
-													<?php $time = date('h:i a', mktime($hour, 0, 0, 1, 1, date('Y'))); ?>
-													<option class="text-center" value="{{ $time }}" @if (isset($check_in_time)) {{ $check_in_time == $time ? 'selected' : '' }} @endif> {{ $time }}</option>
-												@endwhile
+                                                @foreach($times as $time)
+                                                    <option class="text-center" value="{{$time}}" @if (isset($check_in_time)) {{ $check_in_time == $time ? 'selected' : '' }} @endif>{{$time}}</option>
+                                                @endforeach
 											</select>
 										</div>
 		
 										<div class="form-group col-auto">
 											<label for="check_out">Check out*</label>
-											<input type="text" class="form-control datepicker
-											 mt-2 text-center" name="check_out"
-												id="check_out" value="{{ $check_out_date = $check_out_date ?? '' }}"
-												placeholder="Day-Month-Year" required onfocus="clearInput2(this)" />
-		
+											<input type="text" class="form-control datepicker mt-2 text-center" name="check_out" id="check_out" value="{{ $check_out_date = $check_out_date ?? '' }}" placeholder="Day-Month-Year" required onfocus="clearInput2(this)" />
 											<select class="form-control mt-2 text-center" name="check_out_time" required>
 												<option value="">Select time</option>
-												<?php $hour = 0; ?>
-												@while ($hour++ < 24)
-													<?php $time = date('h:i a', mktime($hour, 0, 0, 1, 1, date('Y'))); ?>
-													<option class="text-center" value="{{ $time }}" @if (isset($check_out_time)) {{ $check_out_time == $time ? 'selected' : '' }} @endif> {{ $time }}</option>
-												@endwhile
+												@foreach($times as $time)
+                                                    <option class="text-center" value="{{$time}}" @if (isset($check_out_time)) {{ $check_out_time == $time ? 'selected' : '' }} @endif>{{$time}}</option>
+                                                @endforeach
 											</select>
 										</div>
 		
@@ -144,14 +135,14 @@
 										<div class="form-group col-auto">
 											<label for="check_in">Check in*</label>
 											<input type="text" class="form-control datepicker
-											 mt-2 text-center" name="check_in" id="check_in" value="{{ $check_in_date = $check_in_date ?? '' }}" placeholder="Day-Month-Year" required onfocus="clearInput(this)" />
+											 mt-2 text-center" name="check_in" id="check_in2" value="{{ $check_in_date = $check_in_date ?? '' }}" placeholder="Day-Month-Year" required onfocus="clearInput(this)" />
 										</div>
 		
 										<div class="form-group col-auto">
 											<label for="check_out">Check out*</label>
 											<input type="text" class="form-control datepicker
 											 mt-2 text-center" name="check_out"
-												id="check_out" value="{{ $check_out_date = $check_out_date ?? '' }}"
+												id="check_out2" value="{{ $check_out_date = $check_out_date ?? '' }}"
 												placeholder="Day-Month-Year" required onfocus="clearInput2(this)" />	
 										</div>
 		

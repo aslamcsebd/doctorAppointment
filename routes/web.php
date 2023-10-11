@@ -81,8 +81,6 @@ Route::middleware(['auth'])->group(function(){
 
     // Sub admin info
         Route::get('/sub-admin-list', 'AdminController@sub_admin')->name('sub_admin.list');
-        // Route::get('patientView/{id}/','AdminController@patientView')->name('patientView');
-
         Route::post('/create-sub-admin','AdminController@create_subAdmin')->name('create.subAdmin');
 
 // Doctor
@@ -101,12 +99,12 @@ Route::middleware(['auth'])->group(function(){
     // Doctor search
     Route::get('doctor-search', 'PatientController@doctor_search')->name('doctor.search');
     Route::get('single-doctor/{id}/{route}','PatientController@singleDoctor')->name('singleDoctor');      
-    Route::get('doctor-appointment/{id}/{route}','PatientController@doctor_appointment');      
+    Route::get('doctor-appointment/{id}/{route}','PatientController@doctor_appointment');
     Route::get('addFavourite/{id}','PatientController@addFavourite')->name('addFavourite');
     Route::get('favourite-list','PatientController@favourite_list')->name('favourite.list');
     
     Route::get('search-date', 'PatientController@search_date')->name('search.date');   
-    Route::post('appointment-add', 'PatientController@appointment_add')->name('appointment.add');   
+    Route::post('appointment-add', 'PatientController@appointment_add')->name('appointment.add'); 
     Route::get('appointment-list','PatientController@appointment_list')->name('appointment.list');
 
     Route::get('report-list','PatientController@report_list')->name('report.list');

@@ -21,7 +21,6 @@
                      <th>Mobile</th>
                      <th>Email</th>
                      <th>Age</th>
-                     <th>Activation</th>
                      <th>Action</th>
                   </thead>
                   <tbody>
@@ -39,22 +38,12 @@
                            <td>
                               {{\Carbon\Carbon::parse($patient->dob)->diff(\Carbon\Carbon::now())->format(' %y years ')}}
                            </td>
-                           <td>
-                              <input type="checkbox" class="js-switch status"
-                                 data-model="patients" 
-                                 data-field="status"
-                                 data-id="{{ $patient->id }}" 
-                                 data-tab="tabName"
-                                 {{ $patient->status == 1 ? 'checked' : '' }}
-                              />
-                           </td>
                            <td width="auto">
                               <div class="btn-group">
                                  @if(isset($new_booking))
                                     <a href="{{ url('admin/booking', [$patient->user_id])}}" class="btn btn-sm btn-outline-info py-1">New booking</a>
                                  @else
-                                    <a href="{{ url('patientView', [$patient->id])}}" class="btn btn-sm btn-outline-info py-1">View</a>
-                                    <a href="{{ url('itemDelete', ['patients', $patient->id, 'tabName'])}}" class="btn btn-sm btn-danger py-1" onclick="return confirm('Are you want to delete this?')">Delete</a>
+                                    <a href="{{ url('patientView', [$patient->id])}}" class="btn btn-sm btn-info py-1 px-3">All info</a>
                                  @endif
                               </div>
                            </td>

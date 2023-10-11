@@ -283,7 +283,8 @@ class AdminController extends Controller {
 
     // Patient full info
     public function patientView($id){
-        $data['patient'] = Patient::find($id);        
+        $data['patient'] = Patient::find($id);
+        $data['reports'] = Report::where('patient_id', $data['patient']->user_id)->get();
         return view('admin.patientView', $data);
     }
 

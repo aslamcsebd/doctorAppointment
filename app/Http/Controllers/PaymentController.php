@@ -65,6 +65,8 @@ class PaymentController extends Controller
     
     // Booking search
     public function booking_search(Request $request){
+        // dd($request->all());
+
 		$data['room_type'] = $request->room_type;
 		if($data['room_type'] == 'cabin'){
 			$validator = Validator::make($request->all(),[            

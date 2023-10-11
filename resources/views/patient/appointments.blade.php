@@ -32,8 +32,8 @@
                               {!!$appointment->date!!}
                            </td>
                             @php
-                                $appointment->status == 0 ? $bg='bg-primary' : $bg='bg-success';
-                                $appointment->status == 0 ? $title='Pending' : $title='Accept';
+                                $appointment->status == 'pending' ? $bg='bg-primary' : $bg='bg-success';
+                                $appointment->status == 'pending' ? $title='Pending' : $title='Accept';
                             @endphp
                             <td>
                               <span class="{{$bg}} userType px-2">{{$title}}</span>

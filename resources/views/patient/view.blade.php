@@ -133,13 +133,13 @@
                                             <input type="hidden" name="user_id"
                                                 value="{{ $doctorId = $doctor->user_id }}">
                                             <input type="text" class="select-date form-control datepicker col-4"
-                                                name="date" id="date" placeholder="Day-Month-Year" />
+                                                name="date" id="date" placeholder="Day-Month-Year" required />
 
-                                            {{-- @include('patient.time') --}}
-                                            <select class="select-time form-control col-3 ml-2" name="time"
+                                            @include('patient.time')
+                                            {{-- <select class="select-time form-control col-3 ml-2" name="time"
                                                 id="time">
                                                 <option value="">Select time</option>
-                                            </select>
+                                            </select> --}}
 
                                             <button type="submit" class="btn btn-success ml-2 col-auto"
                                                 {{ isset($disabled) ? 'disabled' : '' }}>
@@ -189,6 +189,4 @@
             });
         });
     </script>
-
-    <script></script>
 @endsection
