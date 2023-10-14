@@ -52,3 +52,6 @@
     1. Doctor add patient report
     2. Doctor can see patient report
     3. Patient can see his/her report
+
+### New feature
+	1. Guest request convert appointment

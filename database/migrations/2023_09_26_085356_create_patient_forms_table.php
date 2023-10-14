@@ -20,7 +20,7 @@ class CreatePatientFormsTable extends Migration
             $table->string('email', 50)->unique();            
             $table->string('phone', 30)->nullable();
             $table->string('age', 5)->nullable();   
-            $table->date('appointment_date')->nullable();
+            $table->dateTime('appointment_date')->nullable();
             $table->text('diseases_info')->nullable();
             $table->text('address')->nullable();	
             $table->string('status', 10)->default('pending')->comment('pending, accept, reject');

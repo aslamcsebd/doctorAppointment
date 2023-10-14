@@ -20,11 +20,17 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('guest.appointment') }}" class="nav-link {{ (request()->routeIs('guest.appointment'))  ? 'active' : '' }}">
+                        <i class="fas fa-user nav-icon"></i>                
+                        <p>New patient request</p>
+                    </a>
+                </li>
+                {{-- <li class="nav-item">
                     <a href="{{ route('appointment.request.admin') }}" class="nav-link {{ (request()->routeIs('appointment.request.admin'))  ? 'active' : '' }}">
                         <i class="fas fa-user-clock nav-icon"></i>                
                         <p>Appointment request</p>
                     </a>
-                </li>
+                </li> --}}
 				<li class="nav-item">
                     <a href="{{ route('patient.list') }}" class="nav-link {{ (request()->routeIs('patient.list'))  ? 'active' : '' }}">
                         <i class="fas fa-user-injured nav-icon"></i>                   
@@ -74,10 +80,7 @@
                         <i class="fas fa-user nav-icon"></i>                   
                         <p>Sub admin list</p>
                     </a>
-                </li>                
-                
-                @include('modal.passwordTop')
-                
+                </li>     
                 <li class="nav-item">
                     <a href="{{ route('hospitalInfo') }}" class="nav-link {{ (request()->routeIs('hospitalInfo*'))  ? 'active' : '' }}">
                         <i class="fas fa-user-cog nav-icon"></i>
@@ -92,9 +95,14 @@
                         <i class="fas fa-procedures nav-icon"></i>
                         <p>Room-seat info</p>
                     </a>
+                </li>                
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-toggle="modal" data-original-title="test"
+                        data-target="#password">
+                        <i class="fas fa-key nav-icon"></i>
+                        <p>Change password</p>
+                    </a>
                 </li>
-
-                @include('modal.passwordTop')
 
             <!-- 3 = Doctor -->
             @elseif($role==3)
@@ -110,9 +118,6 @@
                         <p>Patient list</p>
                     </a>
                 </li>
-
-                @include('modal.passwordTop')
-
                 <li class="nav-item">
                     <a href="{{ route('doctorInfo') }}" class="nav-link {{ (request()->routeIs('doctorInfo*'))  ? 'active' : '' }}">
                         <i class="fas fa-user-cog nav-icon"></i>
@@ -167,9 +172,6 @@
                             <p>My all report</p>
                         </a>
                     </li>
-
-                    @include('modal.passwordTop')
-
                     <li class="nav-item">
                         <a href="{{ route('patientInfo') }}" class="nav-link {{ (request()->routeIs('patientInfo*'))  ? 'active' : '' }}">
                             <i class="fas fa-user-cog nav-icon"></i>

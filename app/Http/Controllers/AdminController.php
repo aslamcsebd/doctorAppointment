@@ -14,12 +14,13 @@ use App\Mail\SendMail;
 use App\Models\Doctor;
 use App\Models\Patient;
 use App\Models\Payment;
+use App\Models\Appointment;
 use App\Models\PatientForm;
 use App\Models\WardBooking;
 use App\Models\CabinBooking;
 use App\Models\HospitalInfo;
-use Illuminate\Http\Request;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -105,12 +106,15 @@ class AdminController extends Controller {
     
 // Guest appointment
 	// Guest appointment
-	public function appointment_request(Request $request){		
-		return view('admin.appointment-request');
+	public function guest_appointment(){	
+        $data['appointmentRequest'] = PatientForm::orderBy('appointment_date')->get();	
+		return view('admin.guestAppointment', $data);
 	}
 
 	public function accept($id){
 		$guest = PatientForm::find($id);
+
+        // All user
 		$user_id = User::create([
             'role' => 3,
             'name' => $guest->name,
@@ -120,11 +124,22 @@ class AdminController extends Controller {
             'created_at' => Carbon::now()
         ]);
 
+        // All patient
         $id2 = $user_id->id;
         Patient::create([
             'user_id' => $id2,
             'patient_id' => str_pad($id2, 6, '0', STR_PAD_LEFT),
 			'address' => $guest->address
+        ]);
+
+        // Appointment booking
+        $id2 = $user_id->id;
+        Appointment::Create([       
+            'appointment_id' => uniqid(),
+            'patient_id' => $id2,
+            'doctor_id' => $guest->doctor_id,
+            'date' => date('Y-m-d', strtotime($guest->appointment_date)),
+            'time' => date('h:i a', strtotime($guest->appointment_date)),
         ]);
 
 		// For email
@@ -140,14 +155,6 @@ class AdminController extends Controller {
 		]);
 		return back()->with('success', 'Appointment request accept successfully');
 	}
-
-	public function reject($id){
-		PatientForm::find($id)->update([
-			'status' => 'reject'
-		]);
-		return back()->with('danger', 'Appointment request reject');
-	}
-
 
 // Patient
     // Create new patient

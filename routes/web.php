@@ -25,11 +25,9 @@ Route::middleware(['auth'])->group(function(){
         Route::get('doctor-list/', 'AdminController@doctor_list')->name('doctor.list');
         Route::get('doctorView/{id}/','AdminController@doctorView')->name('doctorView');
 
-	// Guest appointment 
-		Route::get('guest-appointment', 'AdminController@appointment_request')->name('appointment.request.admin');
+	// Guest appointment
+		Route::get('admin/guest-appointment', 'AdminController@guest_appointment')->name('guest.appointment');
 		Route::get('admin/appointment/accept/{id}', 'AdminController@accept');
-		Route::get('admin/appointment/reject/{id}', 'AdminController@reject');
-
 
     // Patient info
         Route::get('/patient-list', 'AdminController@patient_list')->name('patient.list');
@@ -65,6 +63,9 @@ Route::middleware(['auth'])->group(function(){
 
         Route::get('booking-view/{id}/{type}/{route}/{tab}', 'RoomController@booking_view');
         Route::post('/booking-complete', 'RoomController@bookingComplete')->name('bookingComplete');
+
+    // booked search
+        Route::post('/booked-search', 'RoomController@booked_search')->name('booked_search');    
 
     // Payment system
         Route::get('payment', 'PaymentController@payment')->name('payment');
