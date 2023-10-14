@@ -56,6 +56,10 @@
 		minDate: 0, 
     });
 
+    $(".datepicker3").datepicker({
+		dateFormat: "dd-mm-yy",
+    });
+
 	$(".datepicker2").datepicker({
 		dateFormat: "dd-mm-yy",
 		// maxDate: "+20D" // Now to next 20 day enable
@@ -63,7 +67,7 @@
 		 minDate: +20
 	});	
 
-    $(".datepicker, .datepicker2").attr("autocomplete", "off");
+    $(".datepicker, .datepicker2, .datepicker3").attr("autocomplete", "off");
 
     $(document).ready(function() {
         $('.table').DataTable();

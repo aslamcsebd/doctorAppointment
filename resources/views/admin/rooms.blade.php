@@ -4,7 +4,6 @@
 @endsection
 @section('content')
     @include('includes.alertMessage')
-
     <div class="content-wrapper p-3">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -89,10 +88,8 @@
             </div>
         </div>
     </div>
-
     @include('modal.floorRoomButtom')
-    @include('modal.cabinEditButtom')   
-
+    @include('modal.cabinEditButtom')
 @endsection
 
 @section('js')

@@ -72,7 +72,7 @@ Route::middleware(['auth'])->group(function(){
         Route::post('/booking-complete', 'RoomController@bookingComplete')->name('bookingComplete');
 
     // booked search
-        Route::post('/booked-search', 'RoomController@booked_search')->name('booked_search');    
+        Route::post('/admin/booked-search', 'RoomController@booked_search')->name('booked_search');    
 
     // Payment system
         Route::get('payment', 'PaymentController@payment')->name('payment');
@@ -148,8 +148,10 @@ Route::middleware(['auth'])->group(function(){
 	Route::get('/status/update', 'HomeController@changeStatus')->name('status');
 	
 	// Delete item
-	Route::get('itemDelete/{model}/{id}/{tab}','HomeController@itemDelete')->name('itemDelete');  
-	
+	Route::get('itemDelete/{model}/{id}/{tab}', 'HomeController@itemDelete')->name('itemDelete');  
+
+    // PDF Maker
+	Route::get('/print/{type}/{in}/{out}', 'PDFMakerController@print');
 });
 
 // patient appointment

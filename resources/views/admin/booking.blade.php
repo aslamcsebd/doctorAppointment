@@ -5,7 +5,6 @@
 
 <div class="content-wrapper p-3">
     <div class="row justify-content-center">
-
         <?php
 			// All booking time store
 			$times = App\Models\BookingTime::where('status', 1)->pluck('time')->toArray();
@@ -22,7 +21,6 @@
 				$check_out_date = date('d-m-Y', strtotime($check_out));
 			}
         ?>
-
         <div class="col-md-12">
             <div class="card-body p-1">   
 				<fieldset class="form-group pt-2 mb-1">

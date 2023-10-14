@@ -14,6 +14,7 @@ use App\Models\Payment;
 use App\Models\WardBooking;
 use App\Models\CabinBooking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class RoomController extends Controller {
@@ -115,13 +116,13 @@ class RoomController extends Controller {
 // Booking list
     // Cabin booking
     public function cabin_booking(){ 
-        $data['cabines'] = CabinBooking::orderBy('id', 'desc')->get();
+        $data['cabines'] = CabinBooking::orderBy('check_in')->get();
         return view('admin.cabinBooking', $data);
     }
 
 	// Ward booking
 	public function ward_booking(){ 
-        $data['wards'] = WardBooking::orderBy('id', 'desc')->get();
+        $data['wards'] = WardBooking::orderBy('check_in')->get();
         return view('admin.wardBooking', $data);
     }
 
@@ -172,5 +173,36 @@ class RoomController extends Controller {
             ]);
         }        
         return redirect()->route($request->route)->with('success','All information update successfully');
-    }   
+    }
+
+    // Booked search
+    public function booked_search(Request $request){        
+        $validator = Validator::make($request->all(),[            
+            'room_type'=>'required',
+            'check_in'=>'required|date',
+            'check_out'=>'required|date|after_or_equal:check_in',
+        ]);			
+        if($validator->fails()){
+            $messages = $validator->messages();
+            return Redirect::back()->withErrors($validator);
+        }
+        $data['room_type'] = $request->room_type;
+        $data['check_in'] = $check_in = date('Y-m-d', strtotime($request->check_in));
+        $data['check_out'] = $check_out = date('Y-m-d', strtotime($request->check_out));
+                
+        if($data['room_type'] == 'cabin'){
+            $data['booked'] = CabinBooking::where([
+                ['check_in', '>=', $check_in],
+                ['check_in', '<=', $check_out]
+            ])->get();
+        }
+        else{
+            $data['booked'] = WardBooking::where([
+                ['check_in', '>=', $check_in],
+                ['check_in', '<=', $check_out]
+            ])->get();
+        }
+        // return view('admin.pdf', $data);
+        return view('admin.bookingList', $data);
+    }
 }

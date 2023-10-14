@@ -16,6 +16,19 @@
                <li class="nav-item">
                   <a class="nav-link btn-sm py-1 m-1" data-toggle="pill" href="#past">Past</a>
                </li>
+               <li>
+                  <form action="{{ url('admin/booked-search') }}" method="post" enctype="multipart/form-data" class="needs-validation">
+                     @csrf
+                     <div class="row justify-content-end">
+                        <input type="hidden" name="room_type" value="ward">
+                        <input type="text" class="form-control datepicker3 text-center offset-md-2 col-md-3" name="check_in" placeholder="Day-Month-Year" required/>
+                        <input type="text" class="form-control datepicker3 text-center col-md-3 mx-2" name="check_out" placeholder="Day-Month-Year" required/>
+                        <button type="submit" class="btn btn-success col-auto">
+                              <i class="fas fa-search nav-icon"></i> &nbsp; Search now
+                        </button>
+                     </div>
+                  </form>
+               </li>
             </ul>
          </div>
         
@@ -44,8 +57,8 @@
                                        <br>
                                        <span>{!!$ward->user->name!!}</span>
                                     </td>
-                                    <td>{{ date('Y-m-d', strtotime($ward->check_in)) }}</td>
-                                    <td>{{ date('Y-m-d', strtotime($ward->check_out)) }}</td>
+                                    <td>{{ date('d-M-Y', strtotime($ward->check_in)) }}</td>
+                                    <td>{{ date('d-M-Y', strtotime($ward->check_out)) }}</td>
                                     <td>{{$ward->wardNo->roomNo->room_no}} </td>
                                     <td>{{$ward->wardNo->ward_no}} </td>
                                     <td>{{$ward->rent}}</td>
