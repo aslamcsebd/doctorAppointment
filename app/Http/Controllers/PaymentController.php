@@ -171,61 +171,34 @@ class PaymentController extends Controller
         return view('patient.wardBookingView', $data);
     }
 
-/* Before SSL    
-    // Booking now [Cabin]
-    public function bookingNow(Request $request){
+    // Payment search
+    public function payment_search(Request $request){
         $validator = Validator::make($request->all(),[            
-            'id'=>'required',
-            'room_no'=>'required',
             'check_in'=>'required|date',
-            'check_out'=>'required|date',
-            'rent'=>'required',
-            'totalRent'=>'required',
-            'advance'=>'required'
+            'check_out'=>'required|date|after_or_equal:check_in',
         ]);
-    
         if($validator->fails()){
             $messages = $validator->messages();
             return Redirect::back()->withErrors($validator);
         }
+
+        $data['check_in'] = $check_in = date('Y-m-d', strtotime($request->check_in));
+        $data['check_out'] = $check_out = date('Y-m-d', strtotime($request->check_out));
+
+        $cabin = Payment::join('cabin_bookings', 'cabin_bookings.tran_id', '=', 'payments.tran_id')
+            ->whereDate('check_in', '>=', $check_in)
+            ->whereDate('check_in', '<=', $check_out)
+            ->where('payments.status', '=', 1)
+            ->pluck('cabin_bookings.tran_id')->toArray();
         
-        CabinBooking::create([
-            'patient_id' => Auth::id(),
-            'check_in' => date('Y-m-d', strtotime($request->check_in)),
-            'check_out' => date('Y-m-d', strtotime($request->check_out)),
-            'room_no' => $request->room_no,
-            'rent' => $request->rent,
-        ]);
+        $ward = Payment::join('ward_bookings', 'ward_bookings.tran_id', '=', 'payments.tran_id')
+            ->whereDate('check_in', '>=', $check_in)
+            ->whereDate('check_in', '<=', $check_out)
+            ->where('payments.status', '=', 1)
+            ->pluck('ward_bookings.tran_id')->toArray();
 
-        return Redirect('booking-list')->with('success', 'Booking complete successfully');
+        $paid = collect($cabin)->concat($ward)->toArray();
+        $data['payments'] = Payment::whereIn('tran_id', $paid)->get();
+        return view('payment.paymentList', $data);
     }
-
-    // Booking now [Ward]
-    public function bookingNow2(Request $request){
-        $validator = Validator::make($request->all(),[            
-            'id'=>'required',
-            'check_in'=>'required|date',
-            'check_out'=>'required|date',
-            'rent'=>'required',
-            'totalRent'=>'required',
-            'advance'=>'required'
-        ]);
-    
-        if($validator->fails()){
-            $messages = $validator->messages();
-            return Redirect::back()->withErrors($validator);
-        }
-        
-        WardBooking::create([
-            'patient_id' => Auth::id(),
-            'check_in' => date('Y-m-d', strtotime($request->check_in)),
-            'check_out' => date('Y-m-d', strtotime($request->check_out)),
-            'ward_id' => $request->id,
-            'rent' => $request->rent,
-        ]);
-
-        return Redirect('booking-list')->with('success', 'Booking complete successfully');
-    }
-Before SSL */
-
 }

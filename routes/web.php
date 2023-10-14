@@ -6,12 +6,6 @@ use Artisan;
 
 use Illuminate\Support\Facades\Route;
 
-/* 
-Route::get('/', function () {
-     return view('welcome');
-}); 
-*/
-
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -68,7 +62,7 @@ Route::middleware(['auth'])->group(function(){
         Route::get('cabin-booking', 'RoomController@cabin_booking')->name('cabin.booking');
         Route::get('ward-booking', 'RoomController@ward_booking')->name('ward.booking');
 
-        Route::get('booking-view/{id}/{type}/{route}/{tab}', 'RoomController@booking_view');
+        Route::get('/booking-view/{id}/{type}/{route}/{tab}', 'RoomController@booking_view');
         Route::post('/booking-complete', 'RoomController@bookingComplete')->name('bookingComplete');
 
     // booked search
@@ -77,8 +71,10 @@ Route::middleware(['auth'])->group(function(){
     // Payment system
         Route::get('/payment', 'PaymentController@payment')->name('payment');
         Route::get('/paymentView/{id}','PaymentController@paymentView')->name('paymentView');
-        Route::post('/payment-add/', 'PaymentController@payment_add')->name('payment.add');
+        Route::post('/payment-add', 'PaymentController@payment_add')->name('payment.add');
         Route::get('/invoice-view/{id}','PaymentController@invoice_view');
+
+        Route::post('/admin/payment-search', 'PaymentController@payment_search');
 
     // Sub admin info
         Route::get('/sub-admin-list', 'AdminController@sub_admin')->name('sub_admin.list');
@@ -155,6 +151,8 @@ Route::middleware(['auth'])->group(function(){
 	Route::get('/booked/print/{type}/{in}/{out}', 'PDFMakerController@booked_print');
 	Route::get('/admin/payment/print/{id}', 'PDFMakerController@admin_payment');
 	Route::get('/patient/payment/print/{tran_id}', 'PDFMakerController@patient_payment');
+
+	Route::get('/total-payment/{in}/{out}', 'PDFMakerController@total_payment');
 });
 
 // patient appointment

@@ -189,20 +189,13 @@ class RoomController extends Controller {
         $data['room_type'] = $request->room_type;
         $data['check_in'] = $check_in = date('Y-m-d', strtotime($request->check_in));
         $data['check_out'] = $check_out = date('Y-m-d', strtotime($request->check_out));
-                
+                // dd($check_out);
         if($data['room_type'] == 'cabin'){
-            $data['booked'] = CabinBooking::where([
-                ['check_in', '>=', $check_in],
-                ['check_in', '<=', $check_out]
-            ])->get();
+            $data['booked'] = CabinBooking::where('check_in', '>=', $check_in)->where('check_in', '>=', $check_out)->get();
         }
         else{
-            $data['booked'] = WardBooking::where([
-                ['check_in', '>=', $check_in],
-                ['check_in', '<=', $check_out]
-            ])->get();
+            $data['booked'] = WardBooking::where('check_in', '>=', $check_in)->where('check_in', '>=', $check_out)->get();
         }
-        // return view('admin.pdf', $data);
         return view('admin.bookingList', $data);
     }
 }

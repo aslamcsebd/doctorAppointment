@@ -60,8 +60,8 @@
                                                         <br>
                                                         <span>{!! $cabin->user->name !!}</span>
                                                     </td>
-                                                    <td>{{ date('Y-m-d (h:s a)', strtotime($cabin->check_in)) }}</td>
-                                                    <td>{{ date('Y-m-d (h:s a)', strtotime($cabin->check_out)) }}</td>
+                                                    <td>{{ date('d-M-Y (h:s a)', strtotime($cabin->check_in)) }}</td>
+                                                    <td>{{ date('d-M-Y (h:s a)', strtotime($cabin->check_out)) }}</td>
                                                     <td>{{ $cabin->floorId->floorNo->floor }}</td>
                                                     <td>{{ $cabin->room_no }} </td>
                                                     <td>{{ $cabin->rent }}</td>

@@ -12,24 +12,20 @@ use Barryvdh\DomPDF\Facade\Pdf;
 class PDFMakerController extends Controller{
     // Booking print
     public function booked_print($room_type, $check_in, $check_out){
-        $data['hospitalName'] = HospitalInfo::first();
-      
+        $data['hospitalName'] = HospitalInfo::first();      
         if($room_type == 'cabin'){
             $data['booked'] = CabinBooking::where([
-                ['cabin_bookings.check_in', '<=', $check_in],
-                ['cabin_bookings.check_out', '>=', $check_in]
-            ])
-            ->orwhere([
-                ['cabin_bookings.check_in', '>=', $check_out],
-                ['cabin_bookings.check_out', '<=', $check_out]
+                ['check_in', '>=', $check_in],
+                ['check_in', '<=', $check_out]
             ])->get();
-        }else{
+        }
+        else{
             $data['booked'] = WardBooking::where([
                 ['check_in', '>=', $check_in],
                 ['check_in', '<=', $check_out]
             ])->get();
         }
-
+        
         $data['room_type'] = $room_type;
         $currentPage = 'admin.pdf';
         $pdf = Pdf::loadView($currentPage, $data);
@@ -65,4 +61,32 @@ class PDFMakerController extends Controller{
         $pdf->set_paper("A4", $set_paper);
         return $pdf->download('result.pdf');
     }
+
+    // Total Payment
+    public function total_payment($check_in, $check_out){
+        $data['hospital'] = HospitalInfo::first();
+
+        $cabin = Payment::join('cabin_bookings', 'cabin_bookings.tran_id', '=', 'payments.tran_id')
+            ->whereDate('check_in', '>=', $check_in)
+            ->whereDate('check_in', '<=', $check_out)
+            ->where('payments.status', '=', 1)
+            ->pluck('cabin_bookings.tran_id')->toArray();
+        
+        $ward = Payment::join('ward_bookings', 'ward_bookings.tran_id', '=', 'payments.tran_id')
+            ->whereDate('check_in', '>=', $check_in)
+            ->whereDate('check_in', '<=', $check_out)
+            ->where('payments.status', '=', 1)
+            ->pluck('ward_bookings.tran_id')->toArray();
+
+        $paid = collect($cabin)->concat($ward)->toArray();
+        $data['payments'] = Payment::whereIn('tran_id', $paid)->get();
+
+        $currentPage = 'payment.paymentListPdf';
+        $pdf = Pdf::loadView($currentPage, $data);
+        $set_paper = 'portrait';
+
+        $pdf->set_paper("A4", $set_paper);
+        return $pdf->download('result.pdf');
+    }
+
 }
