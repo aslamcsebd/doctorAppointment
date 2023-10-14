@@ -24,12 +24,12 @@
                            <tr>
                               <td width="30">{{$si}}</td> @php $si++;@endphp
                               <td>
-                                 <img src="{{asset('')}}/{{$patient->user3->photo ?? 'images/default.jpg'}}" class="img-thumbnail" alt="No Image found" width="60">
+                                 <img src="{{asset('')}}/{{$patient->patient->photo ?? 'images/default.jpg'}}" class="img-thumbnail" alt="No Image found" width="60">
                                  <br>
                                  <span>{!!$patient->user2->name!!}</span>
                               </td>                        
                               <td>{!!$patient->user2->phone!!}</td>
-                              <td>{!!$patient->user3->gender!!}</td>
+                              <td>{!!$patient->patient->gender!!}</td>
                               <td width="auto">
                                  <div class="btn-group">
                                        <a href="{{ url('patient-report', [$patient->patient_id]) }}" class="btn btn-sm btn-info py-1">View</a>

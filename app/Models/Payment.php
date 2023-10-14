@@ -15,7 +15,7 @@ class Payment extends Model
     }
     
     public function patientInfo(){
-        return $this->belongsTo(Patient::class, 'patient_id', 'user_id');
+        return $this->belongsTo(Patient::class, 'patient_id', 'user_id')->withDefault();
     }
 
     public function getDoctor(){

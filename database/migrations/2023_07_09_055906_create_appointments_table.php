@@ -20,7 +20,7 @@ class CreateAppointmentsTable extends Migration
             $table->integer('doctor_id');
             $table->date('date')->nullable();
             $table->string('time')->nullable();
-            $table->tinyInteger('status')->default('0')->comment('0=Not accept, 1=Accept, 2=Report');
+            $table->string('status', 10)->default('pending')->comment('pending, accept, report');
             $table->timestamps();
         });
     }

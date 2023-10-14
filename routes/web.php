@@ -29,6 +29,13 @@ Route::middleware(['auth'])->group(function(){
 		Route::get('admin/guest-appointment', 'AdminController@guest_appointment')->name('guest.appointment');
 		Route::get('admin/appointment/accept/{id}', 'AdminController@accept');
 
+    // All appointment
+		Route::get('admin/all-appointment', 'AdminController@all_appointment')->name('all.appointment');
+		Route::post('admin/appointment/accept', 'AdminController@appointment_accept')->name('appointment_accept');
+        Route::get('/admin/patient-view/{id}', 'AdminController@patient_view');    
+        Route::post('/admin/report-add', 'AdminController@report_add')->name('admin_report_add');
+        Route::get('/admin/last-report/{id}', 'AdminController@last_report');
+
     // Patient info
         Route::get('/patient-list', 'AdminController@patient_list')->name('patient.list');
         Route::get('patientView/{id}/','AdminController@patientView')->name('patientView');
@@ -81,14 +88,14 @@ Route::middleware(['auth'])->group(function(){
 // Doctor
     Route::get('appointment-request', 'DoctorController@appointment_request')->name('appointment.request');
     Route::get('appointment-request/{tab}', 'DoctorController@appointment_request2')->name('appointment.request.tab');
-    Route::get('single-patient/{id}/{route}/{tab}', 'DoctorController@singlePatient')->name('singlePatient');   
+    Route::get('doctor/single-patient/{id}', 'DoctorController@singlePatient')->name('singlePatient');   
     Route::post('appointment-accept', 'DoctorController@appointment_accept')->name('appointment.accept');
 
     Route::get('/patient_list','DoctorController@patient_list2')->name('patientList');
-    Route::get('patient-view/{id}', 'DoctorController@patient_view')->name('patient_view');    
-    Route::post('report-add', 'DoctorController@report_add')->name('report.add');
-    Route::get('patient-report/{id}', 'DoctorController@patient_report')->name('patient-report');    
-    Route::get('patient-last-report/{id}/{route}/{tab}', 'DoctorController@patient_last_report')->name('patient-last-report');    
+    Route::get('/doctor/patient-view/{id}', 'DoctorController@patient_view')->name('patient_view');    
+    Route::post('/report-add', 'DoctorController@report_add')->name('report.add');
+    Route::get('/patient-report/{id}', 'DoctorController@patient_report')->name('patient-report');    
+    Route::get('/patient-last-report/{id}/{route}/{tab}', 'DoctorController@patient_last_report');    
 
 // Patient
     // Doctor search

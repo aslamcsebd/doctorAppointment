@@ -53,8 +53,7 @@
                                                         {!! date('Y-m-d (l)', strtotime($appointment->appointment_date)) !!}
                                                     </td>
                                                     <td>
-                                                        <span
-                                                            class="bg-primary userType px-2">{{ $appointment->status }}</span>
+                                                        <span class="bg-primary userType px-2">{{ $appointment->status }}</span>
                                                     </td>
                                                     <td width="auto">
                                                         <a class="btn btn-sm btn-outline-primary viewModal"

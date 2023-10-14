@@ -6,13 +6,14 @@
 <div class="content-wrapper p-3">
    <div class="row justify-content-center">
       <div class="col-md-12">
-         <div class="card">
-            
+         @include('modal.passwordTop')       
+
+         <div class="card">                        
             <h6 class="card-header bg-info text-center py-1">Doctor information (ID: {{$doctorInfo->doctor_id}})</h6>
             <form action="{{ route('updateDoctorInfo') }}" method="post" enctype="multipart/form-data">
                @csrf
                <div class="card-body">
-                    <input type="hidden" name="id" value="{{ $doctorInfo->id }}">
+                  <input type="hidden" name="id" value="{{ $doctorInfo->id }}">
 
                   <div class="row">
                      <div class="form-group col-4">

@@ -91,7 +91,7 @@ class RoomController extends Controller {
 
 // Room-seat edit
     // Create room
-    public function cabinEdit(Request $request){        
+    public function cabinEdit(Request $request){
         $validator = Validator::make($request->all(),[
             'id'=>'required',
             'name'=>'required',

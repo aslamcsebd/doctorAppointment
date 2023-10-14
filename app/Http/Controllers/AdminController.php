@@ -12,14 +12,16 @@ use App\Models\Ward;
 use App\Models\Floor;
 use App\Mail\SendMail;
 use App\Models\Doctor;
+use App\Models\Report;
 use App\Models\Patient;
 use App\Models\Payment;
 use App\Models\Appointment;
 use App\Models\PatientForm;
+use App\Models\ReportTitle;
 use App\Models\WardBooking;
+
 use App\Models\CabinBooking;
 use App\Models\HospitalInfo;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -156,6 +158,82 @@ class AdminController extends Controller {
 		return back()->with('success', 'Appointment request accept successfully');
 	}
 
+    // Appointment request
+    public function all_appointment(){	
+        $data['appointments'] = Appointment::orderBy('date')->get();	
+        return view('admin.appointments', $data);
+    }
+
+    // appointment accept
+    public function appointment_accept(Request $request){
+        $validator = Validator::make($request->all(),[
+            'date'=>'required'
+        ]);
+
+        if($validator->fails()){
+            $messages = $validator->messages();
+            return Redirect::back()->withErrors($validator);
+        }
+      
+        // Appointment confirm
+        Appointment::where('id', $request->id)->update([  
+            'date' => date('Y-m-d', strtotime($request->date)),
+            'time' => date('h:i a', strtotime($request->date)),
+			'status' => 'accept'
+        ]);
+		return back()->with('success', 'Appointment request accept successfully');
+	}
+
+    // Single report 
+    public function patient_view($id){
+        $data['appointment'] = Appointment::find($id);
+        $data['reports'] = ReportTitle::where('status', 1)->get();
+        return view('admin.reportAdd', $data);
+    }
+ 
+    // Add report 
+    public function report_add(Request $request){
+        $path="images/report/";
+        $validator = Validator::make($request->all(),[
+            'id'=>'required',
+            'title'=>'required',
+            'file'=>'required',
+        ]);
+
+        if($validator->fails()){
+            $messages = $validator->messages();
+            return Redirect::back()->withErrors($validator);
+        }
+
+        if($files=$request->file('file')){
+            $file = $request->file;
+            $fullName=time().".".$file->getClientOriginalExtension();
+            $files->move(public_path($path), $fullName);
+            $fileLink = $path . $fullName;
+        }
+
+        $appointment = Appointment::where('id', $request->id)->update([            
+            'status' => 'report'
+        ]);
+        $appointment = Appointment::find($request->id);        
+        Report::create([
+            'appointment_id' => $appointment->appointment_id,
+            'patient_id' => $appointment->patient_id,
+            'doctor_id' => $appointment->doctor_id,
+            'title' => $request->title,
+            'file' => $fileLink
+        ]);
+        return back()->with('success', 'Report file add successfully');       
+    }
+
+    // Last report 
+    public function last_report($id){
+        $data['appointment'] = Appointment::where('appointment_id', $id)->first();
+        $data['report'] = Report::where('appointment_id', $id)->first();
+        return view('admin.lastReport', $data);
+    }
+
+    
 // Patient
     // Create new patient
     public function create_patient(Request $request){

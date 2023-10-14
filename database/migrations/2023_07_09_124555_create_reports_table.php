@@ -15,12 +15,12 @@ class CreateReportsTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
+            $table->string('appointment_id')->nullable();
             $table->integer('patient_id');
             $table->integer('doctor_id');
             $table->string('title')->nullable();
             $table->string('file')->nullable();
-            $table->date('date')->nullable();
-            $table->tinyInteger('status')->default('0')->comment('0=Not accept, 1=Accept');
+            $table->dateTime('date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();
         });
     }

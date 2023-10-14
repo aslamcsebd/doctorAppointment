@@ -55,3 +55,4 @@
 
 ### New feature
 	1. Guest request convert appointment
+	2. All appointment accept & report add by admin

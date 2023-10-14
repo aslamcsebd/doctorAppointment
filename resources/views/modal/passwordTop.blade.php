@@ -1,8 +1,7 @@
 
-<li class="nav-item">
-    <a href="#" class="nav-link" data-toggle="modal" data-original-title="test"
+<div class="p-1">
+    <a href="#" class="btn btn-sm btn-primary text-light" data-toggle="modal" data-original-title="test"
         data-target="#password">
-        <i class="fas fa-key nav-icon"></i>
-        <p>Change password</p>
+        <i class="fas fa-key nav-icon"></i>&nbsp;  Change password
     </a>
-</li>
+</div>

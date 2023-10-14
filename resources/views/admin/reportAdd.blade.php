@@ -37,7 +37,7 @@
                      <td>{{$appointment->patient->gender}}</td>
                   </tr>
                  
-                    <form action="{{ route('report.add') }}" method="post" enctype="multipart/form-data" class="row p-0 m-0">
+                    <form action="{{ route('admin_report_add') }}" method="post" enctype="multipart/form-data" class="row p-0 m-0">
                         @csrf
                         <input type="hidden" name="id" value="{{$appointment->id}}">                        
                         <tr>
@@ -71,7 +71,7 @@
                </table>             
             </div>
             <div class="row">
-               <a href="{{ route('appointment.request') }}" class="btn btn-primary col-auto m-2 ml-4">
+               <a href="{{ route('all.appointment') }}" class="btn btn-primary col-auto m-2 ml-4">
                   <i class="fas fa-arrow-circle-left nav-icon"></i>   &nbsp;
                   Back previous page
                </a>

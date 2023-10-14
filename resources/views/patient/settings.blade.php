@@ -6,8 +6,8 @@
 <div class="content-wrapper p-3">
    <div class="row justify-content-center">
       <div class="col-md-12">
-         <div class="card">
-            
+         @include('modal.passwordTop')       
+         <div class="card">            
             <h6 class="card-header bg-info text-center py-1">Patient information (ID: {{$patientInfo->patient_id}})</h6>
             <form action="{{ route('updatePatientInfo') }}" method="post" enctype="multipart/form-data">
                @csrf
