@@ -269,15 +269,15 @@ class SslCommerzPaymentController extends Controller
             CabinBooking::where('id', $request->value_b)->where('tran_id', $request->value_c)->update([
                 'card_type' => $request->card_type
             ]);
-
-        }elseif($bookingType == 'ward'){
-
+        }
+        elseif($bookingType == 'ward'){
             WardBooking::where('id', $request->value_b)->where('tran_id', $request->value_c)->update([
                 'card_type' => $request->card_type
             ]);
         }
 
         Payment::create([
+            'room_type' => $bookingType,
             'tran_id' => $tran_id,
             'patient_id' => Auth::id(),
             'bed_fee' => $request->value_d,

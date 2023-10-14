@@ -12,6 +12,7 @@ use App\Models\Patient;
 use App\Models\Payment;
 use App\Models\WardBooking;
 use App\Models\CabinBooking;
+use App\Models\HospitalInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +35,6 @@ class PaymentController extends Controller
 
     // Create doctor account
     public function payment_add(Request $request){
-
         $validator = Validator::make($request->all(),[            
             'payment_id'=>'required',
             'due'=>'required'
@@ -52,8 +52,22 @@ class PaymentController extends Controller
         return redirect()->route('payment')->with('success','Payment add successfully');
     }
 
+    // Invoice view
+    public function invoice_view($id){
+        $data['hospital'] = HospitalInfo::first();
+        $data['payment'] = Payment::find($id);
+        
+        if($data['payment']->room_type == 'cabin'){
+            $cabin = CabinBooking::where('tran_id', $data['payment']->tran_id)->get();
+        }
+        else{
+            $ward = WardBooking::where('tran_id', $data['payment']->tran_id)->get();
+        }
+        return view('payment.invoice', $data);
+    }
+
     // Booking list
-    public function booking() {         
+    public function booking(){     
         $data['floors'] = Floor::all();       
         $data['roomWards'] = Room::where('room_type', 'ward')->orderBy('room_no', 'Asc')->get();
 

@@ -12,15 +12,15 @@
     <body class="container-fluid">
         <div class="row justify-content-center">    
 			<div class="col-md-12">
-				<h3 class="card-header bg-secondary text-center py-1 mx-1">{{$type}} list</h3>
+				<h4 class="text-center">{{ $hospitalName->name ?? '' }}</h4>
+				<h3 class="card-header bg-secondary text-center py-1 mx-1">{{$room_type}} list</h3>
 				<div class="card-body p-1">
 					<table class="table table-bordered">
 						<thead class="bg-info">
 							<th>Id</th>
 							<th>Check in</th>
 							<th>Check out</th>
-
-							@if($type=='cabin')
+							@if($room_type=='cabin')
 								<th>Ward no</th>
 							@else
 								<th>Room no</th>
@@ -33,7 +33,7 @@
 									<td width="30">{{ $loop->iteration }}</td>
 									<td>{{ date('d-M-Y', strtotime($book->check_in)) }}</td>
 									<td>{{ date('d-M-Y', strtotime($book->check_out)) }}</td>
-									@if($type=='cabin')
+									@if($room_type=='cabin')
 										<td>{{ $book->room_no }}</td>
 									@else
 										<td>{{ $book->wardNo->roomNo->room_no }}</td>

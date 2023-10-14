@@ -469,12 +469,12 @@ class AdminController extends Controller {
         }       
 
         Payment::create([
+            'room_type' => $bookingType,
             'tran_id' => $post_data['tran_id'],
             'patient_id' => $patientId,
             'bed_fee' => $request->totalRent,
             'advance' => $request->advance
-        ]);
-      
+        ]);      
         return redirect($url)->with('success', 'Booking & transaction is successfully completed');
     }
 
@@ -532,17 +532,6 @@ class AdminController extends Controller {
     // Add hospital info 
     public function updateHospitalInfo(Request $request){
         if($request->id==null){
-            $validator = Validator::make($request->all(),[
-                'name'=>'required',
-                'address'=>'required',
-                'photo'=>'required|image|mimes:jpeg,png,jpg,gif,svg'
-            ]);
-
-            if($validator->fails()){
-                $messages = $validator->messages();
-                return Redirect::back()->withErrors($validator);
-            }
-
             $path="images/admin/";
             $default="default.jpg";
             if ($request->hasFile('photo')){

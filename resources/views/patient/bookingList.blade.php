@@ -16,22 +16,32 @@
                             <th class="hide">Sl</th>
                             <th>Check in</th>
                             <th>Check out</th>
-                            <th>Floor no</th>
                             <th>Room no</th>
                             <th>Rent per day</th>
                             <th>Advance</th>
                             <th>Card type</th>
+                            <th>Action</th>
                         </thead>
                         <tbody> 
                             @foreach($cabines as $cabin)                         
                                 <tr>
-                                    <td>{{ date('Y-m-d (h:s a)', strtotime($cabin->check_in))}}</td>
-                                    <td>{{ date('Y-m-d (h:s a)', strtotime($cabin->check_out))}}</td>
-                                    <td>{{$cabin->floorId->floorNo->floor}}</td>
+                                    <td>
+                                        {{ date('Y-m-d', strtotime($cabin->check_in))}} <br>
+                                        <b>({{ date('h:s a', strtotime($cabin->check_in))}})</b>
+                                    </td>
+                                    <td>
+                                        {{ date('Y-m-d', strtotime($cabin->check_out))}} <br>
+                                        <b>({{ date('h:s a', strtotime($cabin->check_out))}})</b>
+                                    </td>
                                     <td class="{{ $cabin->check_out >= date('Y-m-d') ? 'bg-warning' : '' }}">{{$cabin->room_no}} </td>
                                     <td>{{$cabin->rent}}</td>
                                     <td>{{$cabin->payment->advance}}</td>
                                     <td>{{$cabin->card_type}}</td>
+                                    <td>
+                                        <a href="{{ Url('/patient/payment/print', [ $cabin->tran_id ]) }}" class="btn btn-sm btn-outline-primary p-1">
+                                            <i class="fas fa-download pr-1"></i> Invoice
+                                        </a>
+                                    </td>
                                 </tr>  
                             @endforeach
                         </tbody>
@@ -47,24 +57,28 @@
                             <th class="hide">Sl</th>
                             <th>Check in</th>
                             <th>Check out</th>
-                            <th>Floor no</th>
                             <th>Room no</th>
                             <th>Ward no</th>
                             <th>Rent per day</th>
                             <th>Advance</th>
                             <th>Card type</th>
+                            <th>Action</th>
                         </thead>
                         <tbody>
                             @foreach($wards as $ward)
                                 <tr>
                                     <td>{{ date('Y-m-d', strtotime($ward->check_in))}}</td>
                                     <td>{{ date('Y-m-d', strtotime($ward->check_out))}}</td>
-                                    <td>{{$ward->wardNo->roomNo->floorNo->floor}}</td> 
                                     <td>{{$ward->wardNo->roomNo->room_no}}</td>
                                     <td class="{{ $ward->check_out >= date('Y-m-d') ? 'bg-warning' : '' }}">{{$ward->wardNo->ward_no}}</td>
                                     <td>{{$ward->rent}}</td>
                                     <td>{{$ward->payment->advance}}</td>
                                     <td>{{$ward->card_type}}</td>
+                                    <td>
+                                        <a href="{{ Url('/patient/payment/print', [ $ward->tran_id ]) }}" class="btn btn-sm btn-outline-primary p-1">
+                                            <i class="fas fa-download pr-1"></i> Invoice
+                                        </a>
+                                    </td>
                                 </tr>  
                             @endforeach
                         </tbody>

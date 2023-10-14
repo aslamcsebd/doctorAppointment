@@ -24,39 +24,34 @@
                      <table class="table table-bordered">
                         <thead class="bg-info">
                            <th>Sl</th>
+                           <th>Room type</th>
+                           <th>Payment Id</th>
                            <th>Patient</th>
-                           <th>Bed rent</th>
+                           <th>Total cost</th>
                            <th>Advance</th>
-                           <th class="bg-warning">Due</th>
+                           <th class="bg-warning">Other</th>
                            <th>Status</th>
                            <th>Action</th>
                         </thead>
                         <tbody>
-                           @foreach($payments->where('status', 0) as $payment)
-      
+                           @foreach($payments->where('status', 0) as $payment)      
                               <tr>
-                                 <td width="30">{{$loop->iteration}}</td>
+                                 <td>{{$loop->iteration}}</td>
+                                 <td class="capitalize">{!!$payment->room_type!!}</td>
+                                 <td>{!!$payment->tran_id!!}</td>
                                  <td>
                                     <img src="{{asset('')}}/{{$payment->photo ?? 'images/default.jpg'}}" class="img-thumbnail" alt="No Image found" width="60">
                                     <br>
                                     <span>{!!$payment->getPatient->name!!}</span>
-                                 </td> 
+                                 </td>                                 
                                  <td>{!!$payment->bed_fee!!}</td>
                                  <td>{!!$payment->advance!!}</td>
                                  <td>{!!$payment->bed_fee - $payment->advance!!}</td>
-                                  @php
-                                      $payment->status == 0 ? $bg='bg-primary' : $bg='bg-success';
-                                      $payment->status == 0 ? $title='Unpaid' : $title='Paid';
-                                  @endphp
                                   <td>
-                                    <span class="{{$bg}} userType px-2">{{$title}}</span>
+                                    <span class="bg-primary userType px-2">Unpaid</span>
                                  </td>
-                                 <td width="auto">
-                                      @if($payment->status == 0)
-                                          <div class="btn-group">
-                                              <a href="{{ url('paymentView', [$payment->id])}}" class="btn btn-sm btn-warning py-1 btn-block">Add payment</a>
-                                          </div>
-                                      @endif
+                                 <td idth="auto">
+                                    <a href="{{ url('paymentView', [$payment->id])}}" class="btn btn-sm btn-warning py-1">Add payment</a>
                                  </td>
                               </tr>
                            @endforeach
@@ -68,17 +63,21 @@
                      <table class="table table-bordered">
                         <thead class="bg-info">
                            <th>Sl</th>
+                           <th>Room type</th>
+                           <th>Payment Id</th>
                            <th>Patient</th>
-                           <th>Bed rent</th>
+                           <th>Total cost</th>
                            <th>Advance</th>
-                           <th>Due</th>
+                           <th>Other</th>
                            <th>Status</th>
+                           <th>Action</th>
                         </thead>
                         <tbody>
-                           @foreach($payments->where('status', 1) as $payment)
-      
+                           @foreach($payments->where('status', 1) as $payment)                           
                               <tr>
-                                 <td width="30">{{$loop->iteration}}</td>
+                                 <td>{{$loop->iteration}}</td>
+                                 <td class="capitalize">{!!$payment->room_type!!}</td>
+                                 <td>{!!$payment->tran_id!!}</td>
                                  <td>
                                     <img src="{{asset('')}}/{{$payment->photo ?? 'images/default.jpg'}}" class="img-thumbnail" alt="No Image found" width="60">
                                     <br>
@@ -87,12 +86,11 @@
                                  <td>{!!$payment->bed_fee!!}</td>
                                  <td>{!!$payment->advance!!}</td>
                                  <td>{!!$payment->bed_fee - $payment->advance!!}</td>
-                                  @php
-                                      $payment->status == 0 ? $bg='bg-primary' : $bg='bg-success';
-                                      $payment->status == 0 ? $title='Unpaid' : $title='Paid';
-                                  @endphp
-                                  <td>
-                                    <span class="{{$bg}} userType px-2">{{$title}}</span>
+                                 <td>
+                                    <span class="bg-success userType px-2">Paid</span>
+                                 </td>
+                                 <td>
+                                    <a href="{{ url('invoice-view', [$payment->id])}}" class="btn btn-sm btn-secondary py-1">Invoice view</a>
                                  </td>
                               </tr>
                            @endforeach

@@ -191,7 +191,7 @@ class PatientController extends Controller {
     }
 
     // Report view
-    public function booked(){ 
+    public function booked(){
         $data['cabines'] = CabinBooking::where('patient_id', Auth::id())->orderBy('id', 'desc')->get();
         $data['wards'] = WardBooking::where('patient_id', Auth::id())->orderBy('id', 'desc')->get();
 

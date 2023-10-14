@@ -75,9 +75,10 @@ Route::middleware(['auth'])->group(function(){
         Route::post('/admin/booked-search', 'RoomController@booked_search')->name('booked_search');    
 
     // Payment system
-        Route::get('payment', 'PaymentController@payment')->name('payment');
-        Route::get('paymentView/{id}','PaymentController@paymentView')->name('paymentView');
-        Route::post('payment-add/', 'PaymentController@payment_add')->name('payment.add');
+        Route::get('/payment', 'PaymentController@payment')->name('payment');
+        Route::get('/paymentView/{id}','PaymentController@paymentView')->name('paymentView');
+        Route::post('/payment-add/', 'PaymentController@payment_add')->name('payment.add');
+        Route::get('/invoice-view/{id}','PaymentController@invoice_view');
 
     // Sub admin info
         Route::get('/sub-admin-list', 'AdminController@sub_admin')->name('sub_admin.list');
@@ -151,7 +152,9 @@ Route::middleware(['auth'])->group(function(){
 	Route::get('itemDelete/{model}/{id}/{tab}', 'HomeController@itemDelete')->name('itemDelete');  
 
     // PDF Maker
-	Route::get('/print/{type}/{in}/{out}', 'PDFMakerController@print');
+	Route::get('/booked/print/{type}/{in}/{out}', 'PDFMakerController@booked_print');
+	Route::get('/admin/payment/print/{id}', 'PDFMakerController@admin_payment');
+	Route::get('/patient/payment/print/{tran_id}', 'PDFMakerController@patient_payment');
 });
 
 // patient appointment

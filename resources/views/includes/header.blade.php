@@ -4,7 +4,7 @@
    @endphp   
 
    <a class="navbar-brand" href="{{ url('/home') }}">
-      {{ $hospitalInfo->name ?? 'Add hospital name' }}
+      Dashboard
    </a>
    <button class="navbar-toggler text-primary" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
    <span class="navbar-toggler-icon"></span>
@@ -19,8 +19,8 @@
          </a>
       </ul>
       {{-- @auth --}}
-      <ul class="navbar-nav ml-auto">       
-        
+      <ul class="navbar-nav ml-auto">  
+         <h4>{{ $hospitalInfo->name ?? 'Add hospital name' }} </h4>
       </ul>
       {{-- @endauth --}}
       <ul class="navbar-nav ml-auto">

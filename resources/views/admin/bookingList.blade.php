@@ -7,7 +7,9 @@
     <div class="row justify-content-center">
 		@if($room_type == 'cabin')
 			<div class="col-md-12">
-				<a href="{{ Url('print', [$room_type, $check_in, $check_out]) }}" class="btn btn-primary p-1 mb-2">Download now</a>
+				<a href="{{ Url('print', [$room_type, $check_in, $check_out]) }}" class="btn btn-primary px-1 mb-2">
+					<i class="fas fa-download px-2"></i>Download
+				</a>
 				<h6 class="card-header bg-secondary text-center py-1 mx-1">Cabin list</h6>
 				<div class="card-body p-1">
 					<table class="table table-bordered">
@@ -32,7 +34,7 @@
 			</div>
 		@else
 			<div class="col-md-12">
-				<a href="{{ Url('print', [$room_type, $check_in, $check_out]) }}" class="btn btn-primary p-1 mb-2">Download now</a>
+				<a href="{{ Url('/booked/print', [$room_type, $check_in, $check_out]) }}" class="btn btn-primary p-1 mb-2">Download now</a>
 				<h6 class="card-header bg-secondary text-center py-1 mx-1">Ward list</h6>
 				<div class="card-body p-1">
 					<table class="table table-bordered">
@@ -57,8 +59,7 @@
 					</table>
 				</div>                     
 			</div>
-		@endif     
-       
+		@endif       
    </div>
 </div>
 @endsection
