@@ -17,6 +17,7 @@
                     <table class="table table-bordered">
                         <thead class="bg-info">
                             <th>Id</th>
+                            <th>Payment id</th>
                             <th>Room type</th>
                             <th>Room no</th>
                             <th>Check in</th>
@@ -28,6 +29,7 @@
                             @foreach($payments as $payment)
                                 <tr>	
                                     <td width="30">{{ $loop->iteration }}</td>
+                                    <td>{{ $payment->tran_id }}</td>
                                     <td>{{ $payment->room_type }}</td>
                                     @if($payment->room_type == 'cabin')
                                         <td>{{ $payment->cabin->room_no }}</td>
@@ -45,7 +47,7 @@
                                 </tr>								
                             @endforeach
                             <tr class="bg-info">
-                                <td colspan='5'>
+                                <td colspan='6'>
                                     <b class="pull-right pr-4">Sum : </b>
                                 </td>
                                 <td>

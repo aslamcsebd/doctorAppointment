@@ -60,3 +60,4 @@
 	4. Room & ward list print
 	5. Admin & patient payment invoice ready
 	6. All complete payment download
+	7. Room, ward [name, number, rent] edit complete
