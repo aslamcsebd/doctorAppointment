@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Validator;
 class HomeController extends Controller {
        
 	public function index(){
-        $data['doctors'] = Doctor::all();
+        $data['doctors'] = Doctor::where('status', 1)->get();
 		return view('welcome', $data);
 	}
 
@@ -36,6 +36,7 @@ class HomeController extends Controller {
             'email'=>'required|unique:patient_forms',
             'phone'=>'required',
             'age'=>'required',
+            'source'=>'required',
             'doctor_id'=>'required',
             'appointment_date'=>'required',
             'diseases_info'=>'required',
@@ -56,6 +57,7 @@ class HomeController extends Controller {
             'appointment_date' => date('Y-m-d', strtotime($request->appointment_date)),
             'diseases_info' => $request->diseases_info,
             'address' => $request->address,
+            'source' => $request->source,
         ]);     
         return back()->with('success', 'Patient appointment form fillup successfully');
 	}

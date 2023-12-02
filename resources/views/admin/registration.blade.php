@@ -14,15 +14,19 @@
                <div class="card-body">
 
                   <div class="row">
-                     <div class="form-group col-4">
+                     <div class="form-group col-2">
+                        <label for="doctor_id">Doctor id*</label>
+                        <input type="text" class="form-control" name="doctor_id" id="doctor_id" value="{{ old('doctor_id') }}" placeholder="Enter doctor id" required>
+                     </div>
+					 <div class="form-group col-4">
                         <label for="name">Full name*</label>
                         <input type="text" class="form-control" name="name" id="name"  value="{{ old('name') }}" placeholder="Enter name" required>
                      </div>
-                     <div class="form-group col-4">
+                     <div class="form-group col-3">
                         <label for="email">Email*</label>
-                        <input type="email" class="form-control" name="email" id="email" value="{!! old('email') !!}" placeholder="Enter email" autocomplete="name" required>
+                        <input type="email" class="form-control" name="email" id="email" value="{!! old('email') !!}" placeholder="Enter email" autocomplete="email" required>
                      </div>
-                     <div class="form-group col-4">
+                     <div class="form-group col-3">
                         <label for="phone">Mobile number*</label>
                         <input type="number" class="form-control" name="phone" id="phone" placeholder="Enter phone">
                      </div>

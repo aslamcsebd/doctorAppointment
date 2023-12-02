@@ -58,7 +58,7 @@
 							</div>
 	
 							<div class="row">
-								<div class="form-group col-md-4 col-sm-12">
+								<div class="form-group col-md-3 col-sm-12">
 									<label for="age">Age</label>
 									<div class="input-group mt-1">
 										<input type="text" class="form-control border-right-0" name="age" id="age" placeholder="Age number" required>
@@ -67,8 +67,21 @@
 										</div>
 									</div>
 								</div>
-	
-								<div class="form-group col-md-4 col-sm-12">
+								<div class="form-group col-md-3 col-sm-12">
+									@php
+										$sources = array('Facebook', 'Instagram', 'Youtube', 'Google', 'Other',);
+									@endphp
+									<label for="source">Source of information</label>
+									<div class="input-group mt-1">
+										<select class="form-control" name="source" id="source">
+											<option value="">Select source</option>
+											@foreach($sources as $source)
+												<option value="{{$source}}">{{$source}}</option>
+											@endforeach
+										</select>
+									</div>		
+								</div>		
+								<div class="form-group col-md-3 col-sm-12">
 									<label for="doctor">Doctor name</label>
 									<select class="form-control mt-1" name="doctor_id" id="doctor" required>
 										<option value="">Select doctor</option>
@@ -77,7 +90,7 @@
 										@endforeach
 									</select>
 								</div>
-								<div class="form-group col-md-4 col-sm-12">
+								<div class="form-group col-md-3 col-sm-12">
 									<label for="appointment_date">Appointment date</label>
 									<input type="text" class="form-control datepicker2 mt-1" name="appointment_date" id="appointment_date" placeholder="Day-Month-Year" required>
 								</div>
@@ -93,9 +106,19 @@
 									<textarea class="form-control mt-1" name="address" id="address" rows="3" required></textarea>
 								</div>
 							</div>
-	
+							<div class="row justify-content-center">
+								<div class="form-group col-md-auto col-sm-12">
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" name="remember" id="remember"
+											{{ old('remember') ? 'checked' : '' }} style="width: unset" required>
+										<label class="form-check-label" for="remember">
+											I consent to having this website store my submitted information so they can respond to my inquiry.
+										</label>
+									</div>									
+								</div>
+							</div>	
 							<div class="row justify-content-md-center mt-2 mb-0">
-								<button type="submit" class="btn btn-success col-md-4 rounded-pill">Save now</button>
+								<button type="submit" class="btn btn-success col-md-4 rounded-pill">Book Appointment</button>
 							</div>
 						</div>
 					</form>

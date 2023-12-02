@@ -63,6 +63,7 @@ class PaymentController extends Controller
         else{
             $ward = WardBooking::where('tran_id', $data['payment']->tran_id)->get();
         }
+        // return view('payment.pdf', $data);
         return view('payment.invoice', $data);
     }
 

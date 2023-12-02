@@ -62,7 +62,7 @@
                                                             data-picture="{{ $picture }}"
                                                             data-doctor_name="{{ $name }}" 
 															<?php
-																$fields = array("id", "name", "email", "phone", "age", "appointment_date", "diseases_info", "address", "status");
+																$fields = array("id", "name", "email", "phone", "age", "appointment_date", "diseases_info", "address", "source", "status");
 																foreach ($fields as $field) { ?>
                                                             		data-<?= $field ?>="<?= $appointment[$field] ?>"
                                                             <?php } ?>
@@ -136,8 +136,8 @@
             $('#doctor_name').html(doctor_name);
             $("#picture").attr('src', picture);
 
-            <?php 
-				$fields = array("id", "name", "email", "phone", "age", "appointment_date", "diseases_info", "address", "status");
+            <?php
+				$fields = array("id", "name", "email", "phone", "age", "appointment_date", "diseases_info", "address", "source", "status");
 				foreach ($fields as $field) { ?>
 					var <?= $field ?> = $(this).data('<?= $field ?>');
 					$('#<?= $field ?>').html(<?= $field ?>);

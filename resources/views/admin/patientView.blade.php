@@ -39,24 +39,17 @@
                                 </td>
                                 <td>{{ $patient->user->phone }}</td>
                             </tr>
-                            <tr>
-                                <td width="20%">
-                                    <label class="capitalize">Gender</label>
-                                </td>
-                                <td>{{ $patient->gender }}</td>
-                            </tr>
-                            <tr>
-                                <td width="20%">
-                                    <label class="capitalize">Blood group</label>
-                                </td>
-                                <td>{{ $patient->blood }}</td>
-                            </tr>
-                            <tr>
-                                <td width="20%">
-                                    <label class="capitalize">Date of birth</label>
-                                </td>
-                                <td>{{ $patient->dob }}</td>
-                            </tr>
+
+							<?php
+								$fields = array("gender", "blood", "dob", "address", "source");
+								foreach ($fields as $field) { ?>
+									<tr>
+										<td width="20%">
+											<label class="capitalize">{{$field}}</label>
+										</td>
+										<td>{!! $patient->$field !!}</td>
+									</tr>
+							<?php } ?>
                         </table>
                     </div>
                     <div class="card-footer row justify-content-center">

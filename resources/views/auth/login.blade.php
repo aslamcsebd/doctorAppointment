@@ -64,13 +64,13 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <div class="offset-md-4 col-md-6 col-sm-12">
                                 <a href="{{ url('/login/google') }}" class="btn btn-success btn-block rounded-pill">
                                     <i class="fab fa-google"></i> {{ __('Login with google') }}
                                 </a>
                             </div>
-                        </div>
+                        </div> --}}
                         {{-- <div class="form-group row">
                             <div class="offset-md-4 col-md-6 col-sm-12">
                                 <a href="{{ route('register') }}" class="btn btn-secondary btn-block rounded-pill">

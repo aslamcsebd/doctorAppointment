@@ -35,7 +35,7 @@
 											<td colspan="2"><b>Patient information</b></td>
 										</tr>												
 										<?php 
-											$fields = array("name", "email", "phone", "age", "appointment_date", "diseases_info", "address", "status");
+											$fields = array("name", "email", "phone", "age", "appointment_date", "diseases_info", "address", "source", "status");
 											foreach ($fields as $field) { ?>		
 												<tr>
 													<td width="30%">

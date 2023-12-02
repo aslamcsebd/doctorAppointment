@@ -29,7 +29,6 @@ use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller {
 
-// Doctor...
     // Doctor registration
     public function registration(){
         return view('admin.registration');
@@ -38,6 +37,7 @@ class AdminController extends Controller {
     // Create doctor account
     public function doctor_create(Request $request){
         $validator = Validator::make($request->all(),[
+            'doctor_id'=>'required|unique:doctors',
             'name'=>'required',
             'email'=>'required|unique:users',
             'phone'=>'required',
@@ -73,7 +73,8 @@ class AdminController extends Controller {
 
         Doctor::create([
             'user_id' => $user_id,
-            'doctor_id' => str_pad($user_id, 6, '0', STR_PAD_LEFT),
+            // 'doctor_id' => str_pad($user_id, 6, '0', STR_PAD_LEFT),
+            'doctor_id' => $request->doctor_id,
             'gender' => $request->gender,
             'blood' => $request->blood,
             'dob' => date('Y-m-d', strtotime($request->dob)),
@@ -106,7 +107,6 @@ class AdminController extends Controller {
         return view('admin.doctorView', $data);
     }
     
-// Guest appointment
 	// Guest appointment
 	public function guest_appointment(){	
         $data['appointmentRequest'] = PatientForm::orderBy('appointment_date')->get();	
@@ -131,7 +131,8 @@ class AdminController extends Controller {
         Patient::create([
             'user_id' => $id2,
             'patient_id' => str_pad($id2, 6, '0', STR_PAD_LEFT),
-			'address' => $guest->address
+			'address' => $guest->address,
+			'source' => $guest->source
         ]);
 
         // Appointment booking
@@ -559,7 +560,7 @@ class AdminController extends Controller {
                 $validator = Validator::make($request->all(),[
                     'name'=>'required',
                     'address'=>'required',
-                    'photo'=>'required|image|mimes:jpeg,png,jpg,gif,svg'
+                    'photo'=>'required|image|mimes:jpeg,png,jpg,gif,svg,webp'
                 ]);
 
                 if($validator->fails()){

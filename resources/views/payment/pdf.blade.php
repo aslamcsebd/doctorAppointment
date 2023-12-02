@@ -8,14 +8,25 @@
         <title>Payment</title>
         <style>
             h4{ margin: 0; font-weight: bold; }
+			.img-thumbnail{
+				width: 70px;
+				height: 70px;
+				border-radius: 50%;
+				padding: 0rem;
+				border: 1px solid #dee2e6;
+			}
+			.table>tbody>tr>td{ padding: 5px 8px; }
+			.top tr td table tbody{ min-height:160px !important; }
         </style>
     </head>
-    <body class="container-fluid">
+    <body class="container-fluid" tyle="width: 8.27in; margin: auto;">
         <div class="row justify-content-center">
 			<div class="col-md-12">
-                <h4 class="text-center" style="margin: 20px 0;">            
+                <h4 class="text-center" tyle="margin: 20px 0;">
                     <img src="{{ asset($hospital->photo ?? 'images/default.jpg') }}" class="img-thumbnail" alt="No Image found" width="60">
-                    <span>{{ $hospital->name ?? '' }}</span>
+					<p></p>
+					<h4 class="text-center">{{ $hospital->name ?? '' }}</h4>
+					<p></p>
                 </h4>
 
                 <div class="row">
@@ -23,11 +34,11 @@
                         <table>
                             <tbody>
                                 <tr>
-                                    <td style="width: 40%; padding:0%;">
+                                    <td style="width: 45%; padding:0%;">
                                         <div>
                                             <table class="table table-bordered">
                                                 <tbody>
-                                                    <tr>
+                                                    <tr class="bg-danger">
                                                         <td colspan="2">
                                                             <h4 class="text-center">Billing to</h4>
                                                         </td>
@@ -53,40 +64,44 @@
                                         </div>
                                     </td>
                                     <td style="width: 10%; padding:0%;"></td>
-                                    <td style="width: 40%; padding:0%;">
+                                    <td style="width: 50%; padding:0%;">
+										<table class="table table-bordered">
+											<tbody>
+												<tr class="bg-danger">
+													<td>
+														<h4 class="text-center">Hospital information</h4>
+													</td>
+												</tr>
+												<tr>
+													<td>{!! $hospital->address ?? '' !!}</td>
+												</tr>
+											</tbody>
+										</table> 
                                         <div>
-                                            <table class="table table-bordered">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <h4 class="text-center">Hospital information</h4>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>{!! $hospital->address ?? '' !!}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table> 
                                         </div>
-                                    </td>                            
+                                    </td>                  
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                </div>  
+                </div>
 
                 <div class="row">
                     <div class="col-md-12">
                         <table class="table table-bordered">
                             <tbody>
-                                <tr>
+                                <tr class="bg-danger">
                                     <td colspan="2">
                                         <h4 class="text-center">Invoice</h4>
                                     </td>
                                 </tr>
-                                <tr>
+								<tr>
+                                    <td>Invoice No</td>
+                                    <td>{{ $payment->tran_id ?? '' }}</td>
+                                </tr>
+								<tr>
                                     <td>Booking type</td>
-                                    <td>{{ $payment->room_type ?? '' }}</td>
+                                    <td style="text-transform: capitalize">{{ $payment->room_type ?? '' }}</td>
                                 </tr>
         
                                 @if($payment->room_type == 'cabin')
@@ -140,6 +155,16 @@
                         </table>
                     </div>
                 </div>
+
+				<br> <br>
+				<p>
+					- - - - - - - - - - - - - - - -
+					<p style="padding-left: 30px;">
+						<b>
+							Signature
+						</b>
+					</p>
+				</p>
 			</div>
 	   </div>
     </body>
