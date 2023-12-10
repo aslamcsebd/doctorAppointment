@@ -82,7 +82,7 @@
                                <label class="capitalize">Advance pay :</label>
                            </td>
                            <td>
-                              <input type="number" class="form-control btn-block font-weight-bold text-center" name="advance" min="{{ $rent ?? '' }}" max="{{ $total }}" value="{{ $total }}" required>
+                              <input type="number" class="form-control btn-block font-weight-bold text-center" name="advance" min="{{ round($total/2) }}" max="{{ $total }}" value="{{ $total }}" required>
                            </td>
                        </tr>
                        <tr>
