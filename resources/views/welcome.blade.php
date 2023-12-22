@@ -49,7 +49,7 @@
 								</div>
 								<div class="form-group col-md-4 col-sm-12">
 									<label for="email">Email*</label>
-									<input type="email" class="form-control mt-1" name="email" id="email" value="{!! old('email') !!}" placeholder="Enter email" autocomplete="name" required>
+									<input type="email" class="form-control mt-1" name="email" id="email" value="{!! old('email') !!}" placeholder="Enter email" autocomplete="email" required>
 								</div>
 								<div class="form-group col-md-4 col-sm-12">
 									<label for="phone">Mobile number*</label>

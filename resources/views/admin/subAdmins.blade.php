@@ -38,7 +38,7 @@
             </div>   
             
             {{-- Create new SubAdmin --}}
-            @include('modal.createSubAdminButtom')
+            @include('modal.createSubAdminBottom')
 
          </div>
       </div>

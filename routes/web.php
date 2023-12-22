@@ -128,6 +128,7 @@ Route::middleware(['auth'])->group(function(){
     // Admin
     Route::get('hospitalInfo', 'AdminController@hospitalInfo')->name('hospitalInfo');
     Route::post('updateHospitalInfo', 'AdminController@updateHospitalInfo')->name('updateHospitalInfo');
+    Route::post('/saveNotification', 'AdminController@saveNotification')->name('saveNotification');
     
     // Doctor
     Route::get('doctorInfo', 'DoctorController@doctorInfo')->name('doctorInfo');

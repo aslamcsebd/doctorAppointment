@@ -54,7 +54,7 @@
             </div>   
             
             {{-- Create new patient --}}
-            @include('modal.createPatientButtom')
+            @include('modal.createPatientBottom')
 
          </div>
       </div>

@@ -82,15 +82,10 @@ class AdminController extends Controller {
             'photo' => $photoLink,
             'qualification' => $request->qualification,
             'service' => $request->service,
-        ]);
+        ]);        
 
 		// For email
-		$mailData = [
-            'email' 	=>	$request->email,
-			'password' 	=>	$request->password,
-			'website'	=>	route('login')
-        ];
-        Mail::to($request->email)->send(new SendMail($mailData));
+        $this->send_email($request->email, $request->password);
 
         return back()->with('success','Doctor registration successfully');
     }
@@ -100,7 +95,7 @@ class AdminController extends Controller {
         $data['doctors'] = Doctor::with('user')->get();
         return view('admin.doctors', $data);
     }
-
+    
     // View doctor full info
     public function doctorView($id){
         $data['doctor'] = Doctor::find($id);        
@@ -145,13 +140,8 @@ class AdminController extends Controller {
             'time' => date('h:i a', strtotime($guest->appointment_date)),
         ]);
 
-		// For email
-		$mailData = [
-            'email' 	=>	$guest->email,
-			'password' 	=>	$guest->phone,
-			'website'	=>	route('login')
-        ];
-        Mail::to($guest->email)->send(new SendMail($mailData));
+        // For email
+        $this->send_email($guest->email, $guest->phone);
 
 		PatientForm::find($id)->update([
 			'status' => 'accept'
@@ -182,6 +172,24 @@ class AdminController extends Controller {
             'time' => date('h:i a', strtotime($request->date)),
 			'status' => 'accept'
         ]);
+
+        $id = Appointment::find($request->id)->patient_id;
+        $phone = User::find($id)->phone;
+        $sms = 'Your appointment request accept successfully. ' . date('d-M-Y h:i a', strtotime($request->date));
+
+        // Notification
+        // $notification = HospitalInfo::first()->notification;
+        // if($notification == 'email'){
+        //     echo $notification;
+        // }elseif($notification == 'sms'){
+        //     echo $notification;
+        // }else{
+        //     echo $notification;
+        // }
+
+        // For sms
+        $this->send_sms($phone, $sms);
+
 		return back()->with('success', 'Appointment request accept successfully');
 	}
 
@@ -234,8 +242,6 @@ class AdminController extends Controller {
         return view('admin.lastReport', $data);
     }
 
-    
-// Patient
     // Create new patient
     public function create_patient(Request $request){
         $validator = Validator::make($request->all(),[
@@ -264,14 +270,9 @@ class AdminController extends Controller {
             'user_id' => $id,
             'patient_id' => str_pad($id, 6, '0', STR_PAD_LEFT)
         ]);
-
-		// For email
-		$mailData = [
-            'email' 	=>	$request->email,
-			'password' 	=>	$request->password,
-			'website'	=>	route('login')
-        ];
-        Mail::to($request->email)->send(new SendMail($mailData));
+		
+        // For email
+        $this->send_email($request->email, $request->password);
 
         return back()->with('success', 'Patient registration successfully');
     }   
@@ -289,9 +290,8 @@ class AdminController extends Controller {
         return view('admin.patientView', $data);
     }
 
-// Room-seat [Room controller]
+    // Room-seat [Room controller]
 
-// New booking...
     // Booking for patient list
     public function new_booking(){
         $data['new_booking'] = true;
@@ -479,11 +479,10 @@ class AdminController extends Controller {
         return redirect($url)->with('success', 'Booking & transaction is successfully completed');
     }
 
-// Booking list	[Room controller]
+    // Booking list	[Room controller]
 
-// Payment system [Payment controller]
+    // Payment system [Payment controller]
 
-// Sub admin
     // Create new sub admin
     public function create_subAdmin(Request $request){
         $validator = Validator::make($request->all(),[
@@ -506,16 +505,11 @@ class AdminController extends Controller {
             'password' => Hash::make($request->password)
         ]);
 
-		// For email
-		$mailData = [
-            'email' 	=>	$request->email,
-			'password' 	=>	$request->password,
-			'website'	=>	route('login')
-        ];
-        Mail::to($request->email)->send(new SendMail($mailData));
+        // For email
+        $this->send_email($request->email, $request->password);
 
         return back()->with('success', 'Sub admin registration successfully');
-    }   
+    }
 
     // Sub admin info
     public function sub_admin(){
@@ -523,7 +517,6 @@ class AdminController extends Controller {
         return view('admin.subAdmins', $data);
     }
 
-// Setting...
 	// All settings
     public function hospitalInfo(){
         $data['hospitalInfo'] = HospitalInfo::first();
@@ -551,12 +544,11 @@ class AdminController extends Controller {
                 'address' => $request->address,
                 'photo' => $photoLink
             ]);
-            return back()->with('success','Hospital info save successfully');
-            
-        }else{
-
+            return back()->with('success','Hospital info save successfully');            
+        }
+        else{
             $path="images/admin/";
-            if ($request->hasFile('photo')){                
+            if ($request->hasFile('photo')){
                 $validator = Validator::make($request->all(),[
                     'name'=>'required',
                     'address'=>'required',
@@ -585,5 +577,52 @@ class AdminController extends Controller {
             ]);
             return back()->with('success','Hospital info update successfully');
         }
+    }
+
+    // Email / sms notification 
+    public function saveNotification(Request $request){
+        if($request->id==null){  
+            HospitalInfo::create([
+                'notification' => $request->notification
+            ]);
+            return back()->with('success', 'Notification save successfully');
+
+        }else{
+            HospitalInfo::where('id', $request->id)->update([
+                'notification' => $request->notification
+            ]);
+            return back()->with('success', 'Notification update successfully');
+        }
+    }
+
+    // Email send
+    public  function send_email($email, $password){
+        $mailData = [
+            'email' 	=>	$email,
+			'password' 	=>	$password,
+			'website'	=>	route('login')
+        ];
+        Mail::to($email)->send(new SendMail($mailData));
+    }    
+
+    // SMS gateway
+    public  function send_sms($num, $sms){
+        $url = env('SMS_url');
+        $data = [
+            "api_key" => env('SMS_api_key'), 
+            "type" => env('SMS_type'),
+            "contacts" => $num,
+            "senderid" => env('SMS_senderid'),
+            "msg" => $sms
+        ];
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        return $response;
     }
 }

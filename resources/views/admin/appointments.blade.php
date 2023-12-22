@@ -178,7 +178,7 @@
    </div>
 </div>
 
-@include('modal.appointmentPendingButtom')
+@include('modal.appointmentPendingBottom')
 
 @endsection
 @section('js')

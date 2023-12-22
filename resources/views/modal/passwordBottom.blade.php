@@ -4,8 +4,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h6 class="modal-title text-center" id="exampleModalLabel">Change password</h6>
-                <button class="close border border-primary rounded-circle m-0 px-2 py-1" type="button"
-                    data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+                <button class="close" type="button"
+                    data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
 
             <div class="modal-body">

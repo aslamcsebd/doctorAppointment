@@ -8,7 +8,10 @@
     <div class="content-wrapper p-3">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                @include('modal.passwordTop')             
+                <ul class="nav nav-pills">
+                    @include('modal.passwordTop')
+                    @include('modal.notificationTop')
+                </ul>
                 <div class="card-body p-1">
                     <div class="card border border-danger">
                         <div class="card-body p-3">
@@ -59,6 +62,8 @@
             </div>
         </div>
     </div>
+    @include('modal.notificationBottom')
+
 @endsection
 
 @section('js')

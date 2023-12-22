@@ -145,8 +145,8 @@
             </div>
         </div>
     </div>
-    @include('modal.floorRoomButtom')
-    @include('modal.cabinEditButtom')
+    @include('modal.floorRoomBottom')
+    @include('modal.cabinEditBottom')
 @endsection
 
 @section('js')

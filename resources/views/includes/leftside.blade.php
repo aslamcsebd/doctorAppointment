@@ -87,7 +87,7 @@
                         <p>Settings</p>
                     </a>
                 </li>
-
+            
             <!-- 2 = Sub admin -->
             @elseif($role==2)
                 <li class="nav-item">
@@ -102,11 +102,11 @@
                         <i class="fas fa-key nav-icon"></i>
                         <p>Change password</p>
                     </a>
-                </li>
-
+                </li>            
+            
             <!-- 3 = Doctor -->
             @elseif($role==3)
-            <li class="nav-item">
+                <li class="nav-item">
                     <a href="{{ route('appointment.request') }}" class="nav-link {{ (request()->routeIs('appointment.request*'))  ? 'active' : '' }}">
                         <i class="fas fa-calendar-check nav-icon"></i>
                         <p>Appointment list</p>
@@ -187,9 +187,8 @@
                     </li>
                 @endif
             @endif
-
         </ul>
     </nav>
 </aside>
 
-@include('modal.passwordButtom')
+@include('modal.passwordBottom')

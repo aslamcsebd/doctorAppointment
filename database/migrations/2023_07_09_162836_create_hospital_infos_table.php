@@ -18,6 +18,7 @@ class CreateHospitalInfosTable extends Migration
             $table->string('name')->nullable();
             $table->text('address')->nullable();
             $table->string('photo')->nullable();
+            $table->string('notification', 100)->default('email')->comment('email, sms, both');
             $table->timestamps();
         });
     }

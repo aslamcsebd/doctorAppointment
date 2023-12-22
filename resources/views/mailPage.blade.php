@@ -11,8 +11,7 @@
 	<h4 class="card">
 	   <p class="card-header text-center">Your appointment request accept successfully.</p>
 	   <p class="card-header text-justify">
-		   Dear patient,
-		   welcome to our hospital, we create your account successfully. Now you can login and update your full profile from setting. Otherwise you can't take any appointment and booking any room/ward. 
+		   Welcome to our hospital, we create your account successfully. Now you can login and update your full profile from setting. Otherwise you can't take any appointment and booking any room/ward. 
 	   </p>
 	   <div class="card-body">  
 		   <table class="table table-bordered">
