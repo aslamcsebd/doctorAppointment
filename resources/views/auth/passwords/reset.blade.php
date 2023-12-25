@@ -1,4 +1,9 @@
 @extends('layouts.app2')
+<style>
+.col-md-6 input {
+	color: unset !important;
+}
+</style>
 
 @section('content')
 <div class="container">

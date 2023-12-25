@@ -113,7 +113,7 @@ class AdminController extends Controller {
 
         // All user
 		$user_id = User::create([
-            'role' => 3,
+            'role' => 4,
             'name' => $guest->name,
             'email' => $guest->email,
             'phone' => $guest->phone,
