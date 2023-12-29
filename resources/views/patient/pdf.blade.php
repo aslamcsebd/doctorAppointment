@@ -11,7 +11,7 @@
 			.img-thumbnail{
 				width: 70px;
 				height: 70px;
-				border-radius: 50%;
+				/* border-radius: 50%; */
 				padding: 0rem;
 				border: 1px solid #dee2e6;
 			}

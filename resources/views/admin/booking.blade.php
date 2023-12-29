@@ -32,7 +32,7 @@
 								<div class="radio-toolbar form-check form-check-inline">
 									<div class="radio m-1 pl-1">
 										<input type="radio" id="cabin" name="room_type" value="cabin" @if (isset($room_type)) {{ $room_type == 'cabin' ? 'checked' : '' }} @endif required>
-										<label for="cabin">Cabin/room</label>
+										<label for="cabin">Cabin(room)</label>
 									</div>
 									<div class="radio m-1">
 										<input type="radio" id="ward" name="room_type" value="ward" @if (isset($room_type)) {{ $room_type == 'ward' ? 'checked' : '' }} @endif required>

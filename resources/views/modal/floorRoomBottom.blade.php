@@ -31,7 +31,7 @@
                                 <div class="radio-toolbar form-check form-check-inline">
                                     <div class="radio">
                                         <input type="radio" id="cabin" name="room_type" value="cabin" checked>
-                                        <label for="cabin">Single cabin/room</label>
+                                        <label for="cabin">Single Cabin(room)</label>
                                     </div>
                                     <div class="radio ml-4 mt-1">
                                         <input type="radio" id="ward" name="room_type" value="ward">

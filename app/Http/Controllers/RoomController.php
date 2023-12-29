@@ -191,10 +191,10 @@ class RoomController extends Controller {
         $data['check_out'] = $check_out = date('Y-m-d', strtotime($request->check_out));
                 // dd($check_out);
         if($data['room_type'] == 'cabin'){
-            $data['booked'] = CabinBooking::where('check_in', '>=', $check_in)->where('check_in', '>=', $check_out)->get();
+            $data['booked'] = CabinBooking::whereDate('check_in', '>=', $check_in)->whereDate('check_in', '<=', $check_out)->get();
         }
         else{
-            $data['booked'] = WardBooking::where('check_in', '>=', $check_in)->where('check_in', '>=', $check_out)->get();
+            $data['booked'] = WardBooking::whereDate('check_in', '>=', $check_in)->whereDate('check_in', '<=', $check_out)->get();
         }
         return view('admin.bookingList', $data);
     }

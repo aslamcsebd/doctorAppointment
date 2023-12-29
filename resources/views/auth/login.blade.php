@@ -10,7 +10,7 @@
                     @endphp
                     <div class="text-center pt-2">
                         <img src="{{ asset('') }}/{{ $hospitalInfo->photo ?? 'images/default.jpg' }}"
-                            class="img-thumbnail" alt="No Image found" width="100">
+                            class="img-thumbnail" alt="No Image found" idth="100" style="border-radius: unset;">
                         <br>
                         <h4>{{ $hospitalInfo->name ?? 'Add hospital name' }}</h4>
                         <p>Sign in to your account</p>

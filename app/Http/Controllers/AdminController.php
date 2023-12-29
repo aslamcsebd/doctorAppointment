@@ -352,8 +352,7 @@ class AdminController extends Controller {
         $data['check_out'] = $check_out;
 
         if($data['room_type'] == 'cabin'){
-            $rooms = Room::where('room_type', 'cabin')->orderBy('room_no', 'Asc')->pluck('room_no');
-              
+            $rooms = Room::where('room_type', 'cabin')->orderBy('room_no', 'Asc')->pluck('room_no');              
             $booked = CabinBooking::where([
                 ['cabin_bookings.check_in', '<=', $check_in],
                 ['cabin_bookings.check_out', '>=', $check_in]
@@ -375,6 +374,7 @@ class AdminController extends Controller {
                 ['ward_bookings.check_in', '>=', $check_in],
                 ['ward_bookings.check_out', '<=', $check_out]
             ])->pluck('ward_id');
+            
             $data['unBook'] = $wards->diff($booked);
         }
         
