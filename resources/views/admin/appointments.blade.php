@@ -65,7 +65,8 @@
                                            data-id="{{ $appointment->id }}"
                                            data-appointment_id="{{ $appointment->appointment_id }}"
                                            data-name="{{ $name }}"
-                                           data-date="{{ date('Y-m-d\TH:i', strtotime($date)) }}"                                      
+                                           data-date="{{ date('Y-m-d\TH:i', strtotime($date)) }}"                                           
+                                           data-out_time="{{ date('H:i', strtotime("30 minutes", strtotime($date))) }}"                                      
                                        >View</a>
                                        <a href="{{ url('itemDelete', ['appointments', $appointment->id, 'tabName'])}}" class="btn btn-sm btn-danger py-1" onclick="return confirm('Are you want to delete this?')">Delete</a>
                                    </td>
@@ -188,11 +189,13 @@
          var appointment_id = $(this).data('appointment_id');
          var name = $(this).data('name');
          var date = $(this).data('date');
+         var outTime = $(this).data('out_time');
 
          $('#id').val(id); 
          $('#appointment_id').val(appointment_id); 
          $('#name').val(name); 
          $('#date').val(date);
+         $('#outTime').val(outTime);
       });
    </script>
 @endsection

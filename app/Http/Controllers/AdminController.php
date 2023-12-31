@@ -175,7 +175,7 @@ class AdminController extends Controller {
 
         $id = Appointment::find($request->id)->patient_id;
         $phone = User::find($id)->phone;
-        $sms = 'Your appointment request accept successfully. ' . date('d-M-Y h:i a', strtotime($request->date));
+        $sms = 'Your appointment request accept successfully. Date & time: ' . date('d-M-Y (h:i a', strtotime($request->date)) . " To " . date('h:i a)', strtotime($request->outTime));
 
         // Notification
         // $notification = HospitalInfo::first()->notification;
@@ -189,7 +189,6 @@ class AdminController extends Controller {
 
         // For sms
         $this->send_sms($phone, $sms);
-
 		return back()->with('success', 'Appointment request accept successfully');
 	}
 

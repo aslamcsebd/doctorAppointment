@@ -22,9 +22,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-12">
-                            <label for="password">Appointment date</label>
+                        <div class="form-group col-6">
+                            <label for="date">Appointment date(In-time)</label>
                             <input type="datetime-local" name="date" class="form-control" id="date" required/>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="outTime">Out-time</label>
+                            <input type="time" name="outTime" class="form-control" id="outTime" required/>
                         </div>
                     </div>
                     <div class="modal-footer">
