@@ -7,13 +7,14 @@
         <title>Cabin list</title>
         <style>
             .table thead th, .table tbody tr td {text-align: center !important; vertical-align: middle !important;}
+            .card-header{ text-transform: capitalize }
         </style>
     </head>
     <body class="container-fluid">
         <div class="row justify-content-center">    
 			<div class="col-md-12">
-				<h4 class="text-center">{{ $hospitalName->name ?? '' }}</h4>
-				<h3 class="card-header bg-secondary text-center py-1 mx-1">{{$room_type}} list</h3>
+				<h3 class="text-center">{{ $hospitalName->name ?? '' }}</h3>
+				<h4 class="card-header bg-secondary text-center py-1 mx-1">{{$room_type}} list</h4>
 				<div class="card-body p-1">
 					<table class="table table-bordered">
 						<thead class="bg-info">
@@ -21,7 +22,7 @@
 							<th>Check in</th>
 							<th>Check out</th>
 							@if($room_type=='cabin')
-								<th>Ward no</th>
+                                <th>Room no</th>
 							@else
 								<th>Room no</th>
 								<th>Ward no</th>
