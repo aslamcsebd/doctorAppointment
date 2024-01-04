@@ -143,6 +143,15 @@ class AdminController extends Controller {
         // For email
         $this->send_email($guest->email, $guest->phone);
 
+        // For sms
+        $appName = env('APP_NAME');
+        $loginEmail = "\n". 'Email : '. $guest->email;
+        $loginPass = "\n". 'Password : '. $guest->phone;
+        $website = "\n". 'Website link : '. route('login');
+
+        $sms = 'Welcome to ' . $appName . '. We create your account successfully.' . $loginEmail . $loginPass . $website;
+        $this->send_sms($guest->phone, $sms);
+
 		PatientForm::find($id)->update([
 			'status' => 'accept'
 		]);
