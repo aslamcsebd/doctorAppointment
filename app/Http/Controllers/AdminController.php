@@ -282,6 +282,15 @@ class AdminController extends Controller {
         // For email
         $this->send_email($request->email, $request->password);
 
+        // For sms
+        $appName = env('APP_NAME');
+        $loginEmail = "\n". 'Email : '. $request->email;
+        $loginPass = "\n". 'Password : '. $request->password;
+        $website = "\n". 'Website link : '. route('login');
+
+        $sms = 'Welcome to ' . $appName . '. We create your account successfully.' . $loginEmail . $loginPass . $website;
+        $this->send_sms($request->phone, $sms);
+
         return back()->with('success', 'Patient registration successfully');
     }   
 
